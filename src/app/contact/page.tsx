@@ -1,6 +1,4 @@
-'use client';
 import { useState } from 'react';
-import { Metadata } from 'next';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { MapPin, Phone, Mail, Loader2, CheckCircle } from 'lucide-react';

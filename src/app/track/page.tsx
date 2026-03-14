@@ -7,7 +7,7 @@ import { Search, Map, PackageCheck, Truck, Phone, ChevronRight, Clock, MapPin } 
 
 export default function TrackShipment() {
   const [trackingId, setTrackingId] = useState('');
-  const [shipment, setShipment] = useState<any>(null);
+  const [shipment, setShipment] = useState<unknown>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -22,14 +22,14 @@ export default function TrackShipment() {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
       const res = await fetch(`${baseUrl}/shipments/track/${trackingId.toUpperCase()}`);
-      const data = await res.json();
+      const data: any = await res.json();
 
       if (data.success) {
         setShipment(data.data);
       } else {
         setError(data.message || 'Tracking ID not found. Please check and try again.');
       }
-    } catch (err) {
+    } catch {
       setError('Something went wrong. Please check your connection.');
     } finally {
       setLoading(false);
@@ -265,7 +265,7 @@ export default function TrackShipment() {
                     </h3>
                     <div className="space-y-4 relative pl-5">
                       <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/50"></div>
-                      {shipment.updates.slice().reverse().map((update: any, idx: number) => (
+                      {shipment.updates.slice().reverse().map((update: any) => (
                         <div key={idx} className="relative">
                           <div className={`absolute -left-[22px] top-1.5 w-2 h-2 rounded-full border border-background ${idx === 0 ? 'bg-primary ring-2 ring-primary/20' : 'bg-muted-foreground/30'}`}></div>
                           <div className="flex items-start justify-between">
