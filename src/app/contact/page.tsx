@@ -21,7 +21,7 @@ export default function ContactUs() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5002/api'}/quotes`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api'}/quotes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

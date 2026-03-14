@@ -28,7 +28,7 @@ interface IPricingTier {
   };
 }
 
-const API_BASE_URL = 'http://localhost:5002/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
 
 export default function PricingGuide() {
   const [activeTab, setActiveTab] = useState('house');
