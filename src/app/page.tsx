@@ -143,7 +143,7 @@ export default function Home() {
                       <Image src={`https://i.pravatar.cc/100?img=${i}`} alt="Customer Avatar" width={40} height={40} className="object-cover" />
                     </div>
                   ))}
-                  <div className="w-10 h-10 rounded-full border-2 border-background bg-secondary text-white flex items-center justify-center text-xs font-bold shadow-sm shadow-black/20 z-10">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-secondary text-white flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm shadow-black/20 z-10">
                     2k+
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function Home() {
                   <div className="flex text-yellow-500 gap-0.5">
                     {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" />)}
                   </div>
-                  <span className="text-sm font-semibold mt-0.5 text-foreground/80">Trusted by 10,000+ Customers</span>
+                  <span className="text-[11px] sm:text-sm font-semibold mt-0.5 text-foreground/80">Trusted by 10,000+ Customers</span>
                 </div>
               </div>
             </motion.div>

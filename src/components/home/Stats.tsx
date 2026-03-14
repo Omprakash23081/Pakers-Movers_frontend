@@ -36,7 +36,7 @@ export default function Stats() {
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10 mix-blend-overlay" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-4 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 md:gap-4 text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -45,12 +45,12 @@ export default function Stats() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
             >
-              <TiltCard tiltMax={15} tiltSpeed={400} className="w-full h-full flex flex-col space-y-3 items-center justify-center p-6 rounded-2xl hover:bg-white/10 transition-colors border border-transparent hover:border-white/10 shadow-none hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-                <div className="text-5xl md:text-6xl font-extrabold tracking-tighter text-white drop-shadow-md flex items-center">
+              <TiltCard tiltMax={15} tiltSpeed={400} className="w-full h-full flex flex-col space-y-2 md:space-y-3 items-center justify-center p-4 md:p-6 rounded-2xl hover:bg-white/10 transition-colors border border-transparent hover:border-white/10 shadow-none hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+                <div className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter text-white drop-shadow-md flex items-center">
                   <Counter from={0} to={stat.value} />
-                  <span className="text-accent ml-1 text-4xl md:text-5xl">{stat.suffix}</span>
+                  <span className="text-accent ml-1 text-2xl sm:text-3xl md:text-5xl">{stat.suffix}</span>
                 </div>
-                <div className="text-sm md:text-base font-bold text-white/80 uppercase tracking-widest mt-2 px-4 text-center">
+                <div className="text-[10px] sm:text-sm md:text-base font-bold text-white/80 uppercase tracking-widest mt-1 md:mt-2 px-2 md:px-4 text-center break-words">
                   {stat.label}
                 </div>
               </TiltCard>

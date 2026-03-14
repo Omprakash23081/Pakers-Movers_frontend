@@ -31,11 +31,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="bg-primary text-white p-2 rounded-xl">
-              <Truck size={24} />
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2">
+            <div className="bg-primary text-white p-1.5 sm:p-2 rounded-lg sm:rounded-xl">
+              <Truck size={20} className="sm:w-6 sm:h-6" />
             </div>
-            <span className="font-bold text-xl md:text-2xl tracking-tighter">
+            <span className="font-bold text-lg sm:text-xl md:text-2xl tracking-tighter">
               SSD<span className="text-primary font-black">Packers</span>
             </span>
           </Link>
