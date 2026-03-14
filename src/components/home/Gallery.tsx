@@ -1,0 +1,107 @@
+'use client';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ZoomIn } from 'lucide-react';
+import { TiltCard } from '@/components/ui/TiltCard';
+import { projects } from '@/lib/projects';
+
+export default function Gallery() {
+  // Use the detailed project data for the gallery
+  const galleryItems = [
+    { ...projects[0], height: 'h-[400px]', delay: 0 },
+    { ...projects[1], height: 'h-[300px]', delay: 0.1 },
+    { ...projects[2], height: 'h-[500px]', delay: 0.2 },
+    { ...projects[3], height: 'h-[350px]', delay: 0.3 },
+    // Repeat some items for a fuller grid, using different slugs
+    { ...projects[0], slug: 'villa-shifting-repeat', height: 'h-[450px]', delay: 0.4 },
+    { ...projects[1], slug: 'office-shifting-repeat', height: 'h-[300px]', delay: 0.5 }
+  ];
+
+  return (
+    <section className="py-24 bg-muted/20 relative">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-16 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-semibold text-primary"
+          >
+            Project Showcase
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold tracking-tight"
+          >
+            Our Work <span className="text-primary">Gallery</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium"
+          >
+            A glimpse into our professional packing, secure loading, and seamless transportation process across India.
+          </motion.p>
+        </div>
+
+        {/* Masonry Grid via CSS Columns */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {galleryItems.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: item.delay, duration: 0.6, ease: "easeOut" }}
+              className={`relative w-full ${item.height} break-inside-avoid`}
+            >
+              <Link href={`/projects/${item.slug}`} className="block w-full h-full">
+                <TiltCard tiltMax={15} className="w-full h-full rounded-3xl overflow-hidden shadow-xl group cursor-pointer">
+                  <Image
+                    src={item.mainImage}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
+
+                  {/* Premium Glass Hover Overlay */}
+                  <div className="absolute inset-0 bg-primary/40 dark:bg-primary/60 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                    <div className="transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 flex flex-col items-center p-6 text-center">
+                      <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-3 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                        <ZoomIn size={24} />
+                      </div>
+                      <h3 className="text-white font-bold text-xl mb-1">{item.title}</h3>
+                      <span className="text-white/80 font-medium text-sm mb-4">{item.category}</span>
+                      <span className="bg-white text-primary font-bold text-sm px-5 py-2 rounded-full shadow-lg">View Project</span>
+                    </div>
+                  </div>
+                </TiltCard>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-16 text-center"
+        >
+          <Link href="/contact" tabIndex={-1}>
+            <button className="bg-foreground text-background font-bold text-lg px-10 py-4 rounded-xl hover:bg-primary hover:text-white transition-all shadow-xl hover:-translate-y-1 hover:shadow-primary/30">
+              Get Your Free Quote
+            </button>
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
