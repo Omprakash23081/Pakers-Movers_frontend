@@ -7,15 +7,17 @@ import { Truck, ShieldCheck, Star, CheckCircle, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import ServiceCards from '@/components/home/ServiceCards';
-import AboutUs from '@/components/home/AboutUs';
-import Gallery from '@/components/home/Gallery';
-import Stats from '@/components/home/Stats';
-import ReviewsWidget from '@/components/home/ReviewsWidget';
-import FAQ from '@/components/home/FAQ';
-import ConnectWithUs from '@/components/home/ConnectWithUs';
-import VideoTestimonials from '@/components/home/VideoTestimonials';
-import PricingGuide from '@/components/home/PricingGuide';
+import dynamic from 'next/dynamic';
+
+const ServiceCards = dynamic(() => import('@/components/home/ServiceCards'));
+const AboutUs = dynamic(() => import('@/components/home/AboutUs'));
+const Gallery = dynamic(() => import('@/components/home/Gallery'));
+const Stats = dynamic(() => import('@/components/home/Stats'));
+const ReviewsWidget = dynamic(() => import('@/components/home/ReviewsWidget'));
+const FAQ = dynamic(() => import('@/components/home/FAQ'));
+const ConnectWithUs = dynamic(() => import('@/components/home/ConnectWithUs'));
+const VideoTestimonials = dynamic(() => import('@/components/home/VideoTestimonials'));
+const PricingGuide = dynamic(() => import('@/components/home/PricingGuide'));
 
 interface FormData {
   firstName?: string;
@@ -29,6 +31,7 @@ interface FormData {
 
 export default function Home() {
   const [formData, setFormData] = useState<FormData>({
+    firstName: '',
     movingFrom: 'Nagpur',
     movingTo: '',
     serviceType: 'House Shifting',
@@ -81,6 +84,7 @@ export default function Home() {
             src="/images/hero-bg.png"
             alt="SSD Packers and Movers Background"
             fill
+            sizes="100vw"
             className="object-cover opacity-80 dark:opacity-60 pointer-events-none"
             priority
           />
@@ -123,12 +127,12 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" tabIndex={-1}>
+                <Link href="/contact">
                   <Button size="lg" variant="accent" className="w-full rounded-full gap-2 text-md h-14 px-8 font-semibold">
                     Get Free Estimate <Truck size={18} />
                   </Button>
                 </Link>
-                <Link href="/track" tabIndex={-1}>
+                <Link href="/track">
                   <Button size="lg" variant="outline" className="w-full rounded-full h-14 px-8 text-md border-border/50 bg-white/50 dark:bg-black/50 backdrop-blur-sm font-semibold">
                     Track Shipment
                   </Button>
@@ -177,10 +181,23 @@ export default function Home() {
                 <CardContent className="relative z-10 px-6 py-10 min-h-[400px] flex items-center justify-center">
                   {!submitted ? (
                     <form onSubmit={handleSubmit} className="w-full space-y-6">
+                      <div className="space-y-1.5 focus-within:text-primary transition-colors">
+                        <label htmlFor="firstName" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Full Name</label>
+                        <input 
+                          id="firstName"
+                          type="text" 
+                          placeholder="Your Name" 
+                          className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
+                          value={formData.firstName || ''}
+                          onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                          required
+                        />
+                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                          <label className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving From</label>
+                          <label htmlFor="movingFrom" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving From</label>
                           <input 
+                            id="movingFrom"
                             type="text" 
                             placeholder="Nagpur" 
                             className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
@@ -190,8 +207,9 @@ export default function Home() {
                           />
                         </div>
                         <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                          <label className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving To</label>
+                          <label htmlFor="movingTo" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving To</label>
                           <input 
+                            id="movingTo"
                             type="text" 
                             placeholder="Destination" 
                             className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
@@ -202,8 +220,9 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                        <label className="text-xs font-bold uppercase tracking-wider text-foreground/80">Service Type</label>
+                        <label htmlFor="serviceType" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Service Type</label>
                         <select 
+                          id="serviceType"
                           className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none cursor-pointer shadow-inner backdrop-blur-md"
                           value={formData.serviceType}
                           onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
@@ -211,12 +230,14 @@ export default function Home() {
                           <option className="bg-background text-foreground">House Shifting</option>
                           <option className="bg-background text-foreground">Office Relocation</option>
                           <option className="bg-background text-foreground">Car & Bike Transport</option>
+                          <option className="bg-background text-foreground">Commercial Transport</option>
                           <option className="bg-background text-foreground">Warehouse Storage</option>
                         </select>
                       </div>
                       <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                        <label className="text-xs font-bold uppercase tracking-wider text-foreground/80">Mobile Number</label>
+                        <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Mobile Number</label>
                         <input 
+                          id="phone"
                           type="tel" 
                           placeholder="+91 Your Mobile Number" 
                           className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,12 +32,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1.5 sm:gap-2">
-            <div className="bg-primary text-white p-1.5 sm:p-2 rounded-lg sm:rounded-xl">
-              <Truck size={20} className="sm:w-6 sm:h-6" />
+          <Link href="/" className="flex items-center gap-2 sm:gap-3">
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-lg shadow-primary/20 shrink-0">
+              <Image src="/icon.png" alt="Sunita Cargo Packers Logo" fill className="object-cover" sizes="40px" />
             </div>
-            <span className="font-bold text-lg sm:text-xl md:text-2xl tracking-tighter">
-              SSD<span className="text-primary font-black">Packers</span>
+            <span className="font-bold text-xl sm:text-2xl md:text-3xl tracking-tighter">
+              Sunita Cargo<span className="text-primary font-black">Packers</span>
             </span>
           </Link>
 
@@ -52,13 +53,14 @@ export default function Navbar() {
           {/* Call to Action */}
           <div className="hidden md:flex items-center gap-4">
             <a href="tel:+917387661300" className="font-bold text-sm hidden lg:block hover:text-primary transition-colors">📞 +91 7387661300</a>
-            <Link href="/contact" tabIndex={-1}>
+            <Link href="/contact">
               <Button size="sm" className="rounded-full shadow-apple px-6 cursor-pointer">Get a Quote</Button>
             </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button 
+            aria-label="Toggle mobile menu"
             className="md:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >

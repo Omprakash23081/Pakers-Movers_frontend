@@ -67,6 +67,7 @@ export default function Gallery() {
                     src={item.mainImage}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
 
@@ -95,7 +96,7 @@ export default function Gallery() {
           transition={{ delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <Link href="/contact" tabIndex={-1}>
+          <Link href="/contact">
             <button className="bg-foreground text-background font-bold text-lg px-10 py-4 rounded-xl hover:bg-primary hover:text-white transition-all shadow-xl hover:-translate-y-1 hover:shadow-primary/30">
               Get Your Free Quote
             </button>

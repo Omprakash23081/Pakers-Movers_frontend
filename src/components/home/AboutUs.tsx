@@ -49,6 +49,7 @@ export default function AboutUs() {
                 src="/images/warehouse-storage.png"
                 alt="SSD Packers and Movers Team"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -116,7 +117,7 @@ export default function AboutUs() {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground leading-relaxed font-medium"
               >
-                SSD International Packers & Movers began with a simple mission: to make relocation completely stress-free. Over the last decade, we have grown from a local Nagpur transporter to an IBA-approved national logistics network.
+                Sunita Cargo Packers Movers began with a simple mission: to make relocation completely stress-free. Over the last decade, we have grown from a local Nagpur transporter to an IBA-approved national logistics network.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}

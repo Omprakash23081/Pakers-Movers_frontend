@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/track/details/'],
     },
-    sitemap: 'https://ssdPackersnagpur.in/sitemap.xml',
+    sitemap: 'https://sunitacargopackersmovers.com/sitemap.xml',
   };
 }

@@ -10,20 +10,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'SSD International Packers & Movers (Nagpur) | Top Rated Shifting Services',
+  metadataBase: new URL('https://sunitacargopackersmovers.com'),
+  title: 'Sunita Cargo Packers Movers (Nagpur) | Top Rated Shifting Services',
   description: 'Best Packers and Movers in Nagpur. We provide safe, affordable, and professional home shifting, office relocation, and car transport services across India.',
-  keywords: 'Packers and Movers in Nagpur, Best Packers and Movers Nagpur, House Shifting Service Nagpur, Car and Bike Transport Nagpur, Office Relocation Nagpur',
+  keywords: 'Sunita Cargo Packers Movers, Best Packers and Movers Nagpur, House Shifting Service Nagpur, Car and Bike Transport Nagpur, Office Relocation Nagpur',
   openGraph: {
-    title: 'SSD International Packers & Movers (Nagpur)',
+    title: 'Sunita Cargo Packers Movers (Nagpur)',
     description: 'Best Packers and Movers in Nagpur for fast and secure shifting.',
-    url: 'https://ssdPackersnagpur.in',
-    siteName: 'SSD Packers & Movers',
+    url: 'https://sunitacargopackersmovers.com',
+    siteName: 'Sunita Cargo Packers Movers',
     images: [
       {
-        url: 'https://ssdPackersnagpur.in/og-image.jpg', // Placeholder
+        url: 'https://sunitacargopackersmovers.com/og-image.jpg', // Placeholder
         width: 1200,
         height: 630,
-        alt: 'SSD International Packers & Movers Nagpur',
+        alt: 'Sunita Cargo Packers Movers Nagpur',
       },
     ],
     locale: 'en_IN',
@@ -36,9 +37,9 @@ import FloatingButtons from '@/components/layout/FloatingButtons';
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "SSD International Packers & Movers",
-  "image": "https://ssdPackersnagpur.in/og-image.jpg",
-  "url": "https://ssdPackersnagpur.in",
+  "name": "Sunita Cargo Packers Movers",
+  "image": "https://sunitacargopackersmovers.com/og-image.jpg",
+  "url": "https://sunitacargopackersmovers.com",
   "telephone": "+917387661300",
   "address": {
     "@type": "PostalAddress",

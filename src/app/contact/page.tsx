@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { MapPin, Phone, Mail, Loader2, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Metadata } from 'next';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     phone: '',
     message: ''
@@ -28,6 +28,8 @@ export default function ContactUs() {
         },
         body: JSON.stringify({
           ...formData,
+          firstName: formData.fullName,
+          lastName: '',
           // Contact form doesn't have these, but backend model might require them if it's shared with QuoteRequest
           movingFrom: 'Contact Page',
           movingTo: 'Contact Page',
@@ -37,7 +39,7 @@ export default function ContactUs() {
 
       if (response.ok) {
         setSubmitted(true);
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
+        setFormData({ fullName: '', email: '', phone: '', message: '' });
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || 'Something went wrong. Please try again.'}`);
@@ -107,8 +109,8 @@ export default function ContactUs() {
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-bold text-lg">Email Address</h3>
-                    <p className="text-muted-foreground mt-1 break-all text-sm sm:text-base">info@ssdPackersnagpur.in</p>
-                    <p className="text-muted-foreground break-all text-sm sm:text-base">support@ssdPackersnagpur.in</p>
+                    <p className="text-muted-foreground mt-1 break-all text-sm sm:text-base">info@sunitacargopackersmovers.com</p>
+                    <p className="text-muted-foreground break-all text-sm sm:text-base">support@sunitacargopackersmovers.com</p>
                   </div>
                 </CardContent>
               </Card>
@@ -140,34 +142,23 @@ export default function ContactUs() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">First Name</label>
-                    <input 
-                      type="text" 
-                      className="w-full h-12 px-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
-                      placeholder="John" 
-                      required 
-                      value={formData.firstName}
-                      onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Last Name</label>
-                    <input 
-                      type="text" 
-                      className="w-full h-12 px-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
-                      placeholder="Doe" 
-                      required 
-                      value={formData.lastName}
-                      onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                    />
-                  </div>
+                <div className="space-y-2">
+                  <label htmlFor="fullName" className="text-sm font-medium">Full Name</label>
+                  <input 
+                    id="fullName"
+                    type="text" 
+                    className="w-full h-12 px-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
+                    placeholder="John Doe" 
+                    required 
+                    value={formData.fullName}
+                    onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                  />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Email Address</label>
+                  <label htmlFor="email" className="text-sm font-medium">Email Address</label>
                   <input 
+                    id="email"
                     type="email" 
                     className="w-full h-12 px-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                     placeholder="john@example.com" 
@@ -178,8 +169,9 @@ export default function ContactUs() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Phone Number</label>
+                  <label htmlFor="phone" className="text-sm font-medium">Phone Number</label>
                   <input 
+                    id="phone"
                     type="tel" 
                     className="w-full h-12 px-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                     placeholder="+91 XXXXX XXXXX" 
@@ -190,8 +182,9 @@ export default function ContactUs() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Your Message / Requirement</label>
+                  <label htmlFor="message" className="text-sm font-medium">Your Message / Requirement</label>
                   <textarea 
+                    id="message"
                     className="w-full p-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all min-h-[120px]" 
                     placeholder="I want to shift my 2BHK from Nagpur to Pune next week..." 
                     required

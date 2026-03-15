@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Truck, MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, Star } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -31,12 +32,12 @@ export default function Footer() {
           
           {/* Brand & Social Proof */}
           <div className="flex flex-col gap-5 text-white/80 col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 text-white">
-              <div className="bg-primary p-2.5 rounded-xl shadow-lg shadow-primary/20">
-                <Truck size={24} className="text-white" />
+            <Link href="/" className="flex items-center gap-3 text-white">
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-primary/20 shrink-0">
+                <Image src="/icon.png" alt="Sunita Cargo Packers Logo" fill className="object-cover" sizes="40px" />
               </div>
-              <span className="font-extrabold text-2xl tracking-tighter">
-                SSD<span className="text-primary">Packers</span>
+              <span className="font-extrabold text-2xl sm:text-3xl tracking-tighter">
+                Sunita Cargo<span className="text-primary">Packers</span>
               </span>
             </Link>
             
@@ -52,10 +53,10 @@ export default function Footer() {
             </p>
             
             <div className="flex gap-3 mt-2">
-              <a href="#" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Facebook size={18} /></a>
-              <a href="#" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Twitter size={18} /></a>
-              <a href="#" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Instagram size={18} /></a>
-              <a href="#" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Linkedin size={18} /></a>
+              <a href="#" aria-label="Facebook" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Facebook size={18} /></a>
+              <a href="#" aria-label="Twitter" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Twitter size={18} /></a>
+              <a href="#" aria-label="Instagram" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Instagram size={18} /></a>
+              <a href="#" aria-label="LinkedIn" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Linkedin size={18} /></a>
             </div>
           </div>
 
@@ -101,7 +102,7 @@ export default function Footer() {
                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition">
                   <Mail className="text-primary shrink-0" size={16} />
                 </div>
-                <a href="mailto:info@ssdPackersnagpur.in" className="hover:text-white transition cursor-pointer">info@ssdPackersnagpur.in</a>
+                <a href="mailto:info@sunitacargopackersmovers.com" className="hover:text-white transition cursor-pointer">info@sunitacargopackersmovers.com</a>
               </li>
             </ul>
           </div>
@@ -109,7 +110,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/40 font-medium">
-          <p>© {new Date().getFullYear()} SSD International Packers & Movers. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Sunita Cargo Packers Movers. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition">Terms of Service</Link>
