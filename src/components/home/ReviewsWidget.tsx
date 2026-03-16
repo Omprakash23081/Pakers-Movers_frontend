@@ -32,20 +32,35 @@ export default function ReviewsWidget() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        // If we are at the end, scroll back to 0
-        if (scrollLeft + clientWidth >= scrollWidth - 10) {
-          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    let interval: NodeJS.Timeout;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          interval = setInterval(() => {
+            if (scrollRef.current) {
+              const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+              if (scrollLeft + clientWidth >= scrollWidth - 10) {
+                scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+              } else {
+                scrollRef.current.scrollBy({ left: 344, behavior: 'smooth' });
+              }
+            }
+          }, 4000); // Increased to 4s for better readability and lower CPU
         } else {
-          // Scroll horizontally by approximately one card width + gap (320px + 24px)
-          scrollRef.current.scrollBy({ left: 344, behavior: 'smooth' });
+          clearInterval(interval);
         }
-      }
-    }, 2000); // Scroll every 3 seconds
+      });
+    }, { threshold: 0.1 });
 
-    return () => clearInterval(interval);
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current);
+    }
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+    };
   }, []);
 
   return (

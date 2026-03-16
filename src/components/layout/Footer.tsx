@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Truck, MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, Star } from 'lucide-react';
+import { MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, Star } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Footer() {

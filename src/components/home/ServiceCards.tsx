@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { Truck, Home, Building2, Warehouse, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import NextImage from 'next/image';
 import { TiltCard } from '@/components/ui/TiltCard';
 const services = [
   {
@@ -70,17 +71,22 @@ export default function ServiceCards() {
                   <Card className="h-full border-border/50 hover:border-primary/30 transition-all duration-500 group-hover:-translate-y-3 shadow-sm hover:shadow-2xl bg-white dark:bg-black/40 relative overflow-hidden flex flex-col">
                     {/* Image Header */}
                     <div className="relative w-full h-48 overflow-hidden rounded-t-xl">
-                      <img
+                      <NextImage
                         src={service.imageUrl}
                         alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                     </div>
 
                     <CardHeader className="relative -mt-10 z-10 pb-2">
                       <div className={`w-16 h-16 rounded-2xl ${service.bg} bg-background/80 backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:-translate-y-2`}>
-                        <service.icon className={`w-8 h-8 ${service.color}`} />
+                        {(() => {
+                          const Icon = service.icon;
+                          return <Icon className={`w-8 h-8 ${service.color}`} />;
+                        })()}
                       </div>
                     </CardHeader>
 
