@@ -11,7 +11,7 @@ export default function HeroContent() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col space-y-6 md:space-y-8 relative z-20 -mt-14 sm:-mt-20"
+      className="flex flex-col space-y-6 md:space-y-8 relative z-20 -mt-10 sm:-mt-16"
     >
       <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 sm:px-4 py-1.5 text-[10px] sm:text-sm font-bold text-primary w-fit shadow-sm backdrop-blur-md">
         <Star size={14} className="mr-1.5 sm:mr-2 fill-primary" />
@@ -43,8 +43,8 @@ export default function HeroContent() {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <Button asChild size="lg" variant="accent" className="w-full rounded-full gap-2 text-md h-14 px-8 font-semibold">
-          <a href="#quote">
-            Get Free Moving Quote <Truck size={18} />
+          <a href="#calculator">
+            Calculate Shifting Cost <Truck size={18} />
           </a>
         </Button>
         <a href="tel:+917387661300">

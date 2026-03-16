@@ -8,6 +8,9 @@ import {
   Settings, Zap, Heart, Box, Navigation
 } from 'lucide-react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
 
 // Data constants
 const cities = [
@@ -153,8 +156,12 @@ export default function DynamicSEOPage({ params }: Props) {
               : `Looking for top-rated ${serviceName.toLowerCase()} in ${targetCity}? Our expert team brings 15+ years of experience to every move, ensuring your belongings reach their destination safely.`}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-in fade-in duration-1000 delay-500">
-            <Button size="lg" className="rounded-full shadow-apple h-14 px-8 text-lg font-bold">Calculate Shifting Cost</Button>
-            <Button size="lg" variant="outline" className="rounded-full bg-white/10 backdrop-blur-md h-14 px-8 text-lg font-bold border-white/20 text-white hover:bg-white/20 transition-all">Call Now: +91 7387661300</Button>
+            <Button asChild size="lg" className="rounded-full shadow-apple h-14 px-8 text-lg font-bold cursor-pointer">
+              <a href="#calculator">Calculate Shifting Cost</a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full bg-white/10 backdrop-blur-md h-14 px-8 text-lg font-bold border-white/20 text-white hover:bg-white/20 transition-all">
+              <a href="tel:+917387661300">Call Now: +91 7387661300</a>
+            </Button>
           </div>
         </div>
       </section>
@@ -162,7 +169,6 @@ export default function DynamicSEOPage({ params }: Props) {
       {/* Trust & Certifications */}
       <div className="bg-section/50 border-b border-border py-8">
         <div className="container mx-auto px-4 flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500 overflow-hidden">
-           {/* Placeholder for association logos - using text for now */}
            {['ISO 9001:2015 Certified', 'IBA Approved Fleet', '15+ Years Excellence', 'Registered & Insured', '24/7 Live Support'].map(badge => (
              <div key={badge} className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-muted-foreground">
                <ShieldCheck size={14} className="text-primary"/> {badge}
@@ -171,12 +177,16 @@ export default function DynamicSEOPage({ params }: Props) {
         </div>
       </div>
 
+      <div className="mt-12">
+        <CostCalculator />
+      </div>
+
       {/* Main Content Area */}
       <section className="py-20 container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Left Column (Main SEO Content) */}
-          <div className="lg:col-span-8 space-y-20">
+          <div className="lg:col-span-8 space-y-20 order-2 lg:order-1">
             
             {/* 1. In-Depth Introduction (SEO Boost) */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -332,8 +342,8 @@ export default function DynamicSEOPage({ params }: Props) {
           </div>
 
           {/* Right Column (Sidebar) */}
-          <div className="lg:col-span-4 space-y-8">
-            <Card className="apple-card border-none bg-[#0B1120] border-primary/20 shadow-2xl shadow-primary/10 sticky top-28 overflow-hidden z-20">
+          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 z-20 order-1 lg:order-2" id="quote">
+            <Card className="apple-card border-none bg-[#0B1120] border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden">
               <div className="h-2 bg-gradient-to-r from-primary to-accent w-full" />
               <CardContent className="p-8">
                 <div className="flex items-center gap-2 mb-6 text-primary">

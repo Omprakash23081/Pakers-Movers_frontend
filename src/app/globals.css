@@ -81,10 +81,6 @@
     @apply rounded-2xl bg-white dark:bg-[#1c1c1e] shadow-apple border border-black/5 dark:border-white/5 transition-all duration-300 hover:shadow-lg;
   }
   
-  .stripe-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600;
-  }
-
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }

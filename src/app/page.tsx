@@ -13,6 +13,7 @@ const ConnectWithUs = dynamic(() => import('@/components/home/ConnectWithUs'));
 const VideoTestimonials = dynamic(() => import('@/components/home/VideoTestimonials'));
 const PricingGuide = dynamic(() => import('@/components/home/PricingGuide'));
 const LocationGrid = dynamic(() => import('@/components/home/LocationGrid'));
+const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
 
 export default function Home() {
   return (
@@ -41,12 +42,20 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             
             <HeroContent />
-            <HeroForm />
+            <div className="hidden lg:block">
+              <HeroForm />
+            </div>
 
           </div>
         </div>
       </section>
 
+      <CostCalculator />
+      
+      {/* Mobile-only form after calculator */}
+      <div className="lg:hidden container mx-auto px-4 -mt-8 mb-16">
+        <HeroForm />
+      </div>
       <ServiceCards />
       <AboutUs />
       <Stats />

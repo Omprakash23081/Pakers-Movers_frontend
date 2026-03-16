@@ -27,7 +27,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-3 shadow-sm' : 'bg-transparent py-3 md:py-5 dark:bg-black/20'}`}>
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-3 shadow-md' : 'bg-transparent py-4 md:py-6'}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
 
@@ -85,7 +85,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-panel border-t border-border/50 mt-3 absolute w-full top-full left-0 overflow-hidden"
+            className="md:hidden glass-panel border-t border-border/50 absolute w-full top-full left-0 overflow-hidden shadow-2xl"
           >
             <div className="flex flex-col p-4 space-y-4">
               {navLinks.map((link) => (

@@ -108,7 +108,7 @@ export default function Footer() {
                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition">
                   <Mail className="text-primary shrink-0" size={16} />
                 </div>
-                <a href="mailto:info.sunitacargopackersmovers@gmail.com" className="hover:text-white transition cursor-pointer">info.sunitacargopackersmovers@gmail.com</a>
+                <a href="mailto:info.sunitacargopackersmovers@gmail.com" className="hover:text-white transition cursor-pointer break-all">info.sunitacargopackersmovers@gmail.com</a>
               </li>
             </ul>
           </div>
