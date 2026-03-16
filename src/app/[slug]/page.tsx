@@ -11,15 +11,26 @@ import Link from 'next/link';
 
 // Data constants
 const cities = [
-  "delhi", "mumbai", "pune", "bangalore", "hyderabad", "chennai", "kolkata",
-  "ahmedabad", "surat", "lucknow", "kanpur", "nagpur", "indore", "bhopal",
-  "patna", "jaipur", "agra", "varanasi", "meerut", "noida", "gurgaon"
+  "agra", "ahmedabad", "allahabad", "alwar", "ambala", "ankleshwar", "aurangabad", "banaras", 
+  "bangalore", "baroda", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
+  "chandigarh", "chennai", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
+  "faridabad", "gandhidham", "ghaziabad", "goa", "greaternoida", "gurgaon", "guwahati", 
+  "gwalior", "haridwar", "hisar", "hubli", "hyderabad", "indore", "jabalpur", "jaipur", 
+  "jammu", "jamshedpur", "jamnagar", "jodhpur", "kalighat", "kanpur", "kolhapur", "kolkata", 
+  "korba", "kota", "kottayam", "lucknow", "ludhiana", "madurai", "manesar", "mangalore", 
+  "meerut", "mumbai", "mysore", "nagpur", "nasik", "navimumbai", "neemrana", "noida", 
+  "panipat", "patalganga", "patna", "pondicherry", "portblair", "pune", "raigarh", "raipur", 
+  "rajkot", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
+  "siliguri", "surat", "tinsukia", "tirupur", "trichy", "trivandrum", "udaipur", "vapi", 
+  "varanasi", "vijayawada", "visakhapatnam"
 ];
 
 const services = [
   "home-shifting",
+  "house-shifting",
   "office-relocation",
   "car-transport",
+  "car-bike-transport",
   "bike-transport",
   "warehouse-storage",
   "packers-and-movers"
@@ -143,7 +154,7 @@ export default function DynamicSEOPage({ params }: Props) {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-in fade-in duration-1000 delay-500">
             <Button size="lg" className="rounded-full shadow-apple h-14 px-8 text-lg font-bold">Calculate Shifting Cost</Button>
-            <Button size="lg" variant="outline" className="rounded-full bg-white/50 backdrop-blur-sm h-14 px-8 text-lg font-bold border-primary/20 text-primary">Call Now: +91 7387661300</Button>
+            <Button size="lg" variant="outline" className="rounded-full bg-white/10 backdrop-blur-md h-14 px-8 text-lg font-bold border-white/20 text-white hover:bg-white/20 transition-all">Call Now: +91 7387661300</Button>
           </div>
         </div>
       </section>
@@ -334,7 +345,7 @@ export default function DynamicSEOPage({ params }: Props) {
                 <form className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Full Name</label>
-                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="E.g. Vikram Singh" />
+                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Name here" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Mobile number</label>
@@ -344,7 +355,7 @@ export default function DynamicSEOPage({ params }: Props) {
                     <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Moving To</label>
                     <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="City or Locality" />
                   </div>
-                  <Button className="w-full h-14 text-lg font-black rounded-2xl mt-4 bg-primary text-white hover:scale-[1.02] shadow-xl shadow-primary/20 transition-all">Get Instant Estimate</Button>
+                  <Button className="w-full h-14 text-lg font-black rounded-2xl mt-4 bg-primary text-white hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all">Get Instant Estimate</Button>
                   <div className="flex items-center justify-center gap-4 mt-6 opacity-40">
                     <ShieldCheck size={16}/>
                     <span className="text-[10px] font-bold uppercase tracking-widest">Safe & Confidential</span>

@@ -48,7 +48,7 @@ export default function ConnectWithUs() {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
   };
 
-  const shareText = "Check out SSD Packers and Movers in Nagpur for reliable relocation services!";
+  const shareText = "Check out Sunita Cargo Packers and Movers in Nagpur for reliable relocation services!";
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const handleWhatsAppShare = () => {

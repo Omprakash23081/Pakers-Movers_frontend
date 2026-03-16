@@ -30,15 +30,24 @@ export default function Navbar() {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-panel py-3 shadow-sm' : 'bg-transparent py-3 md:py-5 dark:bg-black/20'}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          
+
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-3">
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-lg shadow-primary/20 shrink-0">
-              <Image src="/icon.png" alt="Sunita Cargo Packers Logo" fill className="object-cover" sizes="40px" />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-primary/20 shrink-0 border border-primary/20 group-hover:bg-primary/20 transition-all duration-300">
+              <Image
+                src="/favicon.ico"
+                alt="Sunita Cargo Packers Logo"
+                fill
+                className="object-cover"
+                sizes="40px"
+              />
             </div>
-            <span className="font-bold text-xl sm:text-2xl md:text-3xl tracking-tighter">
-              Sunita Cargo<span className="text-primary font-black">Packers</span>
-            </span>
+            <div className="flex flex-col -space-y-1">
+              <span className="font-bold text-xl sm:text-2xl tracking-tighter">
+                Sunita<span className="text-primary font-black">Cargo</span>
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Packers & Movers</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,7 +68,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             aria-label="Toggle mobile menu"
             className="md:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -80,9 +89,9 @@ export default function Navbar() {
           >
             <div className="flex flex-col p-4 space-y-4">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  href={link.href} 
+                <Link
+                  key={link.name}
+                  href={link.href}
                   className="text-lg font-medium p-2 hover:bg-muted rounded-lg"
                   onClick={() => setMobileMenuOpen(false)}
                 >

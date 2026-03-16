@@ -18,6 +18,7 @@ const FAQ = dynamic(() => import('@/components/home/FAQ'));
 const ConnectWithUs = dynamic(() => import('@/components/home/ConnectWithUs'));
 const VideoTestimonials = dynamic(() => import('@/components/home/VideoTestimonials'));
 const PricingGuide = dynamic(() => import('@/components/home/PricingGuide'));
+const LocationGrid = dynamic(() => import('@/components/home/LocationGrid'));
 
 interface FormData {
   firstName?: string;
@@ -47,7 +48,7 @@ export default function Home() {
     // Ensure legacy required fields are satisfied even if backend is cached
     const submissionData = {
       ...formData,
-      firstName: formData.firstName || 'SSD',
+      firstName: formData.firstName || 'Sunita',
       lastName: formData.lastName || 'Customer',
       email: formData.email || 'inquiry@example.com'
     };
@@ -82,7 +83,7 @@ export default function Home() {
           {/* Abstract mesh and image background */}
           <Image
             src="/images/hero-bg.png"
-            alt="SSD Packers and Movers Background"
+            alt="Sunita Cargo Packers and Movers Background"
             fill
             sizes="100vw"
             className="object-cover opacity-80 dark:opacity-60 pointer-events-none"
@@ -102,14 +103,14 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="flex flex-col space-y-6 md:space-y-8 relative z-20 -mt-14 sm:-mt-20"
             >
-              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-2 sm:px-3 py-1 text-[10px] sm:text-sm font-medium text-primary w-fit shadow-sm">
-                <ShieldCheck size={14} className="mr-1.5 sm:mr-2" />
-                #1 Trusted Movers in Nagpur
+              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 sm:px-4 py-1.5 text-[10px] sm:text-sm font-bold text-primary w-fit shadow-sm backdrop-blur-md">
+                <Star size={14} className="mr-1.5 sm:mr-2 fill-primary" />
+                Trusted Packers and Movers in Nagpur
               </div>
 
               <div className="relative">
                 <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance leading-tight relative z-10">
-                  Best Packers and Movers in Nagpur – <br /><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Safe & Stress-Free Relocation.</span>
+                  Reliable Packers and Movers in Nagpur for <br /><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Safe & Affordable Shifting Services</span>
                 </h1>
                 {/* Moving Truck Animation */}
                 <motion.div
@@ -123,28 +124,44 @@ export default function Home() {
               </div>
 
               <p className="text-lg md:text-xl text-muted-foreground/90 max-w-lg text-balance leading-relaxed font-medium">
-                Professional packing, safe transportation, and reliable relocation services across India.
+                Professional house shifting, office relocation, vehicle transport and packing services in Nagpur. 
+                Our trained team ensures safe packing, secure loading and on-time delivery across India.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button size="lg" variant="accent" className="w-full rounded-full gap-2 text-md h-14 px-8 font-semibold">
-                    Get Free Estimate <Truck size={18} />
+                <Button asChild size="lg" variant="accent" className="w-full rounded-full gap-2 text-md h-14 px-8 font-semibold">
+                  <a href="#quote">
+                    Get Free Moving Quote <Truck size={18} />
+                  </a>
+                </Button>
+                <a href="tel:+917387661300">
+                  <Button size="lg" variant="outline" className="w-full rounded-full h-14 px-8 text-md border-white/20 bg-white/10 backdrop-blur-md font-bold text-white hover:bg-white/20 transition-all">
+                    Call Now: +91 7387661300
                   </Button>
-                </Link>
-                <Link href="/track">
-                  <Button size="lg" variant="outline" className="w-full rounded-full h-14 px-8 text-md border-border/50 bg-white/50 dark:bg-black/50 backdrop-blur-sm font-semibold">
-                    Track Shipment
-                  </Button>
-                </Link>
+                </a>
+              </div>
+
+              {/* Hero Features Area */}
+              <div className="grid grid-cols-2 gap-y-3 gap-x-6 pt-4 border-t border-border/10">
+                {[
+                  "100% Safe Packing",
+                  "Trained Moving Staff",
+                  "Door-to-Door Shifting",
+                  "Affordable Pricing"
+                ].map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-sm font-bold text-foreground/80">
+                    <CheckCircle size={16} className="text-emerald-500 shrink-0" />
+                    <span>{feature}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Trust Signals Avatar Stack */}
-              <div className="flex items-center gap-4 pt-4">
+              <div className="flex items-center gap-4 pt-4 border-t border-border/10">
                 <div className="flex -space-x-3">
-                  {[44, 32, 12, 65, 23].map((i) => (
+                  {[1, 2, 3, 4, 5].map((i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center overflow-hidden shadow-sm shadow-black/20">
-                      <Image src={`https://i.pravatar.cc/100?img=${i}`} alt="Customer Avatar" width={40} height={40} className="object-cover" />
+                      <Image src="/images/avatar-placeholder.svg" alt="Customer Avatar" width={40} height={40} className="object-cover" />
                     </div>
                   ))}
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-secondary text-white flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm shadow-black/20 z-10">
@@ -166,6 +183,7 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:pl-10 relative"
+              id="quote"
             >
               {/* Decorative Glow */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-transparent/20 rounded-full blur-[600px] -z-10" />
@@ -174,9 +192,9 @@ export default function Home() {
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent z-20" />
                 <CardHeader className="relative z-10 border-b border-border/50 pb-5 pt-8">
                   <div className="flex items-center space-x-2 w-full">
-                    <CardTitle className="text-2xl font-bold tracking-tight text-foreground">Instant Estimate.</CardTitle>
+                    <CardTitle className="text-2xl font-bold tracking-tight text-foreground">Get Free Moving Quote</CardTitle>
                   </div>
-                  <p className="text-sm text-foreground/80 font-medium mt-1">Get a verified quote within 2 minutes.</p>
+                  <p className="text-sm text-foreground/80 font-medium mt-1">Get a verified estimate within 2 minutes</p>
                 </CardHeader>
                 <CardContent className="relative z-10 px-6 py-10 min-h-[400px] flex items-center justify-center">
                   {!submitted ? (
@@ -186,16 +204,28 @@ export default function Home() {
                         <input 
                           id="firstName"
                           type="text" 
-                          placeholder="Your Name" 
+                          placeholder="Enter Name here" 
                           className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
                           value={formData.firstName || ''}
                           onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                           required
                         />
                       </div>
+                      <div className="space-y-1.5 focus-within:text-primary transition-colors">
+                        <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Phone Number</label>
+                        <input 
+                          id="phone"
+                          type="tel" 
+                          placeholder="Your Mobile Number" 
+                          className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          required
+                        />
+                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                          <label htmlFor="movingFrom" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving From</label>
+                          <label htmlFor="movingFrom" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving From (City)</label>
                           <input 
                             id="movingFrom"
                             type="text" 
@@ -207,11 +237,11 @@ export default function Home() {
                           />
                         </div>
                         <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                          <label htmlFor="movingTo" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving To</label>
+                          <label htmlFor="movingTo" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Moving To (City)</label>
                           <input 
                             id="movingTo"
                             type="text" 
-                            placeholder="Destination" 
+                            placeholder="Destination City" 
                             className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
                             value={formData.movingTo}
                             onChange={(e) => setFormData({...formData, movingTo: e.target.value})}
@@ -220,38 +250,26 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                        <label htmlFor="serviceType" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Service Type</label>
+                        <label htmlFor="serviceType" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Select Service</label>
                         <select 
                           id="serviceType"
                           className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none cursor-pointer shadow-inner backdrop-blur-md"
                           value={formData.serviceType}
                           onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
                         >
+                          <option className="bg-background text-foreground" value="">Select Service</option>
                           <option className="bg-background text-foreground">House Shifting</option>
                           <option className="bg-background text-foreground">Office Relocation</option>
-                          <option className="bg-background text-foreground">Car & Bike Transport</option>
-                          <option className="bg-background text-foreground">Commercial Transport</option>
-                          <option className="bg-background text-foreground">Warehouse Storage</option>
+                          <option className="bg-background text-foreground">Vehicle Transport</option>
+                          <option className="bg-background text-foreground">Local Shifting</option>
                         </select>
-                      </div>
-                      <div className="space-y-1.5 focus-within:text-primary transition-colors">
-                        <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-foreground/80">Mobile Number</label>
-                        <input 
-                          id="phone"
-                          type="tel" 
-                          placeholder="+91 Your Mobile Number" 
-                          className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-foreground placeholder-foreground/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
-                          value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                          required
-                        />
                       </div>
                       <button 
                         type="submit"
                         disabled={loading}
                         className="w-full h-14 rounded-xl mt-4 font-bold text-lg bg-accent text-white hover:bg-accent/90 transition-all shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5 flex items-center justify-center disabled:opacity-50 disabled:translate-y-0"
                       >
-                        {loading ? <Loader2 className="animate-spin mr-2" /> : "Start Inquiry Now"}
+                        {loading ? <Loader2 className="animate-spin mr-2" /> : "Get Free Quote"}
                       </button>
                     </form>
                   ) : (
@@ -289,6 +307,7 @@ export default function Home() {
       <ReviewsWidget />
       <ConnectWithUs />
       <PricingGuide />
+      <LocationGrid />
       <FAQ />
 
     </div>

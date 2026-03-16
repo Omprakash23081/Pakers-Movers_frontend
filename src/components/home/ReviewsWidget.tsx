@@ -8,9 +8,9 @@ const testimonials = [
   {
     name: 'Rahul Sharma',
     service: 'House Shifting',
-    text: 'SSD Packers made my move from Nagpur to Pune completely stress-free. The packing was excellent, and not a single item was damaged. Highly recommended!',
+    text: 'Sunita Cargo Packers made my move from Nagpur to Pune completely stress-free. The packing was excellent, and not a single item was damaged. Highly recommended!',
     rating: 5,
-    avatar: 'https://i.pravatar.cc/100?img=11'
+    avatar: '/images/avatar-placeholder.svg'
   },
   {
     name: 'Priya Verma',

@@ -72,9 +72,9 @@ export default function Gallery() {
                   />
 
                   {/* Premium Glass Hover Overlay */}
-                  <div className="absolute inset-0 bg-primary/40 dark:bg-primary/60 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                    <div className="transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 flex flex-col items-center p-6 text-center">
+                  <div className="absolute inset-0 bg-primary/40 dark:bg-primary/60 mix-blend-multiply opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                    <div className="transform translate-y-0 transition-all duration-500 flex flex-col items-center p-6 text-center">
                       <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-3 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
                         <ZoomIn size={24} />
                       </div>

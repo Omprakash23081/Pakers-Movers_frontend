@@ -47,7 +47,7 @@ export default function AboutUs() {
             <div className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl z-10">
               <Image
                 src="/images/warehouse-storage.png"
-                alt="SSD Packers and Movers Team"
+                alt="Sunita Cargo Packers and Movers Team"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

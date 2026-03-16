@@ -38,18 +38,21 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
+import { Slot } from '@radix-ui/react-slot';
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
-    // Note: We use a simple motion.button wrapper for tap animations.
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : motion.button;
+    
+    const motionProps = asChild ? {} : { whileTap: { scale: 0.98 } };
+
     return (
-      <motion.button
-        whileTap={{ scale: 0.98 }}
+      <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        {...(props as HTMLMotionProps<"button">)}
-      >
-        {props.children}
-      </motion.button>
+        {...motionProps}
+        {...(props as any)}
+      />
     );
   }
 );

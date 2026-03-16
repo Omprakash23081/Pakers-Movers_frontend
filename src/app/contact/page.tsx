@@ -109,8 +109,7 @@ export default function ContactUs() {
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-bold text-lg">Email Address</h3>
-                    <p className="text-muted-foreground mt-1 break-all text-sm sm:text-base">info@sunitacargopackersmovers.com</p>
-                    <p className="text-muted-foreground break-all text-sm sm:text-base">support@sunitacargopackersmovers.com</p>
+                    <p className="text-muted-foreground mt-1 break-all text-sm sm:text-base">info.sunitacargopackersmovers@gmail.com</p>
                   </div>
                 </CardContent>
               </Card>
@@ -148,7 +147,7 @@ export default function ContactUs() {
                     id="fullName"
                     type="text" 
                     className="w-full h-12 px-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
-                    placeholder="John Doe" 
+                    placeholder="Enter Name here" 
                     required 
                     value={formData.fullName}
                     onChange={(e) => setFormData({...formData, fullName: e.target.value})}

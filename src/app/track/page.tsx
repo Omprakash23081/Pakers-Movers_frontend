@@ -76,7 +76,7 @@ export default function TrackShipment() {
                     <input
                       type="text"
                       className="w-full h-14 pl-12 pr-4 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-lg font-medium tracking-wide uppercase"
-                      placeholder="e.g. SSD-NGP-8921"
+                      placeholder="e.g. SCN-NGP-8921"
                       value={trackingId}
                       onChange={(e) => setTrackingId(e.target.value)}
                       required
