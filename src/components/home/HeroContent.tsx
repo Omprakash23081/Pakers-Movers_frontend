@@ -14,7 +14,7 @@ export default function HeroContent() {
       className="flex flex-col space-y-6 md:space-y-8 relative z-20 -mt-10 sm:-mt-16"
     >
       <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 sm:px-4 py-1.5 text-[10px] sm:text-sm font-bold text-primary w-fit shadow-sm backdrop-blur-md">
-        <Star size={14} className="mr-1.5 sm:mr-2 fill-primary" />
+        <Star size={14} className="mr-1.5 sm:mr-2 fill-primary" aria-hidden="true" />
         Trusted Packers and Movers in Nagpur
       </div>
 
@@ -25,14 +25,14 @@ export default function HeroContent() {
             Safe & Affordable Shifting Services
           </span>
         </h1>
-        {/* Moving Truck Animation */}
+        {/* Moving Truck Animation - Optimized to run once for performance */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: "60%", opacity: [0, 1, 1, 0] }}
-          transition={{ duration: 8, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 8, ease: "linear", repeat: 1 }}
           className="absolute -top-12 left-0 text-primary/10 z-0"
         >
-          <Truck size={120} />
+          <Truck size={120} aria-hidden="true" />
         </motion.div>
       </div>
 
@@ -63,7 +63,7 @@ export default function HeroContent() {
           "Affordable Pricing"
         ].map((feature, idx) => (
           <div key={idx} className="flex items-center gap-2 text-sm font-bold text-white/80">
-            <CheckCircle size={16} className="text-emerald-500 shrink-0" />
+            <CheckCircle size={16} className="text-emerald-500 shrink-0" aria-hidden="true" />
             <span>{feature}</span>
           </div>
         ))}
@@ -74,16 +74,16 @@ export default function HeroContent() {
         <div className="flex -space-x-3">
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center overflow-hidden shadow-sm shadow-black/20">
-              <Image src="/images/avatar-placeholder.svg" alt="Customer Avatar" width={40} height={40} className="object-cover" />
+              <Image src="/images/avatar-placeholder.svg" alt="" width={40} height={40} className="object-cover" aria-hidden="true" />
             </div>
           ))}
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-secondary text-white flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm shadow-black/20 z-10">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-secondary text-white flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm shadow-black/20 z-10" aria-label="More than 2,000 customers">
             2k+
           </div>
         </div>
         <div className="flex flex-col">
-          <div className="flex text-yellow-500 gap-0.5">
-            {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" />)}
+          <div className="flex text-yellow-500 gap-0.5" aria-label="5 star rating">
+            {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" aria-hidden="true" />)}
           </div>
           <span className="text-[11px] sm:text-sm font-semibold mt-0.5 text-white/80">Trusted by 10,000+ Customers</span>
         </div>

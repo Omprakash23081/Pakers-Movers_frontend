@@ -30,8 +30,8 @@ export default function AboutUs() {
   return (
     <section id="about" className="py-24 bg-background relative overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 rounded-l-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-primary/5 rounded-tr-full blur-3xl -z-10" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 rounded-l-full blur-3xl -z-10" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-primary/5 rounded-tr-full blur-3xl -z-10" aria-hidden="true" />
 
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -65,7 +65,7 @@ export default function AboutUs() {
             >
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                  <Award size={20} />
+                  <Award size={20} aria-hidden="true" />
                 </div>
                 <div className="font-bold text-2xl">15+</div>
               </div>
@@ -81,7 +81,7 @@ export default function AboutUs() {
               className="absolute top-12 -left-8 z-20 bg-white dark:bg-black/80 backdrop-blur-xl p-4 rounded-xl shadow-xl border border-border/50 flex items-center gap-3"
             >
               <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                <ShieldCheck size={20} />
+                <ShieldCheck size={20} aria-hidden="true" />
               </div>
               <div>
                 <div className="font-bold text-sm">ISO 9001:2015</div>
@@ -142,7 +142,7 @@ export default function AboutUs() {
                   className="flex items-start gap-3"
                 >
                   <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <CheckCircle size={16} />
+                    <CheckCircle size={16} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground">{feature.title}</h4>

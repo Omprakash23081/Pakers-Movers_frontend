@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { generateIntro, generateLocalPricing, generateLocalizedFAQs } from '@/lib/content-engine';
+import { getCityTrait } from '@/lib/city-data';
 
 const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
 
@@ -85,9 +87,14 @@ function parseSlug(slug: string) {
   }
 
   // Pattern 2: [service]-[city]
+  // Normalize packers-movers to packers-and-movers for consistency
+  const normalizedSlug = slug.startsWith('packers-movers-') 
+    ? slug.replace('packers-movers-', 'packers-and-movers-')
+    : slug;
+
   for (const service of services) {
-    if (slug.startsWith(`${service}-`)) {
-      const city = slug.replace(`${service}-`, '');
+    if (normalizedSlug.startsWith(`${service}-`)) {
+      const city = normalizedSlug.replace(`${service}-`, '');
       if (cities.includes(city)) {
         return {
           type: 'service-city',
@@ -105,20 +112,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = parseSlug(params.slug);
   if (!data) return { title: 'Not Found' };
 
+  // Normalize canonical URL to packers-and-movers to avoid duplicate content
+  const normalizedSlug = params.slug.startsWith('packers-movers-') 
+    ? params.slug.replace('packers-movers-', 'packers-and-movers-')
+    : params.slug;
+  const canonicalUrl = `https://sunitacargopackersmovers.com/${normalizedSlug}`;
+
+  const serviceName = getTitleCase(data.service || (data as any).service || 'Packers and Movers');
+  const cityName = getTitleCase(data.city || (data as any).from || 'India');
+  const intro = data.type === 'service-city' ? generateIntro(data.city!, data.service!) : '';
+
   if (data.type === 'service-city') {
-    const serviceName = getTitleCase(data.service!);
-    const cityName = getTitleCase(data.city!);
     return {
       title: `${serviceName} in ${cityName} | Sunita Cargo Packers Movers`,
-      description: `Sunita Cargo Packers Movers offers professional ${serviceName.toLowerCase()} services in ${cityName}. Safe relocation, expert packing, and premium transportation across India.`,
+      description: intro.length > 10 ? intro.substring(0, 160) : `Safe and reliable ${serviceName.toLowerCase()} in ${cityName}. Professional packing, secure transport, and 100% damage-free guarantee.`,
+      alternates: {
+        canonical: canonicalUrl,
+      }
     };
   } else {
     const fromCity = getTitleCase(data.from!);
     const toCity = getTitleCase(data.to!);
-    const serviceName = getTitleCase(data.service!);
     return {
       title: `${serviceName} from ${fromCity} to ${toCity} | Sunita Cargo Packers Movers`,
       description: `Premium ${serviceName.toLowerCase()} services from ${fromCity} to ${toCity}. Sunita Cargo Packers Movers ensures safe transit and timely delivery for your long-distance move.`,
+      alternates: {
+        canonical: canonicalUrl,
+      }
     };
   }
 }
@@ -153,7 +173,7 @@ export default function DynamicSEOPage({ params }: Props) {
           <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-1000 delay-300 text-balance">
             {isRoute 
               ? `Planning a move from ${originCity} to ${targetCity}? Sunita Cargo Packers Movers provides the most secure and price-effective intercity ${serviceName.toLowerCase()} services with a 100% damage-free guarantee.`
-              : `Looking for top-rated ${serviceName.toLowerCase()} in ${targetCity}? Our expert team brings 15+ years of experience to every move, ensuring your belongings reach their destination safely.`}
+              : generateIntro(data.city!, data.service!)}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-in fade-in duration-1000 delay-500">
             <Button asChild size="lg" className="rounded-full shadow-apple h-14 px-8 text-lg font-bold cursor-pointer">
@@ -177,16 +197,14 @@ export default function DynamicSEOPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="mt-12">
-        <CostCalculator />
-      </div>
+
 
       {/* Main Content Area */}
       <section className="py-20 container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Left Column (Main SEO Content) */}
-          <div className="lg:col-span-8 space-y-20 order-2 lg:order-1">
+          <div className="lg:col-span-8 space-y-20 order-3 lg:order-1">
             
             {/* 1. In-Depth Introduction (SEO Boost) */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -194,10 +212,12 @@ export default function DynamicSEOPage({ params }: Props) {
                 Your Trusted Partner for {serviceName} in {targetCity}
               </h2>
               <p className="text-muted-foreground leading-extra-relaxed">
-                Relocating home or business can be one of life&apos;s most stressful events. At Sunita Cargo Packers Movers, we have spent over 15 years refining our process to make <strong>{serviceName.toLowerCase()} in {targetCity}</strong> as seamless and worry-free as possible. Whether you are moving down the street or shifting {isRoute ? `from ${originCity} to ${targetCity}` : `across the country`}, our team is equipped with the skills and passion to deliver perfection.
+                Relocating home or business can be one of life&apos;s most stressful events. At Sunita Cargo Packers Movers, we have spent over 15 years refining our process to make <strong>{serviceName.toLowerCase()} in {targetCity}</strong> as seamless and worry-free as possible. {!isRoute && generateIntro(data.city!, data.service!)} Whether you are moving down the street or shifting {isRoute ? `from ${originCity} to ${targetCity}` : `across the country`}, our team is equipped with the skills and passion to deliver perfection.
               </p>
               <p className="text-muted-foreground leading-extra-relaxed">
-                Our presence in {targetCity} is marked by thousands of successful moves and a reputation for being the most reliable logistics provider in the region. We don&apos;t just move items; we move feelings, memories, and valuable assets. Our commitment to using high-standard packing materials like triple-layer bubble wrap, edge protectors, and customized wooden crates for fragile items sets us apart from the competition.
+                {isRoute 
+                  ? `Our specialized ${serviceName.toLowerCase()} between ${originCity} and ${targetCity} is marked by thousands of successful long-distance deliveries.`
+                  : `Our presence in ${targetCity} is marked by thousands of successful moves and a reputation for being the most reliable logistics provider in ${getTitleCase(getCityTrait(data.city!).tier)} regions.`} We don&apos;t just move items; we move feelings, memories, and valuable assets. Our commitment to using high-standard packing materials like triple-layer bubble wrap, edge protectors, and customized wooden crates for fragile items sets us apart from the competition.
               </p>
 
               <div className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
@@ -280,12 +300,10 @@ export default function DynamicSEOPage({ params }: Props) {
                  <h2 className="text-3xl font-black tracking-tight text-foreground">Questions People Ask About {serviceName} in {targetCity}</h2>
                </div>
                <div className="space-y-6">
-                 {[
-                   { q: `What are the average charges for ${serviceName.toLowerCase()} in ${targetCity}?`, a: `For local house shifting in ${targetCity}, the charges usually range from ₹3,500 to ₹15,000 depending on the volume. Intercity shifting {isRoute ? "from " + originCity + " to " + targetCity : "to other parts of India"} depends on distance and volume, with costs varying from ₹15,000 to ₹45,000.` },
-                   { q: `How many days in advance should I book ${serviceName.toLowerCase()}?`, a: `We recommend booking at least 5-7 days in advance, especially during peak moving seasons or weekends in ${targetCity}. However, for emergency moves, we do offer express booking based on availability.` },
-                   { q: `Do you provide car or bike transport as part of ${serviceName.toLowerCase()} in ${targetCity}?`, a: `Yes, we have specialized car carriers and bike containers. We provide end-to-end vehicle relocation with proper documentation and safe handling across India.` },
-                   { q: `Is my move insured with Sunita Cargo Packers Movers?`, a: `Yes, we offer comprehensive transit insurance through our reputed insurance partners. This covers any unlikely damage or loss during the entire relocation process in ${targetCity}.` }
-                 ].map((faq, i) => (
+                 {(isRoute ? [
+                    { q: `What are the average charges for ${serviceName.toLowerCase()} from ${originCity} to ${targetCity}?`, a: `Intercity shifting from ${originCity} to ${targetCity} depends on distance (approx. long-distance) and volume, with costs varying from ₹15,000 to ₹45,000 depending on the vehicle size and packing requirements.` },
+                    { q: `How many days does it take to move from ${originCity} to ${targetCity}?`, a: `Transit time depends on the distance and road conditions. Typically, a move from ${originCity} to ${targetCity} takes 3-7 days for delivery.` }
+                 ] : generateLocalizedFAQs(data.city!, serviceName)).map((faq, i) => (
                     <div key={i} className="p-8 rounded-3xl border border-border bg-section/20 hover:bg-section/40 transition-all duration-300">
                       <h4 className="font-bold text-lg mb-3 flex gap-3">
                         <span className="text-primary font-black">Q.</span> {faq.q}
@@ -390,12 +408,17 @@ export default function DynamicSEOPage({ params }: Props) {
                   </div>
                   <ul className="space-y-4 text-sm">
                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Service Area:</span> <span className="font-black">{targetCity}</span></li>
-                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Starting Price:</span> <span className="font-black text-primary">₹3,500</span></li>
+                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Starting Price:</span> <span className="font-black text-primary">{isRoute ? '₹15,000' : generateLocalPricing(data.city!, serviceName).start}</span></li>
                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Transit Type:</span> <span className="font-black">Closed Container</span></li>
                     <li className="flex justify-between"><span className="text-muted-foreground font-medium">Insurance:</span> <span className="font-black">Available</span></li>
                   </ul>
                </div>
             </div>
+          </div>
+
+          {/* Cost Calculator - Placed here to enable precise mobile ordering (Form -> Estimator -> Content) */}
+          <div className="lg:col-span-12 order-2 lg:order-3">
+             <CostCalculator />
           </div>
         </div>
       </section>

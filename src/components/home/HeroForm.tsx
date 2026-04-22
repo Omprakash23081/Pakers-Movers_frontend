@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import { CheckCircle, Loader2 } from 'lucide-react';
+import { CheckCircle, Loader2, ChevronDown } from 'lucide-react';
 
 interface FormData {
   firstName?: string;
@@ -129,24 +129,29 @@ export default function HeroForm() {
                   />
                 </div>
               </div>
-              <div className="space-y-1.5 focus-within:text-primary transition-colors">
+              <div className="space-y-1.5 focus-within:text-primary transition-colors relative">
                 <label htmlFor="serviceType" className="text-xs font-bold uppercase tracking-wider text-white/80">Select Service</label>
-                <select 
-                  id="serviceType"
-                  className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none cursor-pointer shadow-inner backdrop-blur-md"
-                  value={formData.serviceType}
-                  onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
-                >
-                  <option className="bg-background text-white" value="">Select Service</option>
-                  <option className="bg-background text-white">House Shifting</option>
-                  <option className="bg-background text-white">Office Relocation</option>
-                  <option className="bg-background text-white">Vehicle Transport</option>
-                  <option className="bg-background text-white">Local Shifting</option>
-                </select>
+                <div className="relative">
+                  <select 
+                    id="serviceType"
+                    className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none cursor-pointer shadow-inner backdrop-blur-md"
+                    value={formData.serviceType}
+                    onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
+                    aria-label="Relocation Service Type"
+                  >
+                    <option className="bg-background text-white" value="">Select Service</option>
+                    <option className="bg-background text-white">House Shifting</option>
+                    <option className="bg-background text-white">Office Relocation</option>
+                    <option className="bg-background text-white">Vehicle Transport</option>
+                    <option className="bg-background text-white">Local Shifting</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" size={18} />
+                </div>
               </div>
               <button 
                 type="submit"
                 disabled={loading}
+                aria-label="Submit quote request"
                 className="w-full h-14 rounded-xl mt-4 font-bold text-lg bg-accent text-white hover:bg-accent/90 transition-all shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5 flex items-center justify-center disabled:opacity-50 disabled:translate-y-0"
               >
                 {loading ? <Loader2 className="animate-spin mr-2" /> : "Get Free Quote"}

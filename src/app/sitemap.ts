@@ -3,18 +3,30 @@ import { MetadataRoute } from 'next';
 const DOMAIN = 'https://sunitacargopackersmovers.com';
 
 const cities = [
-  "delhi", "mumbai", "pune", "bangalore", "hyderabad", "chennai", "kolkata",
-  "ahmedabad", "surat", "lucknow", "kanpur", "nagpur", "indore", "bhopal",
-  "patna", "jaipur", "agra", "varanasi", "meerut", "noida", "gurgaon"
+  "agra", "ahmedabad", "allahabad", "alwar", "ambala", "ankleshwar", "aurangabad", "banaras", 
+  "bangalore", "baroda", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
+  "chandigarh", "chennai", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
+  "faridabad", "gandhidham", "ghaziabad", "goa", "greaternoida", "gurgaon", "guwahati", 
+  "gwalior", "haridwar", "hisar", "hubli", "hyderabad", "indore", "jabalpur", "jaipur", 
+  "jammu", "jamshedpur", "jamnagar", "jodhpur", "kalighat", "kanpur", "kolhapur", "kolkata", 
+  "korba", "kota", "kottayam", "lucknow", "ludhiana", "madurai", "manesar", "mangalore", 
+  "meerut", "mumbai", "mysore", "nagpur", "nasik", "navimumbai", "neemrana", "noida", 
+  "panipat", "patalganga", "patna", "pondicherry", "portblair", "pune", "raigarh", "raipur", 
+  "rajkot", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
+  "siliguri", "surat", "tinsukia", "tirupur", "trichy", "trivandrum", "udaipur", "vapi", 
+  "varanasi", "vijayawada", "visakhapatnam"
 ];
 
 const services = [
   "home-shifting",
+  "house-shifting",
   "office-relocation",
   "car-transport",
+  "car-bike-transport",
   "bike-transport",
   "warehouse-storage",
-  "packers-and-movers"
+  "packers-and-movers",
+  "packers-movers" // Added alias for indexing consistency
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

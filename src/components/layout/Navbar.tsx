@@ -32,17 +32,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group" aria-label="Sunita Cargo Packers Movers Home">
             <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-primary/20 shrink-0 border border-primary/20 group-hover:bg-primary/20 transition-all duration-300">
               <Image
                 src="/favicon.ico"
-                alt="Sunita Cargo Packers Logo"
+                alt="Sunita Cargo Logo"
                 fill
                 className="object-cover"
                 sizes="40px"
               />
             </div>
-            <div className="flex flex-col -space-y-1">
+            <div className="flex flex-col -space-y-1" aria-hidden="true">
               <span className="font-bold text-xl sm:text-2xl tracking-tighter">
                 Sunita<span className="text-primary font-black">Cargo</span>
               </span>
@@ -61,19 +61,21 @@ export default function Navbar() {
 
           {/* Call to Action */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="tel:+917387661300" className="font-bold text-sm hidden lg:block hover:text-primary transition-colors">📞 +91 7387661300</a>
+            <a href="tel:+917387661300" className="font-bold text-sm hidden lg:block hover:text-primary transition-colors" aria-label="Call +91 7387661300">
+              <span aria-hidden="true">📞</span> +91 7387661300
+            </a>
             <Link href="/contact">
-              <Button size="sm" className="rounded-full shadow-apple px-6 cursor-pointer">Get a Quote</Button>
+              <Button size="sm" className="rounded-full shadow-apple px-6 cursor-pointer" aria-label="Request a moving quote">Get a Quote</Button>
             </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            aria-label="Toggle mobile menu"
+            aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
             className="md:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
         </div>
       </div>

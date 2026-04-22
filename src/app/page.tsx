@@ -50,12 +50,12 @@ export default function Home() {
         </div>
       </section>
 
-      <CostCalculator />
-      
-      {/* Mobile-only form after calculator */}
-      <div className="lg:hidden container mx-auto px-4 -mt-8 mb-16">
+      {/* Mobile-only form before calculator */}
+      <div className="lg:hidden container mx-auto px-4 -mt-8 mb-8">
         <HeroForm />
       </div>
+
+      <CostCalculator />
       <ServiceCards />
       <AboutUs />
       <Stats />
