@@ -135,9 +135,9 @@ export default function NagpurPage() {
               </div>
               <h3 className="text-3xl font-black">Get a Local Quote</h3>
               <form className="space-y-6">
-                <input type="text" className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary outline-none transition-all font-medium" placeholder="Full Name" />
-                <input type="tel" className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary outline-none transition-all font-medium" placeholder="Phone Number" />
-                <input type="text" className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary outline-none transition-all font-medium" placeholder="Moving to (City or Locality)" />
+                <input type="text" className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary outline-none transition-all font-medium" placeholder="Enter Full Name" />
+                <input type="tel" className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary outline-none transition-all font-medium" placeholder="Enter Phone Number" />
+                <input type="text" className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary outline-none transition-all font-medium" placeholder="Enter Destination City" />
                 <Button className="w-full h-16 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20">Transmit Quote Request</Button>
               </form>
               <p className="text-center text-xs text-muted-foreground">

@@ -373,15 +373,15 @@ export default function DynamicSEOPage({ params }: Props) {
                 <form className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Full Name</label>
-                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Name here" />
+                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Full Name" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Mobile number</label>
-                    <input type="tel" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="+91 XXXX XXX XXX" />
+                    <input type="tel" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Mobile Number" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Moving To</label>
-                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="City or Locality" />
+                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Destination City" />
                   </div>
                   <Button className="w-full h-14 text-lg font-black rounded-2xl mt-4 bg-primary text-white hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all">Get Instant Estimate</Button>
                   <div className="flex items-center justify-center gap-4 mt-6 opacity-40">

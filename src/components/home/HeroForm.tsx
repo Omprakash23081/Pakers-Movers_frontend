@@ -84,7 +84,7 @@ export default function HeroForm() {
                 <input 
                   id="firstName"
                   type="text" 
-                  placeholder="Enter Name here" 
+                  placeholder="Enter Full Name" 
                   className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
                   value={formData.firstName || ''}
                   onChange={(e) => setFormData({...formData, firstName: e.target.value})}
@@ -96,7 +96,7 @@ export default function HeroForm() {
                 <input 
                   id="phone"
                   type="tel" 
-                  placeholder="Your Mobile Number" 
+                  placeholder="Enter Phone Number" 
                   className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -109,7 +109,7 @@ export default function HeroForm() {
                   <input 
                     id="movingFrom"
                     type="text" 
-                    placeholder="Nagpur" 
+                    placeholder="Enter Source City" 
                     className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
                     value={formData.movingFrom}
                     onChange={(e) => setFormData({...formData, movingFrom: e.target.value})}
@@ -121,7 +121,7 @@ export default function HeroForm() {
                   <input 
                     id="movingTo"
                     type="text" 
-                    placeholder="Destination City" 
+                    placeholder="Enter Destination City" 
                     className="w-full h-12 px-4 rounded-xl border border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/40 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all shadow-inner backdrop-blur-md" 
                     value={formData.movingTo}
                     onChange={(e) => setFormData({...formData, movingTo: e.target.value})}

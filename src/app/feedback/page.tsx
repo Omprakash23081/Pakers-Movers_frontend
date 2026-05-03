@@ -186,7 +186,7 @@ export default function FeedbackPage() {
                         type="text" 
                         value={formData.fullName}
                         onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                        placeholder="John Doe"
+                        placeholder="Enter Full Name"
                         className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium"
                       />
                     </div>
@@ -196,7 +196,7 @@ export default function FeedbackPage() {
                         type="email" 
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        placeholder="john@example.com"
+                        placeholder="Enter Email Address"
                         className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium"
                       />
                     </div>
@@ -209,7 +209,7 @@ export default function FeedbackPage() {
                       type="tel" 
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      placeholder="+91 XXXX XXX XXX"
+                      placeholder="Enter Phone Number"
                       className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium"
                     />
                   </div>
@@ -220,7 +220,7 @@ export default function FeedbackPage() {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      placeholder="Tell us what you loved or what we can improve..."
+                      placeholder="Enter Your Feedback"
                       className="w-full h-40 p-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium resize-none"
                     ></textarea>
                   </div>

@@ -104,7 +104,7 @@ function TrackContent() {
                     <input
                       type="text"
                       className="w-full h-16 pl-14 pr-6 rounded-2xl border border-white/10 bg-white/5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-xl font-bold tracking-wide uppercase text-white placeholder:text-white/20"
-                      placeholder="Search by Mobile or Tracking ID"
+                      placeholder="Enter Mobile Number or Tracking ID"
                       value={trackingId}
                       onChange={(e) => setTrackingId(e.target.value)}
                       required

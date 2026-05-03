@@ -222,9 +222,9 @@ export default function ContactUs() {
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {[
-                      { id: 'fullName', label: 'Full Name', placeholder: 'Enter Name here', type: 'text' },
-                      { id: 'email', label: 'Email Address', placeholder: 'john@example.com', type: 'email' },
-                      { id: 'phone', label: 'Phone Number', placeholder: '+91 XXXXX XXXXX', type: 'tel' }
+                      { id: 'fullName', label: 'Full Name', placeholder: 'Enter Full Name', type: 'text' },
+                      { id: 'email', label: 'Email Address', placeholder: 'Enter Email Address', type: 'email' },
+                      { id: 'phone', label: 'Phone Number', placeholder: 'Enter Phone Number', type: 'tel' }
                     ].map((field) => (
                       <div key={field.id} className="space-y-2">
                         <label htmlFor={field.id} className="text-[10px] font-black text-white/40 ml-1 uppercase tracking-widest">{field.label}</label>

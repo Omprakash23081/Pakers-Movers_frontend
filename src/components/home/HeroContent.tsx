@@ -67,21 +67,23 @@ export default function HeroContent() {
 
       {/* Trust Signals Avatar Stack */}
       <div className="flex items-center gap-4 pt-4 border-t border-white/10">
-        <div className="flex -space-x-3">
+        <div className="flex -space-x-3 sm:-space-x-4">
           {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center overflow-hidden shadow-sm shadow-black/20">
-              <Image src="/images/avatar-placeholder.svg" alt="" width={40} height={40} className="object-cover" aria-hidden="true" />
+            <div key={i} className="w-8 h-8 sm:w-12 sm:h-12 rounded-full border-2 border-[#12141a] bg-[#1a1d25] flex items-center justify-center overflow-hidden shadow-xl ring-1 ring-white/5">
+              <div className="w-full h-full bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center">
+                <Image src="/images/avatar-placeholder.svg" alt="" width={48} height={48} className="opacity-60 scale-90" aria-hidden="true" />
+              </div>
             </div>
           ))}
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-secondary text-white flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm shadow-black/20 z-10" aria-label="More than 2,000 customers">
-            2k+
+          <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full border-2 border-[#12141a] bg-accent text-white flex items-center justify-center text-[8px] sm:text-[10px] font-black shadow-xl ring-1 ring-white/5 z-10 uppercase" aria-label="More than 10,000 customers">
+            10k+
           </div>
         </div>
-        <div className="flex flex-col">
-          <div className="flex text-yellow-500 gap-0.5" aria-label="5 star rating">
-            {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" aria-hidden="true" />)}
+        <div className="flex flex-col justify-center">
+          <div className="flex text-yellow-500 gap-1 mb-1" aria-label="5 star rating">
+            {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" className="drop-shadow-[0_0_10px_rgba(234,179,8,0.4)]" aria-hidden="true" />)}
           </div>
-          <span className="text-[11px] sm:text-sm font-semibold mt-0.5 text-white/80">Trusted by 10,000+ Customers</span>
+          <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-white/50 leading-none">Trusted by 10,000+ Customers</span>
         </div>
       </div>
     </motion.div>
