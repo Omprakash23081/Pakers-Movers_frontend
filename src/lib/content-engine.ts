@@ -6,22 +6,22 @@ export const generateIntro = (citySlug: string, service: string): string => {
   
   const intros = {
     metro: [
-      `Moving within the high-rise landscape of ${cityName} requires expert planning and precision. Sunita Cargo Packers Movers specializes in navigating the complex logistics of ${cityName}'s premium residential and commercial hubs.`,
+      `Moving within the high-rise landscape of ${cityName} requires expert planning and precision. As an **IBA-approved** and **ISO 9001:2015 certified** company, Sunita Cargo Packers Movers specializes in navigating the complex logistics of ${cityName}'s premium residential and commercial hubs.`,
       `In a fast-paced metropolis like ${cityName}, every minute counts. Our premium ${service} in ${cityName} ensures a swift, stress-free relocation with zero downtime for your family or business.`,
-      `${cityName}'s unique urban structure demands specialized moving equipment. Whether you are shifting near ${trait.landmarks[0]} or to the busy suburbs like ${trait.neighbors[0]}, we are your reliable partner.`
+      `${cityName}'s unique urban structure demands specialized moving equipment. Whether you are shifting near ${trait.landmarks[0]} or to the busy suburbs like ${trait.neighbors[0]}, we are your reliable, **licensed** partner.`
     ],
     tier1: [
-      `As one of the fastest-growing hubs, ${cityName} demands relocation services that are both efficient and affordable. Sunita Cargo Packers Movers brings 15+ years of trust to your doorstep in ${cityName}.`,
+      `As one of the fastest-growing hubs, ${cityName} demands relocation services that are both efficient and affordable. Sunita Cargo Packers Movers brings 15+ years of trust and **IBA-approved reliability** to your doorstep in ${cityName}.`,
       `Relocating in ${cityName}? From the traditional streets near ${trait.landmarks[0]} to modern townships in ${trait.neighbors[0]}, our professional team handles your valuables with mother-like care.`,
       `Sunita Cargo is the top-rated choice for ${service} in ${cityName}. We understand the local pulse of ${cityName} and provide tailored shifting solutions for local homes and offices.`
     ],
     tier2: [
-      `Sunita Cargo Packers Movers is proud to bring international-standard relocation services to the heart of ${cityName}. Safe, secure, and always on time.`,
+      `Sunita Cargo Packers Movers is proud to bring international-standard, **ISO-certified** relocation services to the heart of ${cityName}. Safe, secure, and always on time.`,
       `Looking for reliable ${service} in ${cityName}? We offer professional packing, secure transport, and doorstep delivery across all localities of ${cityName}.`,
       `Whether you are moving within ${cityName} or shifting to a different state, our dedicated ${cityName} team ensures a damage-free experience every single time.`
     ],
     industrial: [
-      `In the industrial heartland of ${cityName}, heavy-duty relocation requires specialized skills. Sunita Cargo provides industrial-grade packing and logistics in ${cityName}.`,
+      `In the industrial heartland of ${cityName}, heavy-duty relocation requires specialized skills. Sunita Cargo provides **IBA-approved** industrial-grade packing and logistics in ${cityName}.`,
       `Strategic moving for ${cityName}'s growing business sector. We handle heavy machinery, office assets, and residential shifts with equal expertise.`
     ],
     tourist: [

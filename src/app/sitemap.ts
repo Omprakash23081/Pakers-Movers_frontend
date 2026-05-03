@@ -36,6 +36,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/track',
     '/about',
     '/faq',
+    '/blog',
+    '/feedback',
+    '/privacy',
+    '/terms',
+    '/packers-and-movers-nagpur',
   ];
 
   // 1. Service + City pages (126 pages)

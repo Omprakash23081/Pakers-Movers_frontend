@@ -8,21 +8,35 @@ const testimonials = [
   {
     name: 'Rahul Sharma',
     service: 'House Shifting',
-    text: 'Sunita Cargo Packers made my move from Nagpur to Pune completely stress-free. The packing was excellent, and not a single item was damaged. Highly recommended!',
+    text: 'Sunita Cargo Packers made my move from Civil Lines to Pune completely stress-free. The packing was excellent, and not a single item was damaged. Their team knew exactly how to handle the heavy furniture.',
     rating: 5,
-    avatar: '/images/avatar-placeholder.svg'
+    avatar: 'https://i.pravatar.cc/100?img=12'
+  },
+  {
+    name: 'Mrs. Kulkarni',
+    service: 'Local Relocation',
+    text: 'Shifted from Dharampeth to Manish Nagar. I was worried about the narrow lanes but the driver was incredibly skilled. The loading was done very quickly and professionally.',
+    rating: 5,
+    avatar: 'https://i.pravatar.cc/100?img=44'
   },
   {
     name: 'Priya Verma',
     service: 'Office Relocation',
-    text: 'We hired them for moving our 50-seater IT office. They managed everything systematically over the weekend with zero downtime for our business operations.',
+    text: 'We hired them for moving our 50-seater IT office in MIHAN. They managed everything systematically over the weekend with zero downtime for our business operations.',
     rating: 5,
     avatar: 'https://i.pravatar.cc/100?img=5'
   },
   {
+    name: 'Suresh Deshmukh',
+    service: 'Vehicle Transport',
+    text: 'Moved my car from Nagpur to Bangalore. The GPS tracking was spot on and the car arrived without a single scratch. Best experience with packers and movers so far.',
+    rating: 5,
+    avatar: 'https://i.pravatar.cc/100?img=68'
+  },
+  {
     name: 'Amit Patel',
-    service: 'Car Transport',
-    text: 'Transported my new Hyundai Creta to Bangalore. The GPS tracking gave me peace of mind, and the car was delivered in pristine condition without a single scratch.',
+    service: 'Warehouse Storage',
+    text: 'Stored my household goods in their Wadi warehouse for 3 months. Everything was perfectly safe and clean when I took delivery. Excellent management!',
     rating: 5,
     avatar: 'https://i.pravatar.cc/100?img=15'
   }

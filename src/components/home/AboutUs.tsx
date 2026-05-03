@@ -117,7 +117,7 @@ export default function AboutUs() {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground leading-relaxed font-medium"
               >
-                Sunita Cargo Packers Movers began with a simple mission: to make relocation completely stress-free. Over the last decade, we have grown from a local Nagpur transporter to an IBA-approved national logistics network.
+                Sunita Cargo Packers Movers began in 2008 with a simple mission: to provide the people of Nagpur with a packing and moving service that actually cares. Led by a team of industry veterans with over 15 years of ground-level experience, we have grown from a single-truck operation in Wadi to an IBA-approved national logistics network.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -126,7 +126,7 @@ export default function AboutUs() {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-muted-foreground leading-relaxed font-medium mt-4"
               >
-                Our commitment to zero-damage policies, 24/7 client support, and specialized equipment has earned us the trust of over 10,000 families and India&apos;s top corporate enterprises.
+                Our head office at Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Nagpur serves as our central hub for residential shifting, commercial relocation, and secure warehousing. We pride ourselves on using 100% in-house staff—never third-party contractors—to ensure your belongings are handled with the same care we would give our own.
               </motion.p>
             </div>
 

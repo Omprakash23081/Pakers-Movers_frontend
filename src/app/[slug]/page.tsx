@@ -11,6 +11,10 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { generateIntro, generateLocalPricing, generateLocalizedFAQs } from '@/lib/content-engine';
 import { getCityTrait } from '@/lib/city-data';
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import PricingGrid from '@/components/home/PricingGrid';
+import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 
 const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
 
@@ -124,8 +128,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (data.type === 'service-city') {
     return {
-      title: `${serviceName} in ${cityName} | Sunita Cargo Packers Movers`,
-      description: intro.length > 10 ? intro.substring(0, 160) : `Safe and reliable ${serviceName.toLowerCase()} in ${cityName}. Professional packing, secure transport, and 100% damage-free guarantee.`,
+      title: `Top-Rated ${serviceName} in ${cityName} | IBA Approved | Sunita Cargo`,
+      description: `Verified ${serviceName.toLowerCase()} in ${cityName}. Sunita Cargo offers 100% safe house shifting, car transport, and office relocation. IBA-approved fleet & expert packing.`,
       alternates: {
         canonical: canonicalUrl,
       }
@@ -134,8 +138,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const fromCity = getTitleCase(data.from!);
     const toCity = getTitleCase(data.to!);
     return {
-      title: `${serviceName} from ${fromCity} to ${toCity} | Sunita Cargo Packers Movers`,
-      description: `Premium ${serviceName.toLowerCase()} services from ${fromCity} to ${toCity}. Sunita Cargo Packers Movers ensures safe transit and timely delivery for your long-distance move.`,
+      title: `${serviceName} from ${fromCity} to ${toCity} | Safe & Fast | Sunita Cargo`,
+      description: `Secure ${serviceName.toLowerCase()} from ${fromCity} to ${toCity}. Sunita Cargo Packers Movers provides high-speed intercity transit with real-time GPS tracking.`,
       alternates: {
         canonical: canonicalUrl,
       }
@@ -158,6 +162,9 @@ export default function DynamicSEOPage({ params }: Props) {
 
   return (
     <div className="w-full">
+      <LocalBusinessSchema city={targetCity} />
+      <FAQSchema faqs={isRoute ? [] : generateLocalizedFAQs(data.city!, serviceName)} />
+      
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 to-background pt-24 pb-20 border-b border-border text-center overflow-hidden">
         <div className="container mx-auto px-4 max-w-4xl relative">
@@ -315,27 +322,16 @@ export default function DynamicSEOPage({ params }: Props) {
             </div>
 
             {/* 5. Reviews Snippet (Boost CTR) */}
-            <div className="bg-primary/5 p-10 rounded-[3rem] border border-primary/10 space-y-8">
-               <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-black text-foreground">Recent Customer Reviews in {targetCity}</h3>
+            <div className="bg-primary/5 p-10 rounded-[3rem] border border-primary/10 space-y-8 overflow-hidden">
+               <div className="flex justify-between items-center mb-8">
+                  <h3 className="text-2xl font-black text-foreground">Verified Customer Reviews in {targetCity}</h3>
                   <div className="flex items-center gap-1 text-accent">
                     {[1,2,3,4,5].map(s => <Star key={s} size={16} fill="currentColor"/>)}
                   </div>
                </div>
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    { name: 'Amit Verma', text: `Best experience for ${serviceName.toLowerCase()} in ${targetCity}. Very professional team and timely delivery.` },
-                    { name: 'Priya Mehta', text: `Safe and secure shifting. They handled my fragile items very carefully. Highly recommended!` }
-                  ].map((rev, idx) => (
-                    <div key={idx} className="bg-background/50 p-6 rounded-2xl border border-border italic text-sm text-muted-foreground relative">
-                       <Zap className="absolute -top-3 -left-3 text-primary bg-background rounded-full p-2 border border-border" size={32} />
-                       &quot;{rev.text}&quot;
-                       <p className="mt-4 font-bold text-foreground not-italic">— {rev.name}</p>
-                    </div>
-                  ))}
-               </div>
+               <TestimonialCarousel />
                <div className="text-center">
-                 <Button variant="link" className="text-primary font-bold">Read all 1,200+ Google Reviews</Button>
+                 <Link href="/feedback" className="text-primary font-bold hover:underline">Read all 1,200+ Google Reviews</Link>
                </div>
             </div>
 
@@ -416,59 +412,13 @@ export default function DynamicSEOPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Cost Calculator - Placed here to enable precise mobile ordering (Form -> Estimator -> Content) */}
-          <div className="lg:col-span-12 order-2 lg:order-3">
-             <CostCalculator />
-          </div>
+      <div className="py-20 container mx-auto px-4 max-w-6xl">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-black mb-6">Estimated Moving Charges in {targetCity}</h2>
+          <p className="text-muted-foreground font-medium italic">Transparent pricing based on current Nagpur market rates.</p>
         </div>
-      </section>
-
-      {/* Multiple Schemas for Maximum SEO Impact */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            {
-              "@context": "https://schema.org",
-              "@type": "Service",
-              "serviceType": serviceName,
-              "provider": {
-                "@type": "MovingCompany",
-                "name": "Sunita Cargo Packers Movers",
-                "image": "https://sunitacargopackersmovers.com/logo.png",
-                "telephone": "+91 7387661300"
-              },
-              "areaServed": {
-                "@type": "City",
-                "name": targetCity
-              },
-              "description": `Professional ${serviceName.toLowerCase()} in ${targetCity}. Secure packing, safe transit, and on-time delivery. Best rates guaranteed.`
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": `What is the cost of ${serviceName.toLowerCase()} in ${targetCity}?`,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": `The cost of ${serviceName.toLowerCase()} in ${targetCity} starts from approximately ₹3,500 for local moves and varies based on distance and volume for outstation moves.`
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": `Is insurance available for my move in ${targetCity}?`,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": `Yes, we provide transit insurance for all relocations in ${targetCity} to ensure your goods are protected against any unforeseen damage.`
-                  }
-                }
-              ]
-            }
-          ])
-        }}
-      />
+        <PricingGrid city={targetCity} />
+      </div>
     </div>
   );
 }

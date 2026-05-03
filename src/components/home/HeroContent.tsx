@@ -13,17 +13,14 @@ export default function HeroContent() {
       transition={{ duration: 0.6 }}
       className="flex flex-col space-y-6 md:space-y-8 relative z-20 -mt-10 sm:-mt-16"
     >
-      <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 sm:px-4 py-1.5 text-[10px] sm:text-sm font-bold text-primary w-fit shadow-sm backdrop-blur-md">
+      <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 sm:px-4 py-1.5 text-[10px] sm:text-sm font-bold text-primary w-fit shadow-sm backdrop-blur-md uppercase tracking-widest">
         <Star size={14} className="mr-1.5 sm:mr-2 fill-primary" aria-hidden="true" />
-        Trusted Packers and Movers in Nagpur
+        #1 IBA-Approved Packers and Movers in Nagpur
       </div>
 
       <div className="relative">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance leading-tight relative z-10 text-white">
-          Reliable & Safe Packers and Movers in Nagpur | <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-            Stress-Free Shifting
-          </span>
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-balance leading-tight relative z-10 text-white">
+          Expert & Licensed Packers and Movers in <span className="text-primary">Nagpur</span>
         </h1>
         {/* Moving Truck Animation - Optimized to run once for performance */}
         <motion.div
@@ -37,8 +34,7 @@ export default function HeroContent() {
       </div>
 
       <p className="text-lg md:text-xl text-white/70 max-w-lg text-balance leading-relaxed font-medium">
-        Your trusted partner for home, office, and vehicle relocation. 10+ Years of Excellence.
-        Our trained team ensures safe packing, secure loading and on-time delivery across India.
+        IBA-Approved and ISO 9001:2015 Certified. We provide 100% safe home shifting and car transport in Nagpur with 15+ years of trusted excellence.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4">

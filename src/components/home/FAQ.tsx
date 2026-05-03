@@ -6,19 +6,23 @@ import { ChevronDown, MessageCircleQuestion } from 'lucide-react';
 const faqs = [
   {
     question: "What are the packers and movers charges in Nagpur?",
-    answer: "The cost depends on various factors such as the size of your home (1BHK, 2BHK, etc.), distance to the destination, and the quantity of goods. Local shifting within Nagpur typically starts from ₹3,000 to ₹8,000, while outstation moves vary based on distance."
+    answer: "Local shifting within Nagpur starts from ₹3,500 for a 1BHK and can go up to ₹18,000 for a 3BHK villa. For inter-city moves like Nagpur to Pune, the cost depends on the truck size (TATA Ace vs 19ft Container) and distance. We provide fixed-price quotes that include packing materials, labor, and transport."
   },
   {
-    question: "Do you provide car transport service?",
-    answer: "Absolutely. We have specialized car carrier trucks and secure packaging specifically designed for four-wheelers and two-wheelers to ensure safe, scratch-free delivery across India."
+    question: "Do you provide car and bike transport service?",
+    answer: "Yes, we are experts in vehicle relocation. We use specialized hydraulic car carriers and bike crates with 5-layer packing to ensure your vehicles reach scratch-free. We also provide GPS tracking for all vehicle transits across India."
   },
   {
-    question: "Is there insurance coverage for my goods?",
-    answer: "Yes, we provide comprehensive transit insurance for your belongings. In the rare event of damage or loss during transit, our insurance coverage ensures you are fully compensated based on the declared value of the goods."
+    question: "How do you ensure the safety of my fragile items?",
+    answer: "We use a 'Zero-Damage' packing protocol. This includes triple-layer bubble wrap for glassware, foam padding for electronics, and customized wooden crates for high-value antiques. Every move is handled by our permanent, trained staff—not daily laborers."
   },
   {
-    question: "What is your booking timeline?",
-    answer: "We recommend booking at least 3-7 days in advance for local shifting, and 7-14 days for inter-city relocation. However, we also accommodate last-minute emergency relocations subject to availability."
+    question: "What is your booking and claim process?",
+    answer: "We recommend booking at least 3-5 days in advance. In the rare case of damage, we have a transparent claim process. If you have taken transit insurance, we assist you in settling the claim with the insurance provider within 7-10 working days."
+  },
+  {
+    question: "Are there any hidden costs like Toll or Green Tax?",
+    answer: "No. Our quotations are 'All-Inclusive'. The price we commit during the site survey includes GST, Toll taxes, Green taxes, and loading/unloading charges. You don't have to pay a single rupee extra on delivery day."
   }
 ];
 

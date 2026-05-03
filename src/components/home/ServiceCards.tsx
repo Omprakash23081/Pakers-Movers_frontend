@@ -8,7 +8,7 @@ import { TiltCard } from '@/components/ui/TiltCard';
 const services = [
   {
     title: 'House Shifting',
-    description: 'Experience stress-free home relocation. Our expert team handles everything from secure multi-layer packing to careful transportation and unpacking at your new home.',
+    description: 'IBA-Approved home relocation with 15+ years of trust. Our expert team handles everything from secure multi-layer packing to careful transportation and unpacking at your new home.',
     icon: Home,
     href: '/house-shifting-nagpur',
     color: 'text-primary',
@@ -17,7 +17,7 @@ const services = [
   },
   {
     title: 'Office Relocation',
-    description: 'Minimize business downtime with our specialized corporate moving services. We securely transport IT equipment, furniture, and documents on strict timelines.',
+    description: 'Minimize business downtime with our specialized corporate moving services. We securely transport IT equipment, furniture, and documents on strict timelines with professional care.',
     icon: Building2,
     href: '/office-relocation-nagpur',
     color: 'text-secondary',
@@ -26,7 +26,7 @@ const services = [
   },
   {
     title: 'Car & Bike Transport',
-    description: 'Ensure your vehicles reach their destination safely. We provide fully insured, enclosed carrier transport with real-time GPS tracking across India.',
+    description: 'Safe and insured vehicle transit across India. We provide IBA-approved enclosed carrier transport with real-time GPS tracking and 100% safety guarantee.',
     icon: Truck,
     href: '/car-bike-transport-nagpur',
     color: 'text-accent',
@@ -35,7 +35,7 @@ const services = [
   },
   {
     title: 'Warehouse Storage',
-    description: 'Need secure space? Our 24/7 CCTV monitored, climate-controlled warehousing facilities offer safe short-term and long-term storage solutions.',
+    description: 'Secure, climate-controlled warehousing in Nagpur. Our 24/7 CCTV monitored facilities offer safe, short-term and long-term storage solutions for residential and commercial goods.',
     icon: Warehouse,
     href: '/warehouse-storage-nagpur',
     color: 'text-foreground',
