@@ -135,7 +135,7 @@ export default function ContactUs() {
           </div>
         </section>
 
-        <section className="pb-24 container mx-auto px-4">
+        <section className="pb-24 w-full px-2">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-start">
 
             {/* Contact Details */}

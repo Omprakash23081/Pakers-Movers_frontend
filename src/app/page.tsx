@@ -51,7 +51,7 @@ export default function Home() {
       </section>
 
       {/* Mobile-only form before calculator */}
-      <div className="lg:hidden container mx-auto px-4 -mt-8 mb-8">
+      <div className="lg:hidden w-full px-2 -mt-8 mb-8">
         <HeroForm />
       </div>
 

@@ -76,7 +76,7 @@ export default function HeroForm() {
           </div>
           <p className="text-sm text-white/80 font-medium mt-1">Get a verified estimate within 2 minutes</p>
         </CardHeader>
-        <CardContent className="relative z-10 px-6 py-10 min-h-[400px] flex items-center justify-center">
+        <CardContent className="relative z-10 px-4 sm:px-6 py-10 min-h-[400px] flex items-center justify-center">
           {!submitted ? (
             <form onSubmit={handleSubmit} className="w-full space-y-6">
               <div className="space-y-1.5 focus-within:text-primary transition-colors">

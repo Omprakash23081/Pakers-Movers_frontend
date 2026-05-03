@@ -129,7 +129,7 @@ export default function NagpurPage() {
           
           <div className="relative">
             <div className="absolute -inset-4 bg-primary/20 rounded-[2rem] blur-2xl -z-10 opacity-50" />
-            <div className="bg-section p-8 md:p-12 rounded-[2rem] border border-border space-y-8">
+            <div className="bg-section p-5 md:p-12 rounded-[2rem] border border-border space-y-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 font-bold text-[10px] uppercase tracking-widest border border-emerald-500/20">
                 <ShieldCheck size={14} /> Guaranteed Price
               </div>
@@ -150,14 +150,14 @@ export default function NagpurPage() {
 
       {/* Services Grid */}
       <section className="py-24 bg-section/30">
-        <div className="container mx-auto px-4 max-w-6xl text-center mb-16">
+        <div className="w-full px-2 max-w-6xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black mb-6">Premium Shifting Services in Nagpur</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-medium">
             Tailored logistics solutions designed to handle the unique challenges of Nagpur's terrain and traffic.
           </p>
         </div>
         
-        <div className="container mx-auto px-4 max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="w-full px-2 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             { icon: <MapPin />, title: 'Local House Shifting', desc: 'Moving from Civil Lines to Narendra Nagar? We provide end-to-end local relocation.' },
             { icon: <Truck />, title: 'Intercity Shifting', desc: 'Secure transit to Pune, Mumbai, Hyderabad via Samruddhi Mahamarg.' },

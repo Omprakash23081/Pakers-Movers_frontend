@@ -82,7 +82,7 @@ function TrackContent() {
         {/* Background Maps Illustration */}
         <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-        <div className="container mx-auto px-4 max-w-4xl relative z-10 text-center">
+        <div className="w-full px-2 max-w-4xl relative z-10 text-center">
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-6">
             <PackageCheck size={16} className="mr-2" />
             Real-Time Live Tracking

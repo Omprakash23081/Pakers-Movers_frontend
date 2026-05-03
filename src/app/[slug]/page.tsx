@@ -211,7 +211,7 @@ export default function DynamicSEOPage({ params }: Props) {
 
 
       {/* Main Content Area */}
-      <section className="py-20 container mx-auto px-4 lg:px-8">
+      <section className="py-20 w-full px-2 lg:px-8 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Left Column (Main SEO Content) */}
@@ -363,7 +363,7 @@ export default function DynamicSEOPage({ params }: Props) {
           <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 z-20 order-1 lg:order-2" id="quote">
             <Card className="apple-card border-none bg-[#0B1120] border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden">
               <div className="h-2 bg-gradient-to-r from-primary to-accent w-full" />
-              <CardContent className="p-8">
+              <CardContent className="p-5 sm:p-8">
                 <div className="flex items-center gap-2 mb-6 text-primary">
                   <Zap size={20} fill="currentColor"/>
                   <span className="text-xs font-black uppercase tracking-[0.2em]">Priority Callback</span>
@@ -418,7 +418,7 @@ export default function DynamicSEOPage({ params }: Props) {
         </div>
       </section>
 
-      <div className="py-20 container mx-auto px-4 max-w-6xl">
+      <div className="py-20 w-full px-2 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black mb-6">Estimated Moving Charges in {targetCity}</h2>
           <p className="text-muted-foreground font-medium italic">Transparent pricing based on current Nagpur market rates.</p>

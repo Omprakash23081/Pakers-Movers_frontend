@@ -132,7 +132,7 @@ export default function CostCalculator() {
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] -z-10" />
 
-      <div className="container mx-auto px-4">
+      <div className="w-full px-2">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16 space-y-4">
             <motion.div 
@@ -173,7 +173,7 @@ export default function CostCalculator() {
                   </div>
                 </div>
 
-                <div className="p-8 md:p-10">
+                <div className="p-4 sm:p-10">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* From City */}
                   <div className="space-y-2">

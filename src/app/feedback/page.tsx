@@ -51,11 +51,20 @@ export default function FeedbackPage() {
 
   const fetchFeedbacks = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api'}/feedback`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
+      const res = await fetch(`${apiUrl}/feedback`);
+      
+      const contentType = res.headers.get("content-type");
+      if (!res.ok || !contentType || contentType.indexOf("application/json") === -1) {
+        throw new Error("Failed to fetch feedbacks or invalid response");
+      }
+
       const data = await res.json();
-      if (data.success && data.feedbacks.length > 0) {
-        // Merge with our verified ones or just use DB ones if they exist
-        setFeedbacks(prev => [...data.feedbacks, ...prev.filter(p => !data.feedbacks.find((db: any) => db.fullName === p.fullName))]);
+      if (data.success && data.feedbacks && data.feedbacks.length > 0) {
+        setFeedbacks(prev => {
+          const newFeedbacks = data.feedbacks.filter((df: any) => !prev.some(p => p._id === df._id));
+          return [...newFeedbacks, ...prev];
+        });
       }
     } catch (error) {
       console.error('Error fetching feedbacks:', error);
@@ -77,7 +86,8 @@ export default function FeedbackPage() {
 
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api'}/feedback`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
+      const response = await fetch(`${apiUrl}/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,19 +98,24 @@ export default function FeedbackPage() {
         }),
       });
 
+      const contentType = response.headers.get("content-type");
       if (response.ok) {
         setSubmitted(true);
         setFormData({ fullName: '', email: '', phone: '', message: '' });
         setRating(0);
-        // Refresh feedback list to show the newly added one
         fetchFeedbacks();
       } else {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.message || 'Something went wrong.'}`);
+        // Handle non-JSON or missing error messages gracefully
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          const errorData = await response.json();
+          alert(`Error: ${errorData.message || 'Something went wrong.'}`);
+        } else {
+          alert(`Server Error: ${response.status} ${response.statusText}. The feedback service might be undergoing maintenance.`);
+        }
       }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('Failed to submit feedback.');
+      alert('Network Error: Failed to connect to the feedback service. Please check your internet connection or try again later.');
     } finally {
       setLoading(false);
     }
@@ -108,7 +123,7 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen pt-24 pb-20">
-      <div className="w-[95%] sm:w-full sm:container mx-auto px-0 sm:px-4 max-w-5xl">
+      <div className="w-[98%] sm:w-full sm:container mx-auto px-0 sm:px-4 max-w-5xl">
         
         {/* Header Section */}
         <div className="text-center mb-10 sm:mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">

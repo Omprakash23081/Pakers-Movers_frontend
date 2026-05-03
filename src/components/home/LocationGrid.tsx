@@ -39,7 +39,7 @@ export default function LocationGrid() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10" />
 
-      <div className="container mx-auto px-4">
+      <div className="w-full px-2 mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-16">
           <div className="flex-1">
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
