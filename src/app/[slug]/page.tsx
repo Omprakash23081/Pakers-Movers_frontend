@@ -5,18 +5,21 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { 
   Truck, ShieldCheck, CheckCircle2, MapPin, Star, Clock, 
   Phone, ChevronRight, Info, HelpCircle, Award, Users, 
-  Settings, Zap, Heart, Box, Navigation
+  Settings, Zap, Heart, Box, Navigation, IndianRupee
 } from 'lucide-react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { generateIntro, generateLocalPricing, generateLocalizedFAQs } from '@/lib/content-engine';
+import { generateIntro, generateLocalPricing, generateLocalizedFAQs, generateLocalInsights } from '@/lib/content-engine';
 import { getCityTrait } from '@/lib/city-data';
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
 import FAQSchema from '@/components/seo/FAQSchema';
+import RouteMatrix from '@/components/seo/RouteMatrix';
 import PricingGrid from '@/components/home/PricingGrid';
 import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 
 const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
+const GoogleReviews = dynamic(() => import('@/components/home/GoogleReviews'));
+const VisualProof = dynamic(() => import('@/components/home/VisualProof'));
 
 // Data constants
 const cities = [
@@ -227,9 +230,19 @@ export default function DynamicSEOPage({ params }: Props) {
               </p>
               <p className="text-muted-foreground leading-extra-relaxed">
                 {isRoute 
-                  ? `Our specialized ${serviceName.toLowerCase()} between ${originCity} and ${targetCity} is marked by thousands of successful long-distance deliveries.`
-                  : `Our presence in ${targetCity} is marked by thousands of successful moves and a reputation for being the most reliable logistics provider in ${getTitleCase(getCityTrait(data.city!).tier)} regions.`} We don&apos;t just move items; we move feelings, memories, and valuable assets. Our commitment to using high-standard packing materials like triple-layer bubble wrap, edge protectors, and customized wooden crates for fragile items sets us apart from the competition.
+                   ? `Our specialized ${serviceName.toLowerCase()} between ${originCity} and ${targetCity} is marked by thousands of successful long-distance deliveries.`
+                   : `Our presence in ${targetCity} is marked by thousands of successful moves and a reputation for being the most reliable logistics provider in ${getTitleCase(getCityTrait(data.city!).tier)} regions.`} We don&apos;t just move items; we move feelings, memories, and valuable assets. Our commitment to using high-standard packing materials like triple-layer bubble wrap, edge protectors, and customized wooden crates for fragile items sets us apart from the competition.
               </p>
+
+              <div className="bg-primary/10 border border-primary/20 p-8 rounded-3xl mt-8">
+                 <div className="flex items-center gap-3 mb-4 text-primary">
+                    <Navigation size={24} />
+                    <h3 className="text-xl font-bold m-0 text-foreground">Local Shifting Insights for {targetCity}</h3>
+                 </div>
+                 <p className="text-sm text-muted-foreground italic leading-relaxed m-0">
+                    {generateLocalInsights(data.city || 'india')}
+                 </p>
+              </div>
 
               <div className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                  <div className="bg-white/5 p-6 rounded-2xl border border-white/10 flex gap-4">
@@ -245,6 +258,34 @@ export default function DynamicSEOPage({ params }: Props) {
                       <h4 className="font-bold text-foreground">50,000+ Happy Families</h4>
                       <p className="text-sm text-muted-foreground">Join our growing community of satisfied customers across India.</p>
                     </div>
+                 </div>
+              </div>
+
+              {!isRoute && <RouteMatrix city={targetCity} />}
+              
+              {/* 3.5 Localized Pricing Table (SEO Depth) */}
+              <div className="space-y-8">
+                 <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500"><IndianRupee /></div>
+                    <h2 className="text-3xl font-black tracking-tight text-foreground">Moving Cost Breakdown in {targetCity}</h2>
+                 </div>
+                 <div className="overflow-hidden rounded-3xl border border-border bg-section/10">
+                    <table className="w-full text-left">
+                       <thead className="bg-white/5">
+                          <tr>
+                             <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-white/40">Home/Office Size</th>
+                             <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-white/40">Estimated Price</th>
+                          </tr>
+                       </thead>
+                       <tbody className="divide-y divide-border">
+                          {generateLocalPricing(data.city || 'india', serviceName).table?.map((row, idx) => (
+                             <tr key={idx} className="hover:bg-white/5 transition-colors">
+                                <td className="px-6 py-4 font-bold text-white">{row.size}</td>
+                                <td className="px-6 py-4 font-black text-primary">{row.price}</td>
+                             </tr>
+                          ))}
+                       </tbody>
+                    </table>
                  </div>
               </div>
             </div>
@@ -425,6 +466,9 @@ export default function DynamicSEOPage({ params }: Props) {
         </div>
         <PricingGrid city={targetCity} />
       </div>
+
+      <VisualProof />
+      <GoogleReviews />
     </div>
   );
 }

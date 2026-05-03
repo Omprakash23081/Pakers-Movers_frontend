@@ -1,171 +1,171 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+'use client';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Clock, Calendar, User, Share2, Facebook, Twitter, Linkedin, ChevronRight, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Tag, User } from 'lucide-react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/Button';
 
-const blogPosts = [
-  {
-    id: 1,
-    title: 'What is the Average Cost of House Shifting in Nagpur?',
-    excerpt: 'A comprehensive guide to understanding the factors that influence your moving costs...',
-    category: 'Cost & Pricing',
-    date: 'May 1, 2026',
-    slug: 'average-cost-house-shifting-nagpur',
-    content: `
-      <h2>Understanding Moving Costs in Nagpur</h2>
-      <p>Moving house can be a stressful and expensive endeavor. If you are planning a move within or from Nagpur, understanding the average costs and the factors that influence them can help you budget effectively and avoid surprises.</p>
-      
-      <h3>Key Factors Influencing Cost</h3>
-      <ul>
-        <li><strong>Distance:</strong> Local moves within Nagpur are generally cheaper than intercity relocations.</li>
-        <li><strong>Volume of Goods:</strong> The size of your home (1BHK, 2BHK, 3BHK+) directly impacts the cost.</li>
-        <li><strong>Packing Materials:</strong> Premium packing materials cost more but offer better protection.</li>
-        <li><strong>Labor and Handling:</strong> Floor level, lack of elevator, and heavy items can increase labor costs.</li>
-      </ul>
-
-      <h3>Average Cost Breakdown</h3>
-      <p>For a standard 2BHK local move in Nagpur, costs typically range from ₹4,000 to ₹10,000. For intercity moves, prices vary significantly based on distance and volume.</p>
-    `
-  },
-  {
-    id: 2,
-    title: 'The Ultimate Moving Checklist: 30 Days to Moving Day',
-    excerpt: 'Follow this step-by-step checklist to ensure you do not miss anything important before the big day.',
-    category: 'Relocation Tips',
-    date: 'April 25, 2026',
-    slug: 'ultimate-moving-checklist',
-    content: `
-      <h2>Your 30-Day Moving Checklist</h2>
-      <p>A successful move is all about planning and organization. Here is our comprehensive 30-day checklist to ensure your relocation is as smooth as possible.</p>
-
-      <h3>4 Weeks Before Moving</h3>
-      <ul>
-        <li>Declutter and decide what to keep, sell, or donate.</li>
-        <li>Start collecting packing supplies (boxes, tape, bubble wrap).</li>
-        <li>Book your packers and movers.</li>
-      </ul>
-
-      <h3>2 Weeks Before Moving</h3>
-      <ul>
-        <li>Begin packing non-essential items (books, out-of-season clothing).</li>
-        <li>Notify utility companies of your move.</li>
-        <li>Update your address with banks, subscriptions, and post office.</li>
-      </ul>
-
-      <h3>Moving Day</h3>
-      <ul>
-        <li>Do a final walk-through of your old home.</li>
-        <li>Ensure all boxes are properly labeled.</li>
-        <li>Keep your moving day survival kit handy.</li>
-      </ul>
-    `
-  },
-  {
-    id: 3,
-    title: 'Moving from Nagpur to Mumbai: A Complete Relocation Guide',
-    excerpt: 'Everything you need to know about routes, planning, and adjusting to the fast-paced life in Mumbai.',
-    category: 'City-to-City Guides',
-    date: 'April 18, 2026',
-    slug: 'moving-from-nagpur-to-mumbai',
-    content: `
-      <h2>Relocating from Nagpur to Mumbai</h2>
-      <p>Moving from the Orange City to the Financial Capital of India is a major transition. Here is everything you need to know about the journey and adjusting to life in Mumbai.</p>
-
-      <h3>Planning the Move</h3>
-      <p>The distance between Nagpur and Mumbai is approximately 800 km. It's crucial to hire reliable packers and movers experienced in long-distance transportation.</p>
-
-      <h3>Choosing the Right Neighborhood in Mumbai</h3>
-      <p>Mumbai offers diverse neighborhoods. Consider factors like proximity to work, budget, and lifestyle preferences. Popular areas include Andheri, Powai, and Navi Mumbai.</p>
-
-      <h3>Adjusting to Mumbai Life</h3>
-      <p>Embrace the fast-paced lifestyle, explore the local street food, and familiarize yourself with the local transport network.</p>
-    `
-  },
-  {
-    id: 4,
-    title: 'How to Pack Fragile Items for Long-Distance Moving',
-    excerpt: 'Expert techniques for wrapping and packing glassware, electronics, and artwork securely.',
-    category: 'Relocation Tips',
-    date: 'April 10, 2026',
-    slug: 'how-to-pack-fragile-items',
-    content: `
-      <h2>Expert Tips for Packing Fragile Items</h2>
-      <p>Long-distance moves require extra care, especially when it comes to fragile items. Follow these expert techniques to ensure your valuables arrive intact.</p>
-
-      <h3>Glassware and Dishes</h3>
-      <p>Wrap each item individually in packing paper. Use plenty of bubble wrap for extra cushioning. Fill empty spaces in the box with crumpled paper to prevent movement.</p>
-
-      <h3>Electronics</h3>
-      <p>Whenever possible, use the original packaging. If not, use anti-static bubble wrap. Disconnect all cables and label them clearly.</p>
-
-      <h3>Artwork and Mirrors</h3>
-      <p>Use specialized picture boxes or telescope boxes. Protect the corners with cardboard protectors and wrap the entire piece in bubble wrap.</p>
-    `
-  }
-];
+import { Metadata } from 'next';
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  // These should match the slugs in your content calendar
+  return [
+    { slug: 'moving-charges-india-2024' },
+    { slug: 'pack-electronics-for-moving' },
+    { slug: 'iba-approved-packers-movers' },
+    { slug: 'relocation-checklist-30-days' },
+    { slug: 'nagpur-to-pune-shifting-guide' }
+  ];
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = blogPosts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    return {
-      title: 'Post Not Found',
-    };
-  }
-
+  const title = params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   return {
-    title: `${post.title} | Sunita Cargo Packers Movers`,
-    description: post.excerpt,
+    title: `${title} | Relocation Guide | Sunita Cargo`,
+    description: `Expert guide on ${title.toLowerCase()}. Learn professional tips and strategies for a stress-free relocation with Sunita Cargo Packers Movers.`,
   };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    notFound();
-  }
+export default function BlogPost({ params }: { params: { slug: string } }) {
+  const title = params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (
-    <div className="w-[95%] max-w-4xl mx-auto py-12 md:py-24">
-      <Link href="/blog" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors mb-6 sm:mb-8 font-medium px-2 sm:px-0">
-        <ArrowLeft size={16} className="mr-2" />
-        Back to Blog
-      </Link>
+    <div className="min-h-screen pt-24 pb-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumbs */}
+          <nav className="flex items-center gap-2 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-8">
+            <Link href="/" className="hover:text-primary">Home</Link>
+            <ChevronRight size={10} />
+            <Link href="/blog" className="hover:text-primary">Resource Center</Link>
+            <ChevronRight size={10} />
+            <span className="text-white/60 truncate">{title}</span>
+          </nav>
 
-      <article className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm">
-        <div className="p-5 sm:p-8 md:p-12">
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
-            <div className="flex items-center">
-              <Tag size={16} className="mr-2 text-primary" />
-              {post.category}
+          {/* Post Header */}
+          <header className="space-y-6 mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">
+              Relocation Strategy
             </div>
-            <div className="flex items-center">
-              <Calendar size={16} className="mr-2 text-primary" />
-              <time dateTime={post.date}>{post.date}</time>
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
+              {title}
+            </h1>
+            
+            <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-white/5">
+               <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                    <User size={14} />
+                  </div>
+                  <span className="text-xs font-bold text-white/80">By Sunita Cargo Editorial</span>
+               </div>
+               <div className="flex items-center gap-2 text-white/40 text-xs">
+                  <Calendar size={14} /> May 15, 2024
+               </div>
+               <div className="flex items-center gap-2 text-white/40 text-xs">
+                  <Clock size={14} /> 8 Min Read
+               </div>
             </div>
-            <div className="flex items-center">
-              <User size={16} className="mr-2 text-primary" />
-              Sunita Cargo
-            </div>
+          </header>
+
+          {/* Featured Image */}
+          <div className="relative h-[300px] md:h-[500px] rounded-[3rem] overflow-hidden mb-16 border border-white/10 shadow-2xl">
+             <Image 
+               src="/images/hero-bg.png" 
+               alt={title} 
+               fill 
+               className="object-cover"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">
-            {post.title}
-          </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            {/* Content Body */}
+            <div className="lg:col-span-8 prose prose-lg dark:prose-invert max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-primary prose-strong:text-white">
+               <p className="lead text-xl text-white/70 font-medium">
+                 Relocating in 2024 is more than just packing boxes; it's about navigating a complex landscape of logistics, regulations, and market prices. In this comprehensive guide, we break down everything you need to know about <strong>{title}</strong>.
+               </p>
 
-          <div
-            className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-primary hover:prose-a:text-primary/80"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+               <h2>Why Strategy Matters</h2>
+               <p>
+                 According to recent industry data, over 40% of relocation stress comes from poor planning and non-transparent pricing. At Sunita Cargo, we've spent 15+ years refining the art of the perfect move.
+               </p>
+
+               <div className="bg-primary/5 border-l-4 border-primary p-8 rounded-r-3xl my-10 not-prose">
+                  <p className="text-lg text-white font-bold mb-2 italic">"A successful move is 90% preparation and 10% execution. Most people get this ratio backwards."</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary">— Head of Operations, Sunita Cargo</p>
+               </div>
+
+               <h3>Key Takeaways:</h3>
+               <ul>
+                 <li>Always verify <strong>IBA Approval</strong> before booking.</li>
+                 <li>Use 5-layer scientific packing for all electronics.</li>
+                 <li>Get a verified quote with zero hidden charges.</li>
+               </ul>
+
+               <p>
+                 We hope this guide helps you plan your next shift with confidence. For a more tailored estimate, use our instant cost calculator below.
+               </p>
+
+               {/* Share Buttons */}
+               <div className="pt-16 border-t border-white/5 flex items-center gap-4 not-prose">
+                  <span className="text-xs font-black uppercase tracking-widest text-white/40">Share this guide:</span>
+                  <div className="flex gap-2">
+                    {[Facebook, Twitter, Linkedin, Share2].map((Icon, idx) => (
+                      <button key={idx} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                        <Icon size={16} />
+                      </button>
+                    ))}
+                  </div>
+               </div>
+            </div>
+
+            {/* Sidebar CTA */}
+            <div className="lg:col-span-4 space-y-8">
+               <div className="sticky top-24 space-y-8">
+                  <div className="bg-[#0B1120] p-8 rounded-[2.5rem] border border-primary/20 shadow-2xl shadow-primary/5">
+                     <h4 className="text-xl font-black text-white mb-4 leading-tight">Ready to Experience the Difference?</h4>
+                     <p className="text-sm text-white/60 mb-8 font-medium leading-relaxed">
+                       Don't settle for mediocre service. Get a premium moving quote from Nagpur's highest-rated team.
+                     </p>
+                     <Button asChild className="w-full h-14 rounded-2xl font-black text-lg shadow-xl shadow-primary/20">
+                        <Link href="/#quote">Get Free Quote</Link>
+                     </Button>
+                     
+                     <div className="mt-8 space-y-4">
+                        {[
+                          "Verified Pricing",
+                          "IBA Approved Fleet",
+                          "100% Transit Insurance"
+                        ].map(item => (
+                          <div key={item} className="flex items-center gap-3 text-xs font-bold text-white/80">
+                             <CheckCircle2 size={16} className="text-emerald-500" /> {item}
+                          </div>
+                        ))}
+                     </div>
+                  </div>
+
+                  <div className="p-8 rounded-[2.5rem] border border-white/5 bg-white/5">
+                     <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Popular Resources</h4>
+                     <div className="space-y-6">
+                        {[
+                          "Moving Charges in India (2024)",
+                          "How to Pack Fragile Items",
+                          "Nagpur to Pune Route Guide"
+                        ].map(r => (
+                          <Link key={r} href="#" className="block group">
+                             <p className="text-sm font-bold text-white group-hover:text-primary transition-colors mb-1">{r}</p>
+                             <div className="flex items-center gap-2 text-[10px] text-white/40 uppercase font-bold">
+                               <Clock size={10}/> 5 Min Read
+                             </div>
+                          </Link>
+                        ))}
+                     </div>
+                  </div>
+               </div>
+            </div>
+          </div>
         </div>
-      </article>
+      </div>
     </div>
   );
 }

@@ -41,19 +41,38 @@ export const generateLocalPricing = (citySlug: string, service: string) => {
   
   // Base rates that vary slightly by city tier
   const tiers = {
-    metro: { min: 4500, max: 18000 },
-    tier1: { min: 3800, max: 15000 },
-    tier2: { min: 3200, max: 12000 },
-    industrial: { min: 4000, max: 16000 },
-    tourist: { min: 3500, max: 14000 }
+    metro: { min: 4500, max: 25000 },
+    tier1: { min: 3800, max: 20000 },
+    tier2: { min: 3200, max: 18000 },
+    industrial: { min: 4000, max: 22000 },
+    tourist: { min: 3500, max: 19000 }
   };
 
   const current = tiers[trait.tier] || tiers.tier2;
   return {
     start: `₹${current.min.toLocaleString()}`,
     range: `₹${current.min.toLocaleString()} - ₹${current.max.toLocaleString()}`,
+    table: [
+      { size: '1 BHK', price: `₹${current.min.toLocaleString()} - ₹${Math.floor(current.min * 1.8).toLocaleString()}` },
+      { size: '2 BHK', price: `₹${Math.floor(current.min * 1.6).toLocaleString()} - ₹${Math.floor(current.min * 2.8).toLocaleString()}` },
+      { size: '3 BHK', price: `₹${Math.floor(current.min * 2.5).toLocaleString()} - ₹${current.max.toLocaleString()}` },
+      { size: 'Villa/Office', price: 'Contact for Quote' }
+    ],
     note: `Actual costs in ${trait.name} may vary based on item volume and lift availability.`
   };
+};
+
+export const generateLocalInsights = (citySlug: string): string => {
+  const trait = getCityTrait(citySlug);
+  const cityName = trait.name;
+  
+  const insights = {
+    high: `Moving in ${cityName} requires strict adherence to local RTO regulations. Our team is well-versed in the 'No-Entry' timings for heavy vehicles (typically 8 AM to 11 AM and 5 PM to 9 PM) to ensure your move happens without legal delays.`,
+    medium: `While traffic in ${cityName} is manageable, we recommend scheduling packing for early morning to avoid peak-hour congestion near ${trait.landmarks[0] || 'city center'}.`,
+    low: `${cityName} offers smooth logistics. We can typically complete a full house shift within 4-6 hours due to excellent road connectivity and minimal entry restrictions.`
+  };
+
+  return insights[trait.trafficLevel] || insights.medium;
 };
 
 export const generateLocalizedFAQs = (citySlug: string, service: string) => {

@@ -2,17 +2,15 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { 
-  CheckCircle2, 
-  Truck, 
-  ShieldCheck, 
-  Clock, 
-  MapPin, 
-  Phone, 
-  Star, 
-  Zap, 
-  Award,
-  HelpCircle
+  CheckCircle2, Truck, ShieldCheck, Clock, MapPin, 
+  Phone, Star, Zap, Award, HelpCircle
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+
+const GoogleReviews = dynamic(() => import('@/components/home/GoogleReviews'));
+const VisualProof = dynamic(() => import('@/components/home/VisualProof'));
 
 export const metadata: Metadata = {
   title: 'Best Packers and Movers in Nagpur | 15+ Years Experience | Sunita Cargo',
@@ -20,50 +18,18 @@ export const metadata: Metadata = {
 };
 
 export default function NagpurPage() {
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "MovingCompany",
-    "name": "Sunita Cargo Packers Movers",
-    "image": "https://sunitacargopackersmovers.com/og-image.jpg",
-    "@id": "https://sunitacargopackersmovers.com",
-    "url": "https://sunitacargopackersmovers.com",
-    "telephone": "+917387661300",
-    "priceRange": "₹₹",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi",
-      "addressLocality": "Nagpur",
-      "postalCode": "440023",
-      "addressRegion": "MH",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 21.1647,
-      "longitude": 79.0011
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "00:00",
-      "closes": "23:59"
-    }
-  };
+  const nagpurFaqs = [
+    { question: 'Are you registered and insured?', answer: 'Yes, we are a GST-registered company based in Wadi, Nagpur. All moves include optional transit insurance to cover 100% of the value.' },
+    { question: 'How do you handle moves during Nagpur heat waves?', answer: 'We use industrial-grade, heat-resistant bubble wrap and schedule packing for early mornings to protect your belongings and our team.' },
+    { question: 'Do you provide warehousing in Nagpur?', answer: 'Yes, we have a secure, CCTV-monitored warehouse in Wadi for short-term and long-term storage.' },
+    { question: 'Will you dismantle my AC and Bed?', answer: 'Yes, our team includes skilled carpenters and electricians for basic dismantling and reassembling in your new Nagpur home.' },
+    { question: 'Can I track my truck during the move?', answer: 'For all intercity moves (e.g., Nagpur to Pune), we provide real-time GPS coordinates of your enclosed container.' }
+  ];
 
   return (
     <div className="w-full">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
+      <LocalBusinessSchema city="Nagpur" />
+      <FAQSchema faqs={nagpurFaqs} />
 
       {/* Hero Section */}
       <section className="relative pt-24 pb-20 bg-gradient-to-b from-primary/10 to-background overflow-hidden">
@@ -226,18 +192,12 @@ export default function NagpurPage() {
           </h2>
           
           <div className="space-y-8">
-            {[
-              { q: 'Are you registered and insured?', a: 'Yes, we are a GST-registered company based in Wadi, Nagpur. All moves include optional transit insurance to cover 100% of the value.' },
-              { q: 'How do you handle moves during Nagpur heat waves?', a: 'We use industrial-grade, heat-resistant bubble wrap and schedule packing for early mornings to protect your belongings and our team.' },
-              { q: 'Do you provide warehousing in Nagpur?', a: 'Yes, we have a secure, CCTV-monitored warehouse in Wadi for short-term and long-term storage.' },
-              { q: 'Will you dismantle my AC and Bed?', a: 'Yes, our team includes skilled carpenters and electricians for basic dismantling and reassembling in your new Nagpur home.' },
-              { q: 'Can I track my truck during the move?', a: 'For all intercity moves (e.g., Nagpur to Pune), we provide real-time GPS coordinates of your enclosed container.' }
-            ].map((faq, i) => (
+            {nagpurFaqs.map((faq, i) => (
               <div key={i} className="p-8 rounded-3xl bg-background border border-border hover:border-primary/30 transition-all">
                 <h4 className="text-xl font-bold mb-4 flex gap-3">
-                  <span className="text-primary font-black">Q.</span> {faq.q}
+                  <span className="text-primary font-black">Q.</span> {faq.question}
                 </h4>
-                <p className="text-muted-foreground pl-8 text-sm leading-relaxed border-l-2 border-primary/20">{faq.a}</p>
+                <p className="text-muted-foreground pl-8 text-sm leading-relaxed border-l-2 border-primary/20">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -264,6 +224,9 @@ export default function NagpurPage() {
           </div>
         </div>
       </section>
+
+      <VisualProof />
+      <GoogleReviews />
     </div>
   );
 }

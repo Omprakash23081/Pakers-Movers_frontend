@@ -8,6 +8,8 @@ const AboutUs = dynamic(() => import('@/components/home/AboutUs'));
 const Gallery = dynamic(() => import('@/components/home/Gallery'));
 const Stats = dynamic(() => import('@/components/home/Stats'));
 const ReviewsWidget = dynamic(() => import('@/components/home/ReviewsWidget'));
+const GoogleReviews = dynamic(() => import('@/components/home/GoogleReviews'));
+const VisualProof = dynamic(() => import('@/components/home/VisualProof'));
 const FAQ = dynamic(() => import('@/components/home/FAQ'));
 const ConnectWithUs = dynamic(() => import('@/components/home/ConnectWithUs'));
 const VideoTestimonials = dynamic(() => import('@/components/home/VideoTestimonials'));
@@ -56,7 +58,9 @@ export default function Home() {
       </div>
 
       <CostCalculator />
+      <VisualProof />
       <ServiceCards />
+      <GoogleReviews />
       <AboutUs />
       <Stats />
       <Gallery />

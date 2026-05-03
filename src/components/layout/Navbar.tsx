@@ -25,6 +25,7 @@ export default function Navbar() {
     { name: 'Contact', href: '/contact' },
     { name: 'Track', href: '/track' },
     { name: 'Feedback', href: '/feedback' },
+    { name: 'Blog', href: '/blog' },
   ];
 
   return (
