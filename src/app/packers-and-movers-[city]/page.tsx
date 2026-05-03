@@ -2,8 +2,12 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
-  const city = params.city.charAt(0).toUpperCase() + params.city.slice(1);
+export async function generateMetadata({ params }: { params: { city?: string } }): Promise<Metadata> {
+  const cityParam = params?.city || '';
+  if (!cityParam) {
+    return { title: 'Not Found' };
+  }
+  const city = cityParam.charAt(0).toUpperCase() + cityParam.slice(1);
   return {
     title: `Top-Rated Packers and Movers in ${city}`,
     description: `Reliable and affordable packers and movers in ${city}. Expert house shifting, office relocation, and car transport services.`,
@@ -16,14 +20,14 @@ export async function generateStaticParams() {
   return [];
 }
 
-export default function CityPage({ params }: { params: { city: string } }) {
-  const city = params.city.charAt(0).toUpperCase() + params.city.slice(1);
+export default function CityPage({ params }: { params: { city?: string } }) {
+  const cityParam = params?.city || '';
   
-  // Basic validation to prevent arbitrary city paths if needed, 
-  // or allow all and rely on a CMS later.
-  if (!city) {
+  if (!cityParam) {
     notFound();
   }
+
+  const city = cityParam.charAt(0).toUpperCase() + cityParam.slice(1);
 
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
