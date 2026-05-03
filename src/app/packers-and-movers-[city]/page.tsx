@@ -10,6 +10,12 @@ export async function generateMetadata({ params }: { params: { city: string } })
   };
 }
 
+// Return empty array so Next.js doesn't try to build this route
+// (It's now handled by the robust [slug] route)
+export async function generateStaticParams() {
+  return [];
+}
+
 export default function CityPage({ params }: { params: { city: string } }) {
   const city = params.city.charAt(0).toUpperCase() + params.city.slice(1);
   

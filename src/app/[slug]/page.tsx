@@ -54,7 +54,11 @@ export async function generateStaticParams() {
   // 1. Service + City combinations
   services.forEach(service => {
     cities.forEach(city => {
-      params.push({ slug: `${service}-${city}` });
+      const slug = `${service}-${city}`;
+      // Prevent conflict with the static /packers-and-movers-nagpur folder
+      if (slug !== 'packers-and-movers-nagpur') {
+        params.push({ slug });
+      }
     });
   });
 
