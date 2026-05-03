@@ -411,6 +411,8 @@ export default function DynamicSEOPage({ params }: Props) {
                </div>
             </div>
           </div>
+        </div>
+      </section>
 
       <div className="py-20 container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
