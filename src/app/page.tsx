@@ -58,18 +58,20 @@ export default function Home() {
       </div>
 
       <CostCalculator />
-      <VisualProof />
-      <ServiceCards />
-      <GoogleReviews />
-      <AboutUs />
-      <Stats />
-      <Gallery />
-      <VideoTestimonials />
-      <ReviewsWidget />
-      <ConnectWithUs />
-      <PricingGuide />
-      <LocationGrid />
-      <FAQ />
+      <div className="mobile-95-container mx-auto">
+        <VisualProof />
+        <ServiceCards />
+        <GoogleReviews />
+        <AboutUs />
+        <Stats />
+        <Gallery />
+        <VideoTestimonials />
+        <ReviewsWidget />
+        <ConnectWithUs />
+        <PricingGuide />
+        <LocationGrid />
+        <FAQ />
+      </div>
 
     </div>
   );

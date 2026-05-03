@@ -1,5 +1,3 @@
-'use client';
-import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, User, Share2, Facebook, Twitter, Linkedin, ChevronRight, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
