@@ -81,30 +81,30 @@ export const generateLocalizedFAQs = (citySlug: string, service: string) => {
 
   const baseFaqs = [
     {
-      q: `What are the charges for ${service} in ${cityName}?`,
-      a: `For local shifts in ${cityName}, prices typically range from ${generateLocalPricing(citySlug, service).range}. Intercity moves from ${cityName} depend on distance and vehicle type.`
+      question: `What are the charges for ${service} in ${cityName}?`,
+      answer: `For local shifts in ${cityName}, prices typically range from ${generateLocalPricing(citySlug, service).range}. Intercity moves from ${cityName} depend on distance and vehicle type.`
     },
     {
-      q: `Do you provide insurance for relocations in ${cityName}?`,
-      a: `Yes, Sunita Cargo provides comprehensive transit insurance for all moves in ${cityName}. This covers unexpected damages during loading, transit, and unloading.`
+      question: `Do you provide insurance for relocations in ${cityName}?`,
+      answer: `Yes, Sunita Cargo provides comprehensive transit insurance for all moves in ${cityName}. This covers unexpected damages during loading, transit, and unloading.`
     }
   ];
 
   const localizedFaqs = {
     metro: [
       {
-        q: `How do you handle moves in ${cityName}'s high-traffic areas?`,
-        a: `In ${cityName}, we schedule moves during 'No-Entry' free hours and use smaller feeder vehicles for narrow lanes in areas like ${trait.neighbors[0]}.`
+        question: `How do you handle moves in ${cityName}'s high-traffic areas?`,
+        answer: `In ${cityName}, we schedule moves during 'No-Entry' free hours and use smaller feeder vehicles for narrow lanes in areas like ${trait.neighbors[0]}.`
       },
       {
-        q: `Are your staff trained for ${cityName}'s high-rise apartment rules?`,
-        a: `Absolutely. We are familiar with the society protocols of major residential complexes in ${cityName} and ensure minimal disturbance to your neighbors.`
+        question: `Are your staff trained for ${cityName}'s high-rise apartment rules?`,
+        answer: `Absolutely. We are familiar with the society protocols of major residential complexes in ${cityName} and ensure minimal disturbance to your neighbors.`
       }
     ],
     tier1: [
       {
-        q: `Can you deliver to remote areas near ${cityName}?`,
-        a: `Yes, we have a strong network covering all outskirts of ${cityName}, including ${trait.neighbors[0]} and surrounding districts.`
+        question: `Can you deliver to remote areas near ${cityName}?`,
+        answer: `Yes, we have a strong network covering all outskirts of ${cityName}, including ${trait.neighbors[0]} and surrounding districts.`
       }
     ]
   };

@@ -85,7 +85,11 @@ type Props = {
   params: { slug: string };
 };
 
-function parseSlug(slug: string) {
+type SlugData = 
+  | { type: 'route', from: string, to: string, service: string }
+  | { type: 'service-city', service: string, city: string };
+
+function parseSlug(slug: string): SlugData | null {
   // Pattern 1: [from]-to-[to]-[service]
   const routeMatch = slug.match(/^([a-z-]+)-to-([a-z-]+)-(packers-movers|car-transport|home-shifting|office-relocation|bike-transport|warehouse-storage)$/);
   if (routeMatch) {
@@ -129,9 +133,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : params.slug;
   const canonicalUrl = `https://sunitacargopackersmovers.com/${normalizedSlug}`;
 
-  const serviceName = getTitleCase(data.service || (data as any).service || 'Packers and Movers');
-  const cityName = getTitleCase(data.city || (data as any).from || 'India');
-  const intro = data.type === 'service-city' ? generateIntro(data.city!, data.service!) : '';
+  const serviceName = getTitleCase(data.service);
+  const cityName = data.type === 'service-city' ? getTitleCase(data.city) : getTitleCase(data.from);
+  const intro = data.type === 'service-city' ? generateIntro(data.city, data.service) : '';
 
   if (data.type === 'service-city') {
     return {
@@ -159,18 +163,18 @@ export default function DynamicSEOPage({ params }: Props) {
   if (!data) notFound();
 
   const isRoute = data.type === 'route';
-  const mainTitle = isRoute 
-    ? `${getTitleCase(data.service!)} from ${getTitleCase(data.from!)} to ${getTitleCase(data.to!)}`
-    : `${getTitleCase(data.service!)} in ${getTitleCase(data.city!)}`;
+  const mainTitle = data.type === 'route'
+    ? `${getTitleCase(data.service)} from ${getTitleCase(data.from)} to ${getTitleCase(data.to)}`
+    : `${getTitleCase(data.service)} in ${getTitleCase(data.city)}`;
   
-  const targetCity = isRoute ? getTitleCase(data.to!) : getTitleCase(data.city!);
-  const originCity = isRoute ? getTitleCase(data.from!) : targetCity;
-  const serviceName = getTitleCase(data.service!);
+  const targetCity = data.type === 'route' ? getTitleCase(data.to) : getTitleCase(data.city);
+  const originCity = data.type === 'route' ? getTitleCase(data.from) : targetCity;
+  const serviceName = getTitleCase(data.service);
 
   return (
     <div className="w-full">
       <LocalBusinessSchema city={targetCity} />
-      <FAQSchema faqs={isRoute ? [] : generateLocalizedFAQs(data.city!, serviceName)} />
+      <FAQSchema faqs={data.type === 'service-city' ? generateLocalizedFAQs(data.city, serviceName) : []} />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 to-background pt-24 pb-20 border-b border-border text-center overflow-hidden">
@@ -226,12 +230,12 @@ export default function DynamicSEOPage({ params }: Props) {
                 Your Trusted Partner for {serviceName} in {targetCity}
               </h2>
               <p className="text-muted-foreground leading-extra-relaxed">
-                Relocating home or business can be one of life&apos;s most stressful events. At Sunita Cargo Packers Movers, we have spent over 15 years refining our process to make <strong>{serviceName.toLowerCase()} in {targetCity}</strong> as seamless and worry-free as possible. {!isRoute && generateIntro(data.city!, data.service!)} Whether you are moving down the street or shifting {isRoute ? `from ${originCity} to ${targetCity}` : `across the country`}, our team is equipped with the skills and passion to deliver perfection.
+                Relocating home or business can be one of life&apos;s most stressful events. At Sunita Cargo Packers Movers, we have spent over 15 years refining our process to make <strong>{serviceName.toLowerCase()} in {targetCity}</strong> as seamless and worry-free as possible. {data.type === 'service-city' && generateIntro(data.city, data.service)} Whether you are moving down the street or shifting {isRoute ? `from ${originCity} to ${targetCity}` : `across the country`}, our team is equipped with the skills and passion to deliver perfection.
               </p>
               <p className="text-muted-foreground leading-extra-relaxed">
-                {isRoute 
+                {data.type === 'route' 
                    ? `Our specialized ${serviceName.toLowerCase()} between ${originCity} and ${targetCity} is marked by thousands of successful long-distance deliveries.`
-                   : `Our presence in ${targetCity} is marked by thousands of successful moves and a reputation for being the most reliable logistics provider in ${getTitleCase(getCityTrait(data.city!).tier)} regions.`} We don&apos;t just move items; we move feelings, memories, and valuable assets. Our commitment to using high-standard packing materials like triple-layer bubble wrap, edge protectors, and customized wooden crates for fragile items sets us apart from the competition.
+                   : `Our presence in ${targetCity} is marked by thousands of successful moves and a reputation for being the most reliable logistics provider in ${getTitleCase(getCityTrait(data.city).tier)} regions.`} We don&apos;t just move items; we move feelings, memories, and valuable assets. Our commitment to using high-standard packing materials like triple-layer bubble wrap, edge protectors, and customized wooden crates for fragile items sets us apart from the competition.
               </p>
 
               <div className="bg-primary/10 border border-primary/20 p-8 rounded-3xl mt-8">
@@ -240,7 +244,7 @@ export default function DynamicSEOPage({ params }: Props) {
                     <h3 className="text-xl font-bold m-0 text-foreground">Local Shifting Insights for {targetCity}</h3>
                  </div>
                  <p className="text-sm text-muted-foreground italic leading-relaxed m-0">
-                    {generateLocalInsights(data.city || 'india')}
+                    {generateLocalInsights(data.type === 'service-city' ? data.city : 'india')}
                  </p>
               </div>
 
@@ -278,7 +282,7 @@ export default function DynamicSEOPage({ params }: Props) {
                           </tr>
                        </thead>
                        <tbody className="divide-y divide-border">
-                          {generateLocalPricing(data.city || 'india', serviceName).table?.map((row, idx) => (
+                          {generateLocalPricing(data.type === 'service-city' ? data.city : 'india', serviceName).table?.map((row, idx) => (
                              <tr key={idx} className="hover:bg-white/5 transition-colors">
                                 <td className="px-6 py-4 font-bold text-white">{row.size}</td>
                                 <td className="px-6 py-4 font-black text-primary">{row.price}</td>
@@ -301,7 +305,7 @@ export default function DynamicSEOPage({ params }: Props) {
                 {[
                   { step: '01', title: 'Free Asset Survey', desc: 'Our experts conduct a detailed audit of your belongings to provide a fixed-price, transparent quotation with no hidden charges.', icon: <Box size={20}/> },
                   { step: '02', title: '5-Layer Premium Packing', desc: 'Items are wrapped in multiple layers of protection, including heavy-duty sheets and waterproof film to withstand all weather conditions.', icon: <Settings size={20}/> },
-                  { step: '03', title: 'Safe Loading & Transit', desc: 'Securely loaded into specialized moving containers with GPS monitoring for real-time updates as your goods move {isRoute ? "between cities" : "locally"}.', icon: <Navigation size={20}/> },
+                  { step: '03', title: 'Safe Loading & Transit', desc: `Securely loaded into specialized moving containers with GPS monitoring for real-time updates as your goods move ${isRoute ? "between cities" : "locally"}.`, icon: <Navigation size={20}/> },
                   { step: '04', title: 'Unpacking & Setup', desc: 'On arrival, our team doesn’t just unload; we help you set up your new home or office exactly how you want it.', icon: <Heart size={20}/> }
                 ].map((item, idx) => (
                   <div key={idx} className="bg-section/30 p-8 rounded-3xl border border-border group hover:border-primary/50 transition-all duration-300">
@@ -353,14 +357,14 @@ export default function DynamicSEOPage({ params }: Props) {
                </div>
                <div className="space-y-6">
                  {(isRoute ? [
-                    { q: `What are the average charges for ${serviceName.toLowerCase()} from ${originCity} to ${targetCity}?`, a: `Intercity shifting from ${originCity} to ${targetCity} depends on distance (approx. long-distance) and volume, with costs varying from ₹15,000 to ₹45,000 depending on the vehicle size and packing requirements.` },
-                    { q: `How many days does it take to move from ${originCity} to ${targetCity}?`, a: `Transit time depends on the distance and road conditions. Typically, a move from ${originCity} to ${targetCity} takes 3-7 days for delivery.` }
+                    { question: `What are the average charges for ${serviceName.toLowerCase()} from ${originCity} to ${targetCity}?`, answer: `Intercity shifting from ${originCity} to ${targetCity} depends on distance (approx. long-distance) and volume, with costs varying from ₹15,000 to ₹45,000 depending on the vehicle size and packing requirements.` },
+                    { question: `How many days does it take to move from ${originCity} to ${targetCity}?`, answer: `Transit time depends on the distance and road conditions. Typically, a move from ${originCity} to ${targetCity} takes 3-7 days for delivery.` }
                  ] : generateLocalizedFAQs(data.city!, serviceName)).map((faq, i) => (
                     <div key={i} className="p-8 rounded-3xl border border-border bg-section/20 hover:bg-section/40 transition-all duration-300">
                       <h4 className="font-bold text-lg mb-3 flex gap-3">
-                        <span className="text-primary font-black">Q.</span> {faq.q}
+                        <span className="text-primary font-black">Q.</span> {faq.question}
                       </h4>
-                      <p className="text-muted-foreground pl-7 text-sm leading-relaxed border-l-2 border-primary/20">{faq.a}</p>
+                      <p className="text-muted-foreground pl-7 text-sm leading-relaxed border-l-2 border-primary/20">{faq.answer}</p>
                     </div>
                  ))}
                </div>
@@ -449,7 +453,7 @@ export default function DynamicSEOPage({ params }: Props) {
                   </div>
                   <ul className="space-y-4 text-sm">
                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Service Area:</span> <span className="font-black">{targetCity}</span></li>
-                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Starting Price:</span> <span className="font-black text-primary">{isRoute ? '₹15,000' : generateLocalPricing(data.city!, serviceName).start}</span></li>
+                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Starting Price:</span> <span className="font-black text-primary">{data.type === 'route' ? '₹15,000' : generateLocalPricing(data.city, serviceName).start}</span></li>
                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Transit Type:</span> <span className="font-black">Closed Container</span></li>
                     <li className="flex justify-between"><span className="text-muted-foreground font-medium">Insurance:</span> <span className="font-black">Available</span></li>
                   </ul>

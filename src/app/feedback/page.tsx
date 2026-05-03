@@ -50,17 +50,26 @@ export default function FeedbackPage() {
   });
 
   const fetchFeedbacks = async () => {
+    setLoadingFeedbacks(true);
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
       const res = await fetch(`${apiUrl}/feedback`);
       
       const contentType = res.headers.get("content-type");
-      if (!res.ok || !contentType || contentType.indexOf("application/json") === -1) {
-        throw new Error("Failed to fetch feedbacks or invalid response");
+      if (!res.ok) {
+        if (res.status === 404) {
+          console.warn("Feedback endpoint not found on server yet.");
+          return;
+        }
+        throw new Error(`Server returned ${res.status}`);
+      }
+
+      if (!contentType || contentType.indexOf("application/json") === -1) {
+        throw new Error("Invalid response from server");
       }
 
       const data = await res.json();
-      if (data.success && data.feedbacks && data.feedbacks.length > 0) {
+      if (data.success && data.feedbacks) {
         setFeedbacks(prev => {
           const newFeedbacks = data.feedbacks.filter((df: any) => !prev.some(p => p._id === df._id));
           return [...newFeedbacks, ...prev];
@@ -110,7 +119,13 @@ export default function FeedbackPage() {
           const errorData = await response.json();
           alert(`Error: ${errorData.message || 'Something went wrong.'}`);
         } else {
-          alert(`Server Error: ${response.status} ${response.statusText}. The feedback service might be undergoing maintenance.`);
+          if (response.status === 503 || response.status === 502) {
+            alert(`The feedback service is currently waking up or under maintenance. Please try again in 30 seconds.`);
+          } else if (response.status === 404) {
+            alert(`Service update in progress. The feedback endpoint is being initialized on the server. Please check back shortly.`);
+          } else {
+            alert(`Server Error (${response.status}). The service might be temporarily unavailable.`);
+          }
         }
       }
     } catch (error) {
@@ -122,8 +137,8 @@ export default function FeedbackPage() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
-      <div className="w-[98%] sm:w-full sm:container mx-auto px-0 sm:px-4 max-w-5xl">
+    <main className="min-h-screen bg-background pt-32 pb-20 overflow-x-hidden">
+      <div className="container mx-auto px-4 relative mobile-95-container">
         
         {/* Header Section */}
         <div className="text-center mb-10 sm:mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -255,7 +270,7 @@ export default function FeedbackPage() {
           </div>
 
           {/* Sidebar / Info */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-6 mobile-95-container">
             <div className="bg-primary/5 border border-primary/10 p-8 rounded-3xl">
               <h3 className="text-2xl font-black mb-4">Why your feedback matters?</h3>
               <p className="text-muted-foreground leading-relaxed font-medium mb-6">
@@ -313,6 +328,6 @@ export default function FeedbackPage() {
         </div>
 
       </div>
-    </div>
+    </main>
   );
 }

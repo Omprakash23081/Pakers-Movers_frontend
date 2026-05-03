@@ -88,4 +88,16 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Mobile Width Enforcements */
+  @media (max-width: 640px) {
+    .mobile-95-container {
+      width: 95% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: none !important;
+    }
+  }
 }
