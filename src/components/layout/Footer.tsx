@@ -84,6 +84,7 @@ export default function Footer() {
               <li><Link href="/about" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> About Us</Link></li>
               <li><Link href="/track" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Track Shipment</Link></li>
               <li><Link href="/contact" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Contact Us</Link></li>
+              <li><Link href="/feedback" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Customer Feedback</Link></li>
               <li><Link href="/#faq" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> FAQ & Policies</Link></li>
             </ul>
           </div>

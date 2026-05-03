@@ -20,9 +20,9 @@ export default function HeroContent() {
 
       <div className="relative">
         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance leading-tight relative z-10 text-white">
-          Reliable Packers and Movers in Nagpur for <br />
+          Reliable & Safe Packers and Movers in Nagpur | <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-            Safe & Affordable Shifting Services
+            Stress-Free Shifting
           </span>
         </h1>
         {/* Moving Truck Animation - Optimized to run once for performance */}
@@ -37,7 +37,7 @@ export default function HeroContent() {
       </div>
 
       <p className="text-lg md:text-xl text-white/70 max-w-lg text-balance leading-relaxed font-medium">
-        Professional house shifting, office relocation, vehicle transport and packing services in Nagpur. 
+        Your trusted partner for home, office, and vehicle relocation. 10+ Years of Excellence.
         Our trained team ensures safe packing, secure loading and on-time delivery across India.
       </p>
 
@@ -57,10 +57,10 @@ export default function HeroContent() {
       {/* Hero Features Area */}
       <div className="grid grid-cols-2 gap-y-3 gap-x-6 pt-4 border-t border-white/10">
         {[
-          "100% Safe Packing",
-          "Trained Moving Staff",
-          "Door-to-Door Shifting",
-          "Affordable Pricing"
+          "10,000+ Successful Moves",
+          "4.9/5 Average Rating",
+          "100% Safe & Insured Transit",
+          "On-Time Delivery Guarantee"
         ].map((feature, idx) => (
           <div key={idx} className="flex items-center gap-2 text-sm font-bold text-white/80">
             <CheckCircle size={16} className="text-emerald-500 shrink-0" aria-hidden="true" />
