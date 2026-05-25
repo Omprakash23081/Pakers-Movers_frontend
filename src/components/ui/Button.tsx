@@ -36,6 +36,8 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  variant?: 'default' | 'accent' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'glass';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
 }
 
 import { Slot } from '@radix-ui/react-slot';

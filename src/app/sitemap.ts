@@ -23,8 +23,11 @@ const services = [
   "car-transport",
   "bike-transport",
   "warehouse-storage",
-  "packers-and-movers"
+  "packers-and-movers",
+  "home-shifting",
+  "car-bike-transport"
 ];
+
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -32,15 +35,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/track',
     '/about',
+    '/services',
     '/blog',
     '/feedback',
     '/privacy',
     '/terms',
+    '/faq',
     '/packers-and-movers-nagpur',
     '/services/bike-transport',
     '/services/car-transport',
     '/services/house-shifting',
     '/services/office-relocation',
+    '/services/loading-unloading',
+    '/services/local-shifting',
+    '/services/packing-unpacking',
+    '/services/warehouse-storage',
     '/projects/premium-villa-shifting-nagpur',
     '/projects/corporate-it-office-relocation',
     '/projects/luxury-car-transport-nagpur-pune',

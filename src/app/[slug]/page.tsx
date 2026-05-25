@@ -44,7 +44,9 @@ const services = [
   "car-transport",
   "bike-transport",
   "warehouse-storage",
-  "packers-and-movers"
+  "packers-and-movers",
+  "home-shifting",
+  "car-bike-transport"
 ];
 
 // Content Generation Helpers
@@ -52,6 +54,8 @@ const getTitleCase = (str: string) => {
   if (!str) return '';
   return str.split('-').map(word => (word.charAt(0) || '').toUpperCase() + word.slice(1)).join(' ');
 };
+
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const params: { slug: string }[] = [];
@@ -108,7 +112,7 @@ type SlugData =
 function parseSlug(slug: string): SlugData | null {
   if (!slug) return null;
   // Pattern 1: [from]-to-[to]-[service]
-  const routeMatch = slug.match(/^([a-z-]+)-to-([a-z-]+)-(packers-movers|car-transport|home-shifting|office-relocation|bike-transport|warehouse-storage)$/);
+  const routeMatch = slug.match(/^([a-z-]+)-to-([a-z-]+)-(packers-movers|car-transport|home-shifting|office-relocation|bike-transport|warehouse-storage|car-bike-transport)$/);
   if (routeMatch) {
     return {
        type: 'route',
