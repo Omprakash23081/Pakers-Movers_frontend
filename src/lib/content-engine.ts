@@ -75,20 +75,35 @@ export const generateLocalInsights = (citySlug: string): string => {
   return insights[trait.trafficLevel] || insights.medium;
 };
 
-export const generateLocalizedFAQs = (citySlug: string, service: string) => {
+export const generateLocalizedFAQs = (citySlug: string, service: string, localityName?: string | null) => {
   const trait = getCityTrait(citySlug);
   const cityName = trait.name;
+  const locationText = localityName ? `${localityName}, ${cityName}` : cityName;
 
   const baseFaqs = [
     {
-      question: `What are the charges for ${service} in ${cityName}?`,
-      answer: `For local shifts in ${cityName}, prices typically range from ${generateLocalPricing(citySlug, service).range}. Intercity moves from ${cityName} depend on distance and vehicle type.`
+      question: `What are the charges for ${service} in ${locationText}?`,
+      answer: `For local moves in ${locationText}, prices typically range from ${generateLocalPricing(citySlug, service).range} depending on the volume of items, elevator availability, and distance.`
     },
     {
-      question: `Do you provide insurance for relocations in ${cityName}?`,
-      answer: `Yes, Sunita Cargo provides comprehensive transit insurance for all moves in ${cityName}. This covers unexpected damages during loading, transit, and unloading.`
+      question: `Do you provide transit insurance for relocations in ${locationText}?`,
+      answer: `Yes, Sunita Cargo provides comprehensive transit insurance for all moves in and around ${locationText}. This covers unexpected damages during loading, transit, and unloading.`
     }
   ];
+
+  if (localityName) {
+    return [
+      ...baseFaqs,
+      {
+        question: `How do you handle moves in high-rise apartments in ${localityName}?`,
+        answer: `We are familiar with the society protocols, security entry rules, and service lift permissions of major residential complexes in ${localityName}. We ensure a smooth shift with zero disturbance.`
+      },
+      {
+        question: `Are your packers and movers services available near me in ${localityName}?`,
+        answer: `Yes, Sunita Cargo has local crews based right in ${localityName} and neighboring areas of ${cityName} for swift and prompt shifting services.`
+      }
+    ];
+  }
 
   const localizedFaqs = {
     metro: [
@@ -109,6 +124,6 @@ export const generateLocalizedFAQs = (citySlug: string, service: string) => {
     ]
   };
 
-  const pool = localizedFaqs[trait.tier] || [];
+  const pool = (localizedFaqs as Record<string, any>)[trait.tier] || [];
   return [...baseFaqs, ...pool];
 };

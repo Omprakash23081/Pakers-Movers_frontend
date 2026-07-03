@@ -4,9 +4,9 @@ import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import { TiltCard } from '@/components/ui/TiltCard';
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Successful Moves' },
-  { value: 50, suffix: '+', label: 'Cities Covered' },
-  { value: 100, suffix: '+', label: 'Positive Reviews' },
+  { value: 10000, suffix: '+', label: 'Successful Moves' },
+  { value: 150, suffix: '+', label: 'Cities Covered' },
+  { value: 1200, suffix: '+', label: 'Positive Reviews' },
   { value: 24, suffix: '/7', label: 'Customer Support' },
 ];
 

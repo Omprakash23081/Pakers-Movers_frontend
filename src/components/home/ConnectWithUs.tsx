@@ -8,14 +8,14 @@ const contactInfo = [
   {
     icon: User,
     label: 'Branch Manager',
-    value: 'Subham kumar',
+    value: 'Subham Kumar',
     subValue: 'Assisting in your moving & storage needs.',
     color: 'bg-red-500/10 text-red-500',
   },
   {
     icon: MapPin,
     label: 'Registered Office',
-    value: 'Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023',
+    value: 'Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023',
     subValue: 'Visit us for a face-to-face consultation.',
     color: 'bg-primary/10 text-primary',
   },
@@ -43,7 +43,7 @@ export default function ConnectWithUs() {
   }, []);
 
   const handleDirections = () => {
-    const address = "Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023";
+    const address = "Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023";
     const encodedAddress = encodeURIComponent(address);
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
   };

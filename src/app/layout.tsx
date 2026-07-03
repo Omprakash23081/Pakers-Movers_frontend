@@ -16,12 +16,22 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sunitacargopackersmovers.com"),
 
   title: {
-    default: "Best Packers and Movers in Nagpur | Sunita Cargo Packers Movers",
+    default: "Best Packers and Movers in Nagpur | Safe House Shifting Services",
     template: "%s | Sunita Cargo Packers Movers",
   },
 
+  keywords: [
+    "Packers and movers in Nagpur",
+    "Best packers and movers in Nagpur",
+    "House shifting services in Nagpur",
+    "Moving companies in Nagpur",
+    "Office relocation services in Nagpur",
+    "Packers and movers near me",
+    "Car and bike transport services in Nagpur",
+  ],
+
   description:
-    "Sunita Cargo Packers Movers provides safe, affordable and professional home shifting, office relocation, car transport and warehouse storage services in Nagpur and across India.",
+    "Looking for the best packers and movers in Nagpur? Sunita Cargo offers affordable, professional house shifting, office relocation, and car transport services near you.",
 
   icons: {
     icon: [
@@ -79,7 +89,7 @@ const localBusinessSchema = {
   address: {
     "@type": "PostalAddress",
     streetAddress:
-      "Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi",
+      "Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi",
     addressLocality: "Nagpur",
     addressRegion: "MH",
     postalCode: "440023",
@@ -87,8 +97,8 @@ const localBusinessSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 21.1042,
-    longitude: 79.0527,
+    latitude: 21.1474,
+    longitude: 78.9752,
   },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",

@@ -28,7 +28,6 @@ export default function NagpurQuoteForm() {
         body: JSON.stringify({
           firstName: formData.fullName,
           lastName: '',
-          email: 'inquiry@example.com',
           phone: formData.phone,
           movingFrom: 'Nagpur',
           movingTo: formData.movingTo || 'Not Specified',

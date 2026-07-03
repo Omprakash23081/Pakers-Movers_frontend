@@ -2,15 +2,18 @@ import React from 'react';
 
 interface LocalBusinessSchemaProps {
   city?: string;
+  locality?: string | null;
 }
 
-export default function LocalBusinessSchema({ city = 'Nagpur' }: LocalBusinessSchemaProps) {
+export default function LocalBusinessSchema({ city = 'Nagpur', locality = null }: LocalBusinessSchemaProps) {
+  const locationLabel = locality ? `${locality}, ${city}` : city;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
     "name": "Sunita Cargo Packers Movers",
-    "alternateName": "Sunita Cargo Packers & Movers Nagpur",
-    "description": `IBA-approved packers and movers in ${city}. 15+ years experience in house shifting, office relocation, and vehicle transport with 100% safety guarantee.`,
+    "alternateName": `Sunita Cargo Packers & Movers ${locationLabel}`,
+    "description": `IBA-approved packers and movers in ${locationLabel}. 15+ years experience in house shifting, office relocation, and vehicle transport with 100% safety guarantee.`,
     "url": "https://sunitacargopackersmovers.com",
     "logo": "https://sunitacargopackersmovers.com/logo.png",
     "image": "https://sunitacargopackersmovers.com/og-image.jpg",
@@ -19,16 +22,20 @@ export default function LocalBusinessSchema({ city = 'Nagpur' }: LocalBusinessSc
     "priceRange": "₹₹",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi",
-      "addressLocality": city,
-      "postalCode": "440023",
+      "streetAddress": "Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi",
+      "addressLocality": "Nagpur",
       "addressRegion": "MH",
+      "postalCode": "440023",
       "addressCountry": "IN"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": locationLabel
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 21.1647,
-      "longitude": 79.0011
+      "latitude": 21.1474,
+      "longitude": 78.9752
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -51,7 +58,7 @@ export default function LocalBusinessSchema({ city = 'Nagpur' }: LocalBusinessSc
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
-      "reviewCount": "1250"
+      "reviewCount": "1200"
     }
   };
 

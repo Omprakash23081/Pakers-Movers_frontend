@@ -30,13 +30,65 @@ const reviews = [
 
 export default function TestimonialCarousel() {
   const [index, setIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % reviews.length);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="relative max-w-4xl mx-auto px-4 py-12">
+        <div className="absolute -top-12 -left-12 opacity-5 text-primary">
+          <Quote size={200} />
+        </div>
+        
+        <div className="relative overflow-hidden min-h-[350px] flex items-center">
+          <div className="w-full text-center space-y-8">
+            <div className="flex justify-center gap-1 text-yellow-500">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={24} fill="currentColor" />
+              ))}
+            </div>
+            
+            <p className="text-2xl md:text-3xl font-medium leading-relaxed italic text-white/90">
+              "{reviews[0].text}"
+            </p>
+            
+            <div className="flex flex-col items-center gap-4 pt-6">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary/20 p-1">
+                 <Image 
+                   src={reviews[0].avatar} 
+                   alt={reviews[0].name} 
+                   fill 
+                   className="rounded-full object-cover"
+                   sizes="64px"
+                   priority
+                 />
+              </div>
+              <div>
+                <h4 className="text-xl font-black">{reviews[0].name}</h4>
+                <p className="text-sm font-bold text-primary uppercase tracking-[0.2em]">{reviews[0].city}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-4 mt-12">
+          <button className="p-3 rounded-full bg-white/5 border border-white/10 text-white" aria-label="Previous review">
+            <ChevronLeft size={24} />
+          </button>
+          <button className="p-3 rounded-full bg-white/5 border border-white/10 text-white" aria-label="Next review">
+            <ChevronRight size={24} />
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative max-w-4xl mx-auto px-4 py-12">

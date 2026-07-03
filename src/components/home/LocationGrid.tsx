@@ -4,18 +4,18 @@ import Link from 'next/link';
 import { MapPin, Search } from 'lucide-react';
 
 const cities = [
-  "Agra", "Ahmedabad", "Allahabad", "Alwar", "Ambala", "Ankleshwar", "Aurangabad", "Banaras", 
-  "Bangalore", "Baroda", "Bhiwandi", "Bhopal", "Bhubaneswar", "Bhuj", "Bikaner", "Calicut", 
-  "Chandigarh", "Chennai", "Cochin", "Coimbatore", "Cuttack", "Dehradun", "Delhi", "Dwarka", 
-  "Faridabad", "Gandhidham", "Ghaziabad", "Goa", "Greaternoida", "Gurgaon", "Guwahati", 
+  "Agra", "Ahmedabad", "Akola", "Allahabad", "Alwar", "Amravati", "Ambala", "Ankleshwar", "Aurangabad", "Banaras", 
+  "Bangalore", "Baroda", "Bhandara", "Bhiwandi", "Bhopal", "Bhubaneswar", "Bhuj", "Bikaner", "Calicut", 
+  "Chandigarh", "Chandrapur", "Chennai", "Chhindwara", "Cochin", "Coimbatore", "Cuttack", "Dehradun", "Delhi", "Dwarka", 
+  "Faridabad", "Gandhidham", "Ghaziabad", "Goa", "Gondia", "Greater Noida", "Gurgaon", "Guwahati", 
   "Gwalior", "Haridwar", "Hisar", "Hubli", "Hyderabad", "Indore", "Jabalpur", "Jaipur", 
   "Jammu", "Jamshedpur", "Jamnagar", "Jodhpur", "Kalighat", "Kanpur", "Kolhapur", "Kolkata", 
   "Korba", "Kota", "Kottayam", "Lucknow", "Ludhiana", "Madurai", "Manesar", "Mangalore", 
-  "Meerut", "Mumbai", "Mysore", "Nagpur", "Nasik", "Navimumbai", "Neemrana", "Noida", 
-  "Panipat", "Patalganga", "Patna", "Pondicherry", "Portblair", "Pune", "Raigarh", "Raipur", 
-  "Rajkot", "Ranchi", "Renukoot", "Rourkela", "Rudrapur", "Secunderabad", "Shillong", 
+  "Meerut", "Mumbai", "Mysore", "Nagpur", "Nasik", "Navi Mumbai", "Neemrana", "Noida", 
+  "Panipat", "Patalganga", "Patna", "Pondicherry", "Port Blair", "Pune", "Raigarh", "Raipur", 
+  "Rajkot", "Ramtek", "Ranchi", "Renukoot", "Rourkela", "Rudrapur", "Secunderabad", "Shillong", 
   "Siliguri", "Surat", "Tinsukia", "Tirupur", "Trichy", "Trivandrum", "Udaipur", "Vapi", 
-  "Varanasi", "Vijayawada", "Visakhapatnam"
+  "Varanasi", "Vijayawada", "Visakhapatnam", "Wardha", "Yavatmal"
 ];
 
 const DEFAULT_CITIES = ["Nagpur", "Raipur", "Jabalpur", "Bhopal", "Indore"];
@@ -67,7 +67,7 @@ export default function LocationGrid() {
             {filteredCities.map((city) => (
               <Link 
                 key={city} 
-                href={`/packers-and-movers-${city.toLowerCase().replace(/\s/g, '-')}`}
+                href={`/packers-and-movers-${city.toLowerCase().replace(/\s/g, '')}`}
                 className="group"
               >
                 <div className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all duration-300 group-hover:-translate-y-1 shadow-sm hover:shadow-primary/10">

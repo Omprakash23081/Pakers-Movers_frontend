@@ -34,8 +34,7 @@ export default function HeroForm() {
     const submissionData = {
       ...formData,
       firstName: formData.firstName || 'Anonymous',
-      lastName: formData.lastName || '',
-      email: formData.email || 'inquiry@example.com'
+      lastName: formData.lastName || ''
     };
 
     try {

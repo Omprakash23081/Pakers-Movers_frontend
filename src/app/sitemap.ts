@@ -1,20 +1,21 @@
 import { MetadataRoute } from 'next';
+import { cityData } from '@/lib/city-data';
 
 const DOMAIN = 'https://sunitacargopackersmovers.com';
 
 const cities = [
-  "agra", "ahmedabad", "allahabad", "alwar", "ambala", "ankleshwar", "aurangabad", "banaras", 
-  "bangalore", "baroda", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
-  "chandigarh", "chennai", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
-  "faridabad", "gandhidham", "ghaziabad", "goa", "greaternoida", "gurgaon", "guwahati", 
+  "agra", "ahmedabad", "akola", "allahabad", "alwar", "amravati", "ambala", "ankleshwar", "aurangabad", "banaras", 
+  "bangalore", "baroda", "bhandara", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
+  "chandigarh", "chandrapur", "chennai", "chhindwara", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
+  "faridabad", "gandhidham", "ghaziabad", "goa", "gondia", "greaternoida", "gurgaon", "guwahati", 
   "gwalior", "haridwar", "hisar", "hubli", "hyderabad", "indore", "jabalpur", "jaipur", 
   "jammu", "jamshedpur", "jamnagar", "jodhpur", "kalighat", "kanpur", "kolhapur", "kolkata", 
   "korba", "kota", "kottayam", "lucknow", "ludhiana", "madurai", "manesar", "mangalore", 
   "meerut", "mumbai", "mysore", "nagpur", "nasik", "navimumbai", "neemrana", "noida", 
   "panipat", "patalganga", "patna", "pondicherry", "portblair", "pune", "raigarh", "raipur", 
-  "rajkot", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
+  "rajkot", "ramtek", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
   "siliguri", "surat", "tinsukia", "tirupur", "trichy", "trivandrum", "udaipur", "vapi", 
-  "varanasi", "vijayawada", "visakhapatnam"
+  "varanasi", "vijayawada", "visakhapatnam", "wardha", "yavatmal"
 ];
 
 const services = [
@@ -79,10 +80,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
+  // 3. Locality routes (e.g. /house-shifting-in-dharampeth-nagpur)
+  const localityRoutes: string[] = [];
+  services.forEach(service => {
+    Object.keys(cityData).forEach(cityKey => {
+      const trait = cityData[cityKey];
+      if (trait.localities) {
+        trait.localities.forEach(locality => {
+          localityRoutes.push(`/${service}-in-${locality}-${cityKey}`);
+        });
+      }
+    });
+  });
+
   const allRoutes = [
     ...staticRoutes,
     ...serviceCityRoutes,
-    ...cityToCityRoutes
+    ...cityToCityRoutes,
+    ...localityRoutes
   ];
 
   return allRoutes.map((route) => ({

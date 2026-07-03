@@ -90,9 +90,30 @@ export const cityData: Record<string, CityTrait> = {
     name: 'Nagpur',
     tier: 'tier1',
     landmarks: ['Zero Mile', 'Futala Lake', 'Deekshabhoomi'],
-    neighbors: ['Wadi', 'Wardha Road', 'Manish Nagar'],
-    localities: ['dharampeth', 'ramdaspeth', 'bajaj-nagar', 'shankar-nagar', 'sadar', 'civil-lines', 'sitabuldi', 'mahal', 'manish-nagar', 'besa', 'hingna', 'wadi', 'wardhaman-nagar', 'nandanvan', 'kamal-chowk', 'koradi-road', 'zingabai-takli', 'trimurti-nagar', 'pratap-nagar', 'swawalambi-nagar', 'dighori', 'manewada'],
+    neighbors: ['Wadi', 'Manish Nagar', 'Besa', 'Hingna', 'Wardha', 'Amravati', 'Chandrapur'],
+    localities: ['dharampeth', 'ramdaspeth', 'bajaj-nagar', 'shankar-nagar', 'sadar', 'civil-lines', 'sitabuldi', 'mahal', 'manish-nagar', 'besa', 'hingna', 'wadi', 'wardhaman-nagar', 'nandanvan', 'kamal-chowk', 'koradi-road', 'zingabai-takli', 'trimurti-nagar', 'pratap-nagar', 'swawalambi-nagar', 'dighori', 'manewada', 'narendra-nagar', 'beltarodi', 'mihan', 'somalwada', 'khamla', 'jaitala'],
     weather: 'severe heat',
+    trafficLevel: 'medium'
+  },
+  amravati: {
+    name: 'Amravati',
+    tier: 'tier2',
+    landmarks: ['Ambadevi Temple', 'Melghat Tiger Reserve', 'Chattri Talao'],
+    neighbors: ['Badnera', 'Nagpur', 'Akola'],
+    trafficLevel: 'medium'
+  },
+  wardha: {
+    name: 'Wardha',
+    tier: 'tier2',
+    landmarks: ['Sevagram Ashram', 'Gitaram Temple', 'Bor Wildlife Sanctuary'],
+    neighbors: ['Sevagram', 'Nagpur', 'Yavatmal'],
+    trafficLevel: 'low'
+  },
+  chandrapur: {
+    name: 'Chandrapur',
+    tier: 'tier2',
+    landmarks: ['Tadoba National Park', 'Chandrapur Fort', 'Mahakali Temple'],
+    neighbors: ['Ballarpur', 'Nagpur', 'Wardha'],
     trafficLevel: 'medium'
   },
   // Add major Tier 1
@@ -116,6 +137,21 @@ export const cityData: Record<string, CityTrait> = {
     landmarks: ['Rajwada', 'Lal Bagh Palace', 'Sarafa Bazaar'],
     neighbors: ['Vijay Nagar', 'Rajendra Nagar'],
     trafficLevel: 'medium'
+  },
+  navimumbai: {
+    name: 'Navi Mumbai',
+    tier: 'metro',
+    landmarks: ['Vashi Station', 'Palm Beach Road', 'Parsik Hill'],
+    neighbors: ['Thane', 'Mumbai', 'Panvel'],
+    localities: ['vashi', 'nerul', 'koparkhairane', 'kharghar', 'belapur', 'airoli'],
+    trafficLevel: 'high'
+  },
+  portblair: {
+    name: 'Port Blair',
+    tier: 'tourist',
+    landmarks: ['Cellular Jail', 'Corbyn Cove Beach', 'Ross Island'],
+    neighbors: ['Havelock Island', 'Neil Island'],
+    trafficLevel: 'low'
   }
 };
 

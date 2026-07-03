@@ -59,9 +59,9 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-3 mt-2">
-              <a href="#" aria-label="Facebook" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Facebook size={18} /></a>
+              <a href="https://www.facebook.com/sunitacargopackersmovers" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Facebook size={18} /></a>
               <a href="#" aria-label="Twitter" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Twitter size={18} /></a>
-              <a href="#" aria-label="Instagram" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Instagram size={18} /></a>
+              <a href="https://www.instagram.com/sunitacargopackersmovers" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Instagram size={18} /></a>
               <a href="#" aria-label="LinkedIn" className="p-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-primary hover:border-transparent transition-all shadow-sm"><Linkedin size={18} /></a>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function Footer() {
                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition">
                   <MapPin className="text-primary shrink-0" size={16} />
                 </div>
-                <span className="mt-1">Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023</span>
+                <span className="mt-1">Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023</span>
               </li>
               <li className="flex items-center gap-3 group transition">
                 <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition">

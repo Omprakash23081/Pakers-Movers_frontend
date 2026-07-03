@@ -54,7 +54,7 @@ export default function ContactUs() {
     {
       icon: MapPin,
       title: "Head Office (Nagpur)",
-      detail: "Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur, Maharashtra 440023",
+      detail: "Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur, Maharashtra 440023",
       bgColor: "bg-blue-500/15",
       borderColor: "border-blue-500/30",
       iconBg: "bg-blue-500/20",

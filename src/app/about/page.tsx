@@ -26,7 +26,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 relative z-20 pb-16">
            <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-widest backdrop-blur-md mb-6">
-                Established 2009
+                Established 2008
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-tight text-white drop-shadow-lg">
                 Moving People, <br /><span className="text-primary">Protecting Memories.</span>

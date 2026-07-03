@@ -9,14 +9,14 @@ const REVIEWS = [
     name: "Rajesh Sharma",
     date: "2 weeks ago",
     rating: 5,
-    text: "Excellent service by Sunita Cargo! They moved my entire 3BHK from Noida to Pune without a single scratch. The team was professional and handled fragile items with extra care. Highly recommended!",
+    text: "Excellent service by Sunita Cargo! They moved my entire 3BHK from Nagpur to Pune without a single scratch. The team was professional and handled fragile items with extra care. Highly recommended!",
     avatar: "https://i.pravatar.cc/150?u=rajesh"
   },
   {
     name: "Priya Deshmukh",
     date: "1 month ago",
     rating: 5,
-    text: "Truly professional packers and movers in Delhi NCR. Their rates are transparent, and there were no hidden charges. The packing quality was superior compared to Agarwal Packers I used earlier.",
+    text: "Truly professional packers and movers in Nagpur. Their rates are transparent, and there were no hidden charges. The packing quality was superior compared to Agarwal Packers I used earlier.",
     avatar: "https://i.pravatar.cc/150?u=priya"
   },
   {
@@ -38,7 +38,7 @@ export default function GoogleReviews() {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
       "bestRating": "5",
-      "ratingCount": "842"
+      "ratingCount": "1200"
     }
   };
 
@@ -68,7 +68,7 @@ export default function GoogleReviews() {
                 <div className="flex text-yellow-500 gap-0.5 my-1 justify-center">
                   {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill="currentColor" />)}
                 </div>
-                <div className="text-[9px] md:text-[10px] font-bold text-white/40 uppercase tracking-tighter">842+ Google Reviews</div>
+                <div className="text-[9px] md:text-[10px] font-bold text-white/40 uppercase tracking-tighter">1,200+ Google Reviews</div>
              </div>
              <div className="h-10 md:h-12 w-px bg-border" />
              <div className="flex flex-col gap-1 md:gap-1.5">

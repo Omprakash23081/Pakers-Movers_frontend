@@ -47,8 +47,8 @@ export default function HeroContent() {
         </a>
         <a href="tel:+917387661300" className="w-full sm:w-1/2">
           <Button size="lg" variant="outline" className="w-full rounded-full gap-2 h-14 px-6 text-md border-white/30 bg-white/10 backdrop-blur-md font-bold text-white hover:bg-white/20 hover:border-white/50 transition-all shadow-xl">
-             <PhoneCall size={18} />
-             Call Now
+            <PhoneCall size={18} />
+            Call Now
           </Button>
         </a>
       </div>

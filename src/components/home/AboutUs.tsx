@@ -127,7 +127,7 @@ export default function AboutUs() {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-muted-foreground leading-relaxed font-medium mt-4"
               >
-                Our head office at Plot No. 78 B, Sariputra Housing society, Ganesh Nagar, Nagpur serves as our central hub for residential shifting, commercial relocation, and secure warehousing. We pride ourselves on using 100% in-house staff—never third-party contractors—to ensure your belongings are handled with the same care we would give our own.
+                Our head office at Plot No. 78 B, Sariputra Housing Society, Ganesh Nagar, Dawalameti, Amravati Road, Wadi, Nagpur 440023 serves as our central hub for residential shifting, commercial relocation, and secure warehousing. We pride ourselves on using 100% in-house staff—never third-party contractors—to ensure your belongings are handled with the same care we would give our own.
               </motion.p>
             </div>
 

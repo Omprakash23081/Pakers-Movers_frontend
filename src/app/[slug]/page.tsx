@@ -24,18 +24,18 @@ import SlugQuoteForm from '@/components/forms/SlugQuoteForm';
 
 // Data constants
 const cities = [
-  "agra", "ahmedabad", "allahabad", "alwar", "ambala", "ankleshwar", "aurangabad", "banaras", 
-  "bangalore", "baroda", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
-  "chandigarh", "chennai", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
-  "faridabad", "gandhidham", "ghaziabad", "goa", "greaternoida", "gurgaon", "guwahati", 
+  "agra", "ahmedabad", "akola", "allahabad", "alwar", "amravati", "ambala", "ankleshwar", "aurangabad", "banaras", 
+  "bangalore", "baroda", "bhandara", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
+  "chandigarh", "chandrapur", "chennai", "chhindwara", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
+  "faridabad", "gandhidham", "ghaziabad", "goa", "gondia", "greaternoida", "gurgaon", "guwahati", 
   "gwalior", "haridwar", "hisar", "hubli", "hyderabad", "indore", "jabalpur", "jaipur", 
   "jammu", "jamshedpur", "jamnagar", "jodhpur", "kalighat", "kanpur", "kolhapur", "kolkata", 
   "korba", "kota", "kottayam", "lucknow", "ludhiana", "madurai", "manesar", "mangalore", 
   "meerut", "mumbai", "mysore", "nagpur", "nasik", "navimumbai", "neemrana", "noida", 
   "panipat", "patalganga", "patna", "pondicherry", "portblair", "pune", "raigarh", "raipur", 
-  "rajkot", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
+  "rajkot", "ramtek", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
   "siliguri", "surat", "tinsukia", "tirupur", "trichy", "trivandrum", "udaipur", "vapi", 
-  "varanasi", "vijayawada", "visakhapatnam"
+  "varanasi", "vijayawada", "visakhapatnam", "wardha", "yavatmal"
 ];
 
 const services = [
@@ -47,6 +47,12 @@ const services = [
   "packers-and-movers",
   "home-shifting",
   "car-bike-transport"
+];
+
+const topNetworkCities = [
+  "nagpur", "mumbai", "pune", "bangalore", "delhi", "hyderabad", 
+  "chennai", "kolkata", "raipur", "amravati", "wardha", "chandrapur", 
+  "akola", "bhopal", "indore"
 ];
 
 // Content Generation Helpers
@@ -173,7 +179,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `https://sunitacargopackersmovers.com/${normalizedSlug}`;
 
   const serviceName = getTitleCase(data.service);
-  const cityName = data.type === 'service-city' ? getTitleCase(data.city) : getTitleCase(data.from);
+  const cityName = (data.type === 'service-city' || data.type === 'locality')
+    ? getCityTrait(data.city!).name
+    : getCityTrait(data.from!).name;
   const intro = data.type === 'service-city' ? generateIntro(data.city, data.service) : '';
 
   if (data.type === 'service-city') {
@@ -187,15 +195,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   } else if (data.type === 'locality') {
     const localityName = getTitleCase(data.locality);
     return {
-      title: `Best ${serviceName} in ${localityName}, ${cityName} | Sunita Cargo`,
-      description: `Verified ${serviceName.toLowerCase()} in ${localityName}, ${cityName}. Sunita Cargo provides fast, safe, and affordable shifting in ${localityName}.`,
+      title: `Best ${serviceName} in ${localityName}, ${cityName} | Get Shifting Quotes`,
+      description: `Hire top-rated ${serviceName.toLowerCase()} in ${localityName}, ${cityName} from Sunita Cargo. Verified local shifting, 5-layer packing, secure transport, and instant quotes near you.`,
       alternates: {
         canonical: canonicalUrl,
       }
     };
   } else {
-    const fromCity = getTitleCase(data.from!);
-    const toCity = getTitleCase(data.to!);
+    const fromCity = getCityTrait(data.from!).name;
+    const toCity = getCityTrait(data.to!).name;
     return {
       title: `${serviceName} from ${fromCity} to ${toCity} | Safe & Fast | Sunita Cargo`,
       description: `Secure ${serviceName.toLowerCase()} from ${fromCity} to ${toCity}. Sunita Cargo Packers Movers provides high-speed intercity transit with real-time GPS tracking.`,
@@ -213,21 +221,35 @@ export default function DynamicSEOPage({ params }: Props) {
 
   const isRoute = data.type === 'route';
   const isLocality = data.type === 'locality';
-  const mainTitle = data.type === 'route'
-    ? `${getTitleCase(data.service)} from ${getTitleCase(data.from)} to ${getTitleCase(data.to)}`
-    : data.type === 'locality'
-      ? `${getTitleCase(data.service)} in ${getTitleCase(data.locality)}, ${getTitleCase(data.city)}`
-      : `${getTitleCase(data.service)} in ${getTitleCase(data.city)}`;
-  
-  const targetCity = data.type === 'route' ? getTitleCase(data.to) : getTitleCase(data.city);
-  const targetLocality = data.type === 'locality' ? getTitleCase(data.locality) : null;
-  const originCity = data.type === 'route' ? getTitleCase(data.from) : targetCity;
   const serviceName = getTitleCase(data.service);
+  const targetCity = data.type === 'route' ? getCityTrait(data.to!).name : getCityTrait(data.city!).name;
+  const targetLocality = data.type === 'locality' ? getTitleCase(data.locality!) : null;
+  const originCity = data.type === 'route' ? getCityTrait(data.from!).name : targetCity;
+
+  const cityKey = (data.type === 'service-city' || data.type === 'locality') ? data.city : data.from;
+  const cityTrait = getCityTrait(cityKey);
+  const showLocalityLinks = !isRoute && !!cityTrait.localities && cityTrait.localities.length > 0;
+
+  // Safe helper variables for JSX to avoid TypeScript union narrowing issues:
+  const targetCityKey = (data.type === 'service-city' || data.type === 'locality') ? data.city : '';
+  const fromCityKey = data.type === 'route' ? data.from : '';
+
+  const mainTitle = data.type === 'route'
+    ? `${serviceName} from ${originCity} to ${targetCity}`
+    : data.type === 'locality'
+      ? `${serviceName} in ${targetLocality}, ${targetCity}`
+      : `${serviceName} in ${targetCity}`;
 
   return (
     <div className="w-full">
-      <LocalBusinessSchema city={targetCity} />
-      <FAQSchema faqs={data.type === 'service-city' ? generateLocalizedFAQs(data.city, serviceName) : []} />
+      <LocalBusinessSchema city={targetCity} locality={targetLocality} />
+      <FAQSchema faqs={
+        data.type === 'service-city' 
+          ? generateLocalizedFAQs(data.city, serviceName) 
+          : data.type === 'locality' 
+            ? generateLocalizedFAQs(data.city, serviceName, targetLocality) 
+            : []
+      } />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 to-background pt-24 pb-20 border-b border-border text-center overflow-hidden">
@@ -272,14 +294,50 @@ export default function DynamicSEOPage({ params }: Props) {
 
 
 
-      {/* Main Content Area */}
+      {/* Cost Calculator Section */}
+      <div id="calculator" className="bg-background py-16 border-b border-border">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <CostCalculator />
+        </div>
+      </div>
+
+      {/* Main Content Area (Two-Column Layout) */}
       <section className="py-20 w-full px-2 lg:px-8 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Left Column (Main SEO Content) */}
           <div className="lg:col-span-8 space-y-20 order-3 lg:order-1">
-            
-            {/* 1. In-Depth Introduction (SEO Boost) */}
+
+            {/* 1. Moving Cost Breakdown Table (High Weightage) */}
+            <div className="space-y-8">
+               <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500"><IndianRupee /></div>
+                  <h2 className="text-3xl font-black tracking-tight text-foreground">Moving Cost Breakdown in {targetCity}</h2>
+               </div>
+               <div className="overflow-hidden rounded-3xl border border-border bg-section/10">
+                  <table className="w-full text-left">
+                     <thead className="bg-white/5">
+                        <tr>
+                           <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-white/40">Home/Office Size</th>
+                           <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-white/40">Estimated Price</th>
+                        </tr>
+                     </thead>
+                     <tbody className="divide-y divide-border">
+                        {generateLocalPricing((data.type === 'service-city' || data.type === 'locality') ? data.city : 'india', serviceName).table?.map((row, idx) => (
+                           <tr key={idx} className="hover:bg-white/5 transition-colors">
+                              <td className="px-6 py-4 font-bold text-white">{row.size}</td>
+                              <td className="px-6 py-4 font-black text-primary">{row.price}</td>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+
+            {/* 2. Route Matrix (High Weightage, only if not isRoute) */}
+            {!isRoute && <RouteMatrix city={targetCity} />}
+
+            {/* 3. In-Depth Introduction (SEO Boost) */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <h2 className="text-4xl font-extrabold tracking-tight text-foreground border-l-8 border-primary pl-6 mb-8">
                 Your Trusted Partner for {serviceName} in {isLocality ? `${targetLocality}, ${targetCity}` : targetCity}
@@ -299,7 +357,7 @@ export default function DynamicSEOPage({ params }: Props) {
                     <h3 className="text-xl font-bold m-0 text-foreground">Local Shifting Insights for {targetCity}</h3>
                  </div>
                  <p className="text-sm text-muted-foreground italic leading-relaxed m-0">
-                    {generateLocalInsights(data.type === 'service-city' ? data.city : 'india')}
+                    {generateLocalInsights((data.type === 'service-city' || data.type === 'locality') ? data.city : 'india')}
                  </p>
               </div>
 
@@ -319,144 +377,8 @@ export default function DynamicSEOPage({ params }: Props) {
                     </div>
                  </div>
               </div>
-
-              {!isRoute && <RouteMatrix city={targetCity} />}
-              
-              {/* 3.5 Localized Pricing Table (SEO Depth) */}
-              <div className="space-y-8">
-                 <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500"><IndianRupee /></div>
-                    <h2 className="text-3xl font-black tracking-tight text-foreground">Moving Cost Breakdown in {targetCity}</h2>
-                 </div>
-                 <div className="overflow-hidden rounded-3xl border border-border bg-section/10">
-                    <table className="w-full text-left">
-                       <thead className="bg-white/5">
-                          <tr>
-                             <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-white/40">Home/Office Size</th>
-                             <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-white/40">Estimated Price</th>
-                          </tr>
-                       </thead>
-                       <tbody className="divide-y divide-border">
-                          {generateLocalPricing(data.type === 'service-city' ? data.city : 'india', serviceName).table?.map((row, idx) => (
-                             <tr key={idx} className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 font-bold text-white">{row.size}</td>
-                                <td className="px-6 py-4 font-black text-primary">{row.price}</td>
-                             </tr>
-                          ))}
-                       </tbody>
-                    </table>
-                 </div>
-              </div>
             </div>
 
-            {/* 2. Process Section - Expanded */}
-            <div className="space-y-10">
-              <div className="text-center md:text-left">
-                <h2 className="text-3xl font-black tracking-tight text-foreground">The Sunita Cargo {serviceName} Workflow</h2>
-                <p className="text-muted-foreground mt-2">Professionalism at every step of your journey in {targetCity}.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {[
-                  { step: '01', title: 'Free Asset Survey', desc: 'Our experts conduct a detailed audit of your belongings to provide a fixed-price, transparent quotation with no hidden charges.', icon: <Box size={20}/> },
-                  { step: '02', title: '5-Layer Premium Packing', desc: 'Items are wrapped in multiple layers of protection, including heavy-duty sheets and waterproof film to withstand all weather conditions.', icon: <Settings size={20}/> },
-                  { step: '03', title: 'Safe Loading & Transit', desc: `Securely loaded into specialized moving containers with GPS monitoring for real-time updates as your goods move ${isRoute ? "between cities" : "locally"}.`, icon: <Navigation size={20}/> },
-                  { step: '04', title: 'Unpacking & Setup', desc: 'On arrival, our team doesn’t just unload; we help you set up your new home or office exactly how you want it.', icon: <Heart size={20}/> }
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-section/30 p-8 rounded-3xl border border-border group hover:border-primary/50 transition-all duration-300">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-lg shadow-primary/5">
-                        {item.icon}
-                      </div>
-                      <span className="text-4xl font-black text-white/5 group-hover:text-primary/10 transition-colors uppercase italic">{item.step}</span>
-                    </div>
-                    <h3 className="text-xl font-extrabold mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-             {/* 3. Competitive Advantage (Long-form content) */}
-             <div className="prose prose-lg dark:prose-invert max-w-none">
-                <h2 className="text-3xl font-bold tracking-tight text-foreground">Why We Are Different From Other Packers and Movers in {targetCity}</h2>
-                <p>
-                   Most logistics companies in {targetCity} rely on third-party laborers and open trucks. At Sunita Cargo Packers Movers, we maintain our own fleet and a permanent staff of trained professionals. This control over our operations ensures that we can maintain a <strong>near-zero damage rate</strong> over thousands of moves.
-                </p>
-                <p>
-                   Our specialized services for {serviceName.toLowerCase()} are designed to cater to the specific needs of {targetCity} residents. Whether it&apos;s navigating narrow residential lanes or coordinating with high-rise apartment management, we have the experience to handle local challenges effortlessly.
-                </p>
-                
-                <div className="not-prose bg-gradient-to-br from-section to-background p-8 rounded-[2.5rem] border border-white/5 my-12">
-                   <h3 className="text-xl font-black mb-6 text-center text-primary uppercase tracking-[0.2em]">Our Shifting Checklist</h3>
-                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {[
-                        'Professional pre-move survey', 'Customized packing strategies', 'Door-to-door transportation', 'Consolidated or dedicated truck options', 'Warehousing solutions for up to 6 months', 'Post-move support and unpacking'
-                      ].map(check => (
-                        <div key={check} className="flex gap-3 items-center text-sm font-bold opacity-80">
-                           <div className="w-5 h-5 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center shrink-0">
-                              <CheckCircle2 size={12}/>
-                           </div>
-                           {check}
-                        </div>
-                      ))}
-                   </div>
-                </div>
-             </div>
-
-            {/* 4. FAQ Section - Enhanced with city references */}
-            <div className="space-y-10">
-               <div className="flex items-center gap-4">
-                 <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary"><HelpCircle /></div>
-                 <h2 className="text-3xl font-black tracking-tight text-foreground">Questions People Ask About {serviceName} in {targetCity}</h2>
-               </div>
-               <div className="space-y-6">
-                 {(isRoute ? [
-                    { question: `What are the average charges for ${serviceName.toLowerCase()} from ${originCity} to ${targetCity}?`, answer: `Intercity shifting from ${originCity} to ${targetCity} depends on distance (approx. long-distance) and volume, with costs varying from ₹15,000 to ₹45,000 depending on the vehicle size and packing requirements.` },
-                    { question: `How many days does it take to move from ${originCity} to ${targetCity}?`, answer: `Transit time depends on the distance and road conditions. Typically, a move from ${originCity} to ${targetCity} takes 3-7 days for delivery.` }
-                 ] : generateLocalizedFAQs(data.city!, serviceName)).map((faq, i) => (
-                    <div key={i} className="p-8 rounded-3xl border border-border bg-section/20 hover:bg-section/40 transition-all duration-300">
-                      <h4 className="font-bold text-lg mb-3 flex gap-3">
-                        <span className="text-primary font-black">Q.</span> {faq.question}
-                      </h4>
-                      <p className="text-muted-foreground pl-7 text-sm leading-relaxed border-l-2 border-primary/20">{faq.answer}</p>
-                    </div>
-                 ))}
-               </div>
-            </div>
-
-            {/* 5. Reviews Snippet (Boost CTR) */}
-            <div className="bg-primary/5 p-10 rounded-[3rem] border border-primary/10 space-y-8 overflow-hidden">
-               <div className="flex justify-between items-center mb-8">
-                  <h3 className="text-2xl font-black text-foreground">Verified Customer Reviews in {targetCity}</h3>
-                  <div className="flex items-center gap-1 text-accent">
-                    {[1,2,3,4,5].map(s => <Star key={s} size={16} fill="currentColor"/>)}
-                  </div>
-               </div>
-               <TestimonialCarousel />
-               <div className="text-center">
-                 <Link href="/feedback" className="text-primary font-bold hover:underline">Read all 1,200+ Google Reviews</Link>
-               </div>
-            </div>
-
-             {/* 6. Internal Linking / Reach - Optimized */}
-             <div className="pt-20 border-t border-border">
-                <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 mb-10">
-                   <div>
-                     <h3 className="text-xl font-bold text-foreground">Our Service Network</h3>
-                     <p className="text-sm text-muted-foreground">Find us in every major city across India.</p>
-                   </div>
-                   <Button variant="outline" className="rounded-full">View All Serviceable Areas</Button>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                   {cities.map(c => (
-                     <Link key={c} href={`/${serviceName.toLowerCase().replace(/\s/g, '-')}-${c}`} className="group flex items-center gap-2 p-3 rounded-xl border border-border bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300">
-                       <MapPin size={12} className="text-primary group-hover:text-white" />
-                       <span className="text-[11px] font-bold text-muted-foreground group-hover:text-white uppercase tracking-wider">{getTitleCase(c)}</span>
-                     </Link>
-                   ))}
-                </div>
-             </div>
           </div>
 
           {/* Right Column (Sidebar) */}
@@ -489,24 +411,172 @@ export default function DynamicSEOPage({ params }: Props) {
                      <h4 className="font-extrabold text-lg">Quick Guide</h4>
                   </div>
                   <ul className="space-y-4 text-sm">
-                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Service Area:</span> <span className="font-black">{targetCity}</span></li>
-                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Starting Price:</span> <span className="font-black text-primary">{data.type === 'route' ? '₹15,000' : generateLocalPricing(data.city, serviceName).start}</span></li>
-                    <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Transit Type:</span> <span className="font-black">Closed Container</span></li>
-                    <li className="flex justify-between"><span className="text-muted-foreground font-medium">Insurance:</span> <span className="font-black">Available</span></li>
+                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Service Area:</span> <span className="font-black">{targetCity}</span></li>
+                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Starting Price:</span> <span className="font-black text-primary">{data.type === 'route' ? '₹15,000' : generateLocalPricing(data.city, serviceName).start}</span></li>
+                     <li className="flex justify-between border-b border-white/5 pb-2"><span className="text-muted-foreground font-medium">Transit Type:</span> <span className="font-black">Closed Container</span></li>
+                     <li className="flex justify-between"><span className="text-muted-foreground font-medium">Insurance:</span> <span className="font-black">Available</span></li>
                   </ul>
                </div>
             </div>
           </div>
+
         </div>
       </section>
 
-      <div className="py-20 w-full px-2 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black mb-6">Estimated Moving Charges in {targetCity}</h2>
-          <p className="text-muted-foreground font-medium italic">Transparent pricing based on current Nagpur market rates.</p>
+      {/* Full-Width Section (Workflow and everything after it) */}
+      <section className="py-20 w-full px-2 max-w-6xl mx-auto space-y-24 border-t border-border">
+
+        {/* 4. Process Section - Expanded */}
+        <div className="space-y-10">
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">The Sunita Cargo {serviceName} Workflow</h2>
+            <p className="text-muted-foreground mt-2 text-lg">Professionalism at every step of your journey in {targetCity}.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { step: '01', title: 'Free Asset Survey', desc: 'Our experts conduct a detailed audit of your belongings to provide a fixed-price, transparent quotation with no hidden charges.', icon: <Box size={20}/> },
+              { step: '02', title: '5-Layer Premium Packing', desc: 'Items are wrapped in multiple layers of protection, including heavy-duty sheets and waterproof film to withstand all weather conditions.', icon: <Settings size={20}/> },
+              { step: '03', title: 'Safe Loading & Transit', desc: `Securely loaded into specialized moving containers with GPS monitoring for real-time updates as your goods move ${isRoute ? "between cities" : "locally"}.`, icon: <Navigation size={20}/> },
+              { step: '04', title: 'Unpacking & Setup', desc: 'On arrival, our team doesn’t just unload; we help you set up your new home or office exactly how you want it.', icon: <Heart size={20}/> }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-section/30 p-8 rounded-3xl border border-border group hover:border-primary/50 transition-all duration-300">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-lg shadow-primary/5">
+                    {item.icon}
+                  </div>
+                  <span className="text-4xl font-black text-white/5 group-hover:text-primary/10 transition-colors uppercase italic">{item.step}</span>
+                </div>
+                <h3 className="text-xl font-extrabold mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <PricingGrid city={targetCity} />
-      </div>
+
+        {/* 5. Estimated Moving Charges (PricingGrid - full width) */}
+        <div className="space-y-10">
+           <div className="text-center md:text-left">
+             <h2 className="text-3xl md:text-5xl font-black mb-2 text-white">Estimated Moving Charges in {targetCity}</h2>
+             <p className="text-muted-foreground text-lg font-medium italic">Transparent pricing based on current Nagpur market rates.</p>
+           </div>
+           <PricingGrid city={targetCity} />
+        </div>
+
+        {/* 6. FAQ Section - Enhanced with city references */}
+        <div className="space-y-10">
+           <div className="flex items-center gap-4">
+             <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary"><HelpCircle /></div>
+             <h2 className="text-3xl font-black tracking-tight text-foreground">Questions People Ask About {serviceName} in {targetCity}</h2>
+           </div>
+           <div className="space-y-6">
+             {(isRoute ? [
+                { question: `What are the average charges for ${serviceName.toLowerCase()} from ${originCity} to ${targetCity}?`, answer: `Intercity shifting from ${originCity} to ${targetCity} depends on distance (approx. long-distance) and volume, with costs varying from ₹15,000 to ₹45,000 depending on the vehicle size and packing requirements.` },
+                { question: `How many days does it take to move from ${originCity} to ${targetCity}?`, answer: `Transit time depends on the distance and road conditions. Typically, a move from ${originCity} to ${targetCity} takes 3-7 days for delivery.` }
+             ] : generateLocalizedFAQs(data.city!, serviceName, targetLocality)).map((faq, i) => (
+                <div key={i} className="p-8 rounded-3xl border border-border bg-section/20 hover:bg-section/40 transition-all duration-300">
+                  <h4 className="font-bold text-lg mb-3 flex gap-3">
+                    <span className="text-primary font-black">Q.</span> {faq.question}
+                  </h4>
+                  <p className="text-muted-foreground pl-7 text-sm leading-relaxed border-l-2 border-primary/20">{faq.answer}</p>
+                </div>
+             ))}
+           </div>
+        </div>
+
+        {/* 7. Competitive Advantage (Long-form content) */}
+        <div className="prose prose-lg dark:prose-invert max-w-none">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">Why We Are Different From Other Packers and Movers in {targetCity}</h2>
+            <p>
+               Most logistics companies in {targetCity} rely on third-party laborers and open trucks. At Sunita Cargo Packers Movers, we maintain our own fleet and a permanent staff of trained professionals. This control over our operations ensures that we can maintain a <strong>near-zero damage rate</strong> over thousands of moves.
+            </p>
+            <p>
+               Our specialized services for {serviceName.toLowerCase()} are designed to cater to the specific needs of {targetCity} residents. Whether it&apos;s navigating narrow residential lanes or coordinating with high-rise apartment management, we have the experience to handle local challenges effortlessly.
+            </p>
+            
+            <div className="not-prose bg-gradient-to-br from-section to-background p-8 rounded-[2.5rem] border border-white/5 my-12">
+               <h3 className="text-xl font-black mb-6 text-center text-primary uppercase tracking-[0.2em]">Our Shifting Checklist</h3>
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    'Professional pre-move survey', 'Customized packing strategies', 'Door-to-door transportation', 'Consolidated or dedicated truck options', 'Warehousing solutions for up to 6 months', 'Post-move support and unpacking'
+                  ].map(check => (
+                    <div key={check} className="flex gap-3 items-center text-sm font-bold opacity-80">
+                       <div className="w-5 h-5 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center shrink-0">
+                          <CheckCircle2 size={12}/>
+                       </div>
+                       {check}
+                    </div>
+                  ))}
+               </div>
+            </div>
+         </div>
+
+         {/* 8. Internal Linking / Reach - Optimized */}
+         <div className="pt-20 border-t border-border">
+            {showLocalityLinks ? (
+              <>
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 mb-10">
+                   <div>
+                     <h3 className="text-xl font-bold text-foreground">Our Shifting Network in {cityTrait.name}</h3>
+                     <p className="text-sm text-muted-foreground">Find local {serviceName.toLowerCase()} services in your neighborhood.</p>
+                   </div>
+                   <Button asChild variant="outline" className="rounded-full">
+                     <Link href="/">View All Cities</Link>
+                   </Button>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                   {cityTrait.localities!.map(locality => (
+                     <Link key={locality} href={`/${data.service}-in-${locality}-${targetCityKey}`} className="group flex items-center gap-2 p-3 rounded-xl border border-border bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300">
+                       <MapPin size={12} className="text-primary group-hover:text-white" />
+                       <span className="text-[11px] font-bold text-muted-foreground group-hover:text-white uppercase tracking-wider">{getTitleCase(locality)}</span>
+                     </Link>
+                   ))}
+                </div>
+              </>
+            ) : isRoute ? (
+              <>
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 mb-10">
+                   <div>
+                     <h3 className="text-xl font-bold text-foreground">Other Shifting Routes from {originCity}</h3>
+                     <p className="text-sm text-muted-foreground">Compare transit routes and rates from {originCity}.</p>
+                   </div>
+                   <Button asChild variant="outline" className="rounded-full">
+                     <Link href="/">View All Cities</Link>
+                   </Button>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                   {topNetworkCities.filter(c => c !== fromCityKey).map(c => (
+                     <Link key={c} href={`/${fromCityKey}-to-${c}-packers-movers`} className="group flex items-center gap-2 p-3 rounded-xl border border-border bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300">
+                       <MapPin size={12} className="text-primary group-hover:text-white" />
+                       <span className="text-[11px] font-bold text-muted-foreground group-hover:text-white uppercase tracking-wider">{originCity} to {getTitleCase(c)}</span>
+                     </Link>
+                   ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 mb-10">
+                   <div>
+                     <h3 className="text-xl font-bold text-foreground">Our Service Network</h3>
+                     <p className="text-sm text-muted-foreground">Find us in every major city across India.</p>
+                   </div>
+                   <Button asChild variant="outline" className="rounded-full">
+                     <Link href="/">View All Cities</Link>
+                   </Button>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                   {topNetworkCities.map(c => (
+                     <Link key={c} href={`/${data.service}-${c}`} className="group flex items-center gap-2 p-3 rounded-xl border border-border bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300">
+                       <MapPin size={12} className="text-primary group-hover:text-white" />
+                       <span className="text-[11px] font-bold text-muted-foreground group-hover:text-white uppercase tracking-wider">{getTitleCase(c)}</span>
+                     </Link>
+                   ))}
+                </div>
+              </>
+            )}
+         </div>
+
+      </section>
 
       <VisualProof />
       <GoogleReviews />

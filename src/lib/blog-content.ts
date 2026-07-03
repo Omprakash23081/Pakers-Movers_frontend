@@ -7,7 +7,7 @@ export const blogContent: Record<string, { title: string, date: string, readTime
       <h2>Understanding the Factors that Affect Moving Costs</h2>
       <p>When planning a relocation, the biggest question is always: <em>How much will it cost?</em> The truth is, there is no single fixed price for shifting. The cost of packers and movers in India depends on several critical factors:</p>
       <ul>
-        <li><strong>Distance:</strong> Local shifting within a city (e.g., Noida to Greater Noida) is charged based on manpower and transport. Intercity shifting (e.g., Delhi to Mumbai) includes fuel, tolls, and inter-state taxes.</li>
+        <li><strong>Distance:</strong> Local shifting within a city (e.g., Wadi to Dharampeth in Nagpur) is charged based on manpower and transport. Intercity shifting (e.g., Nagpur to Mumbai) includes fuel, tolls, and inter-state taxes.</li>
         <li><strong>Volume of Goods:</strong> A 1 BHK requires a smaller 14ft truck, while a 3 BHK might need a 19ft or 22ft container.</li>
         <li><strong>Packing Material:</strong> Standard packing uses basic corrugated sheets. Premium scientific packing uses foam, bubble wrap, and wooden crates for electronics, which increases the cost.</li>
       </ul>

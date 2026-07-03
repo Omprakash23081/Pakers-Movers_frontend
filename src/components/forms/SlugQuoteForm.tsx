@@ -32,7 +32,6 @@ export default function SlugQuoteForm({ originCity }: Props) {
         body: JSON.stringify({
           firstName: formData.fullName,
           lastName: '',
-          email: 'inquiry@example.com',
           phone: formData.phone,
           movingFrom: originCity || 'Not Specified',
           movingTo: formData.movingTo || 'Not Specified',

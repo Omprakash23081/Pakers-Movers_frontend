@@ -18,18 +18,18 @@ const CATEGORIES = [
 ];
 
 const CITIES = [
-  "Agra", "Ahmedabad", "Allahabad", "Alwar", "Ambala", "Ankleshwar", "Aurangabad", "Banaras",
-  "Bangalore", "Baroda", "Bhiwandi", "Bhopal", "Bhubaneswar", "Bhuj", "Bikaner", "Calicut",
-  "Chandigarh", "Chennai", "Cochin", "Coimbatore", "Cuttack", "Dehradun", "Delhi", "Dwarka",
-  "Faridabad", "Gandhidham", "Ghaziabad", "Goa", "Greater Noida", "Gurgaon", "Guwahati",
+  "Agra", "Ahmedabad", "Akola", "Allahabad", "Alwar", "Amravati", "Ambala", "Ankleshwar", "Aurangabad", "Banaras",
+  "Bangalore", "Baroda", "Bhandara", "Bhiwandi", "Bhopal", "Bhubaneswar", "Bhuj", "Bikaner", "Calicut",
+  "Chandigarh", "Chandrapur", "Chennai", "Chhindwara", "Cochin", "Coimbatore", "Cuttack", "Dehradun", "Delhi", "Dwarka",
+  "Faridabad", "Gandhidham", "Ghaziabad", "Goa", "Gondia", "Greater Noida", "Gurgaon", "Guwahati",
   "Gwalior", "Haridwar", "Hisar", "Hubli", "Hyderabad", "Indore", "Jabalpur", "Jaipur",
   "Jammu", "Jamshedpur", "Jamnagar", "Jodhpur", "Kalighat", "Kanpur", "Kolhapur", "Kolkata",
   "Korba", "Kota", "Kottayam", "Lucknow", "Ludhiana", "Madurai", "Manesar", "Mangalore",
   "Meerut", "Mumbai", "Mysore", "Nagpur", "Nasik", "Navi Mumbai", "Neemrana", "Noida",
   "Panipat", "Patalganga", "Patna", "Pondicherry", "Port Blair", "Pune", "Raigarh", "Raipur",
-  "Rajkot", "Ranchi", "Renukoot", "Rourkela", "Rudrapur", "Secunderabad", "Shillong",
+  "Rajkot", "Ramtek", "Ranchi", "Renukoot", "Rourkela", "Rudrapur", "Secunderabad", "Shillong",
   "Siliguri", "Surat", "Tinsukia", "Tirupur", "Trichy", "Trivandrum", "Udaipur", "Vapi",
-  "Varanasi", "Vijayawada", "Visakhapatnam"
+  "Varanasi", "Vijayawada", "Visakhapatnam", "Wardha", "Yavatmal"
 ];
 
 const CATEGORY_OPTIONS: Record<string, string[]> = {
@@ -39,7 +39,7 @@ const CATEGORY_OPTIONS: Record<string, string[]> = {
 };
 
 // Coordinates for supported cities (Lat, Lng)
-const CITY_COORDS: Record<string, [number, number]> = {
+export const CITY_COORDS: Record<string, [number, number]> = {
   "Nagpur": [21.1458, 79.0882],
   "Mumbai": [19.0760, 72.8777],
   "Pune": [18.5204, 73.8567],
@@ -142,6 +142,44 @@ const CITY_COORDS: Record<string, [number, number]> = {
   "Greater Noida": [28.4744, 77.5040],
   "Pondicherry": [11.9416, 79.8083],
   "Haridwar": [29.9457, 78.1642],
+  "Akola": [20.7002, 77.0082],
+  "Bhandara": [21.1685, 79.6548],
+  "Chandrapur": [19.9540, 79.2961],
+  "Chhindwara": [22.0574, 78.9382],
+  "Gondia": [21.4549, 80.1983],
+  "Ramtek": [21.3970, 79.3274],
+  "Wardha": [20.7453, 78.6022],
+  "Yavatmal": [20.3888, 78.1311],
+  "Alwar": [27.5530, 76.6346],
+  "Ambala": [30.3782, 76.7767],
+  "Ankleshwar": [21.6264, 73.0152],
+  "Banaras": [25.3176, 82.9739],
+  "Baroda": [22.3072, 73.1812],
+  "Bhuj": [23.2420, 69.6669],
+  "Calicut": [11.2588, 75.7804],
+  "Cochin": [9.9312, 76.2673],
+  "Dwarka": [22.2442, 68.9685],
+  "Gandhidham": [23.0805, 70.1260],
+  "Hisar": [29.1492, 75.7217],
+  "Hubli": [15.3647, 75.1240],
+  "Kalighat": [22.5204, 88.3473],
+  "Korba": [22.3597, 82.7501],
+  "Kottayam": [9.5916, 76.5221],
+  "Manesar": [28.3513, 76.9428],
+  "Nasik": [19.9975, 73.7898],
+  "Neemrana": [27.9942, 76.3888],
+  "Panipat": [29.3909, 76.9635],
+  "Patalganga": [18.8475, 73.1539],
+  "Port Blair": [11.6234, 92.7265],
+  "Raigarh": [21.8974, 83.3949],
+  "Renukoot": [24.2084, 83.0336],
+  "Rourkela": [22.2604, 84.8536],
+  "Rudrapur": [28.9860, 79.3972],
+  "Tinsukia": [27.5002, 95.3667],
+  "Tirupur": [11.1085, 77.3411],
+  "Trichy": [10.7905, 78.7047],
+  "Trivandrum": [8.5241, 76.9366],
+  "Vapi": [20.3717, 72.9030]
 };
 
 interface IPricingTier {
