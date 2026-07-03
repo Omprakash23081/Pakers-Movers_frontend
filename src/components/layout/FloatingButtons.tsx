@@ -1,6 +1,8 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -12,11 +14,53 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.488-1.761-1.662-2.062-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.052 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
   </svg>
 );
-import { useState, useEffect } from 'react';
+
+const CITIES_LIST = [
+  "agra", "ahmedabad", "akola", "allahabad", "alwar", "amravati", "ambala", "ankleshwar", "aurangabad", "banaras", 
+  "bangalore", "baroda", "bhandara", "bhiwandi", "bhopal", "bhubaneswar", "bhuj", "bikaner", "calicut", 
+  "chandigarh", "chandrapur", "chennai", "chhindwara", "cochin", "coimbatore", "cuttack", "dehradun", "delhi", "dwarka", 
+  "faridabad", "gandhidham", "ghaziabad", "goa", "gondia", "greaternoida", "gurgaon", "guwahati", 
+  "gwalior", "haridwar", "hisar", "hubli", "hyderabad", "indore", "jabalpur", "jaipur", 
+  "jammu", "jamshedpur", "jamnagar", "jodhpur", "kalighat", "kanpur", "kolhapur", "kolkata", 
+  "korba", "kota", "kottayam", "lucknow", "ludhiana", "madurai", "manesar", "mangalore", 
+  "meerut", "mumbai", "mysore", "nagpur", "nasik", "navimumbai", "neemrana", "noida", 
+  "panipat", "patalganga", "patna", "pondicherry", "portblair", "pune", "raigarh", "raipur", 
+  "rajkot", "ramtek", "ranchi", "renukoot", "rourkela", "rudrapur", "secunderabad", "shillong", 
+  "siliguri", "surat", "tinsukia", "tirupur", "trichy", "trivandrum", "udaipur", "vapi", 
+  "varanasi", "vijayawada", "visakhapatnam", "wardha", "yavatmal"
+];
+
+const getCityFromPath = (pathname: string) => {
+  if (!pathname) return '';
+  const parts = pathname.toLowerCase().split(/[/-]+/);
+  
+  // Check for route pattern: from-[city]-to-[city]
+  const toIndex = parts.indexOf('to');
+  if (toIndex > 0 && toIndex < parts.length - 1) {
+    const fromCity = parts[toIndex - 1];
+    const toCity = parts[toIndex + 1];
+    if (CITIES_LIST.includes(fromCity) || CITIES_LIST.includes(toCity)) {
+      const fromName = fromCity.charAt(0).toUpperCase() + fromCity.slice(1);
+      const toName = toCity.charAt(0).toUpperCase() + toCity.slice(1);
+      return ` from ${fromName} to ${toName}`;
+    }
+  }
+
+  // Otherwise check if any part of the path is a city name
+  for (const part of parts) {
+    if (CITIES_LIST.includes(part)) {
+      if (part === 'navimumbai') return ' in Navi Mumbai';
+      if (part === 'greaternoida') return ' in Greater Noida';
+      return ' in ' + part.charAt(0).toUpperCase() + part.slice(1);
+    }
+  }
+  return '';
+};
 
 export default function FloatingButtons() {
   const [isVisible, setIsVisible] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
+  const pathname = usePathname();
 
   // Show buttons after a small scroll
   useEffect(() => {
@@ -38,6 +82,10 @@ export default function FloatingButtons() {
       clearTimeout(timer);
     };
   }, []);
+
+  const citySuffix = getCityFromPath(pathname || '');
+  const message = `Hi, I am looking for a packers and movers quotation${citySuffix}.`;
+  const whatsappUrl = `https://wa.me/917387661300?text=${encodeURIComponent(message)}`;
 
   return (
     <AnimatePresence>
@@ -72,10 +120,10 @@ export default function FloatingButtons() {
             </AnimatePresence>
 
             <a
-              href="https://wa.me/917387661300"
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 bg-[#25D366] hover:bg-[#1ebd5b] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-500/30 transition-all hover:-translate-y-1"
+              className="w-14 h-14 bg-[#25D366] hover:bg-[#1ebd5b] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-500/30 transition-all hover:-translate-y-1 animate-whatsapp-pulse"
               aria-label="Chat on WhatsApp"
             >
               <WhatsAppIcon className="w-[28px] h-[28px]" />
@@ -83,7 +131,7 @@ export default function FloatingButtons() {
 
             <a
               href="tel:+917387661300"
-              className="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-primary/30 transition-all hover:-translate-y-1"
+              className="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-primary/30 transition-all hover:-translate-y-1 animate-call-pulse animation-delay-2000"
               aria-label="Call Us directly"
             >
               <Phone fill="currentColor" className="w-[24px] h-[24px]" />
@@ -92,10 +140,10 @@ export default function FloatingButtons() {
 
           {/* Mobile Sticky Bottom Bar */}
           <div className="md:hidden fixed bottom-0 left-0 w-full bg-background border-t border-border shadow-[0_-10px_20px_rgba(0,0,0,0.1)] z-50 p-3 flex gap-3">
-            <a href="tel:+917387661300" className="flex-1 bg-primary text-white flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm">
+            <a href="tel:+917387661300" className="flex-1 bg-primary text-white flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm animate-call-pulse">
               <Phone size={16} fill="currentColor" /> Call Now
             </a>
-            <a href="https://wa.me/917387661300" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#25D366] text-white flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#25D366] text-white flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm animate-whatsapp-pulse animation-delay-2000">
               <WhatsAppIcon className="w-4 h-4" /> WhatsApp
             </a>
           </div>

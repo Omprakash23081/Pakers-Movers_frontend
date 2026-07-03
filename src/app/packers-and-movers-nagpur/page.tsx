@@ -49,8 +49,8 @@ export default function NagpurPage() {
               <Button asChild size="lg" className="rounded-full shadow-apple h-14 px-8 text-lg font-bold">
                 <a href="tel:+917387661300">Call +91 7387661300</a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full bg-white/5 backdrop-blur-md h-14 px-8 text-lg font-bold border-white/10 hover:bg-white/10 transition-all">
-                <a href="https://wa.me/917387661300">Get WhatsApp Quote</a>
+              <Button asChild size="lg" className="rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white h-14 px-8 text-lg font-bold border border-[#25D366]/50 shadow-lg shadow-[#25D366]/20 transition-all animate-whatsapp-pulse">
+                <a href="https://wa.me/917387661300?text=Hi%2C%20I%20am%20looking%20for%20a%20packers%20and%20movers%20quotation%20in%20Nagpur.">Get WhatsApp Quote</a>
               </Button>
             </div>
           </div>
@@ -213,8 +213,8 @@ export default function NagpurPage() {
               <Button asChild size="lg" className="rounded-full px-12 h-16 text-xl font-bold">
                 <a href="tel:+917387661300">Book Your Move Now</a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full bg-white/5 border-white/20 px-12 h-16 text-xl font-bold hover:bg-white/10 text-white">
-                <a href="https://wa.me/917387661300">WhatsApp Quote</a>
+              <Button asChild size="lg" className="rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white border border-[#25D366]/50 px-12 h-16 text-xl font-bold shadow-lg shadow-[#25D366]/20 transition-all animate-whatsapp-pulse">
+                <a href="https://wa.me/917387661300?text=Hi%2C%20I%20am%20looking%20for%20a%20packers%20and%20movers%20quotation%20in%20Nagpur.">WhatsApp Quote</a>
               </Button>
             </div>
           </div>

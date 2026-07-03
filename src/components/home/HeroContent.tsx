@@ -40,7 +40,7 @@ export default function HeroContent() {
 
       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg mt-4">
         <a href="https://wa.me/917387661300?text=Hi%2C%20I%20am%20looking%20for%20a%20packers%20and%20movers%20quotation." target="_blank" rel="noopener noreferrer" className="w-full sm:w-1/2">
-          <Button size="lg" className="w-full rounded-full gap-2 text-md h-14 px-6 font-bold bg-[#25D366] hover:bg-[#1DA851] text-white shadow-lg shadow-[#25D366]/20 transition-all border border-[#25D366]/50">
+          <Button size="lg" className="w-full rounded-full gap-2 text-md h-14 px-6 font-bold bg-[#25D366] hover:bg-[#1DA851] text-white shadow-lg shadow-[#25D366]/20 transition-all border border-[#25D366]/50 animate-whatsapp-pulse">
             <MessageCircle size={20} className="fill-current" />
             WhatsApp Quote
           </Button>
